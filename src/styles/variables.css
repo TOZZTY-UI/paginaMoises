@@ -1,0 +1,14 @@
+:root {
+  --color-bg: #f7f7f2;
+  --color-surface: #fff;
+  --color-ink: #151515;
+  --color-muted: #686862;
+  --color-line: #deded6;
+  --color-accent: #d9ff4f;
+  --color-accent-strong: #b9e62c;
+  --font-body: 'DM Sans', Arial, sans-serif;
+  --font-display: 'Space Grotesk', Arial, sans-serif;
+  --container: 1180px;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+}

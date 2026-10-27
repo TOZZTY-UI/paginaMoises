@@ -1,0 +1,482 @@
+---
+interface Link {
+  label: string;
+  href?: string;
+}
+interface Column {
+  title: string;
+  links: Link[];
+}
+interface Action extends Link {
+  variant?: "solid" | "outline";
+}
+interface Props {
+  wordmark?: string;
+  brand?: string;
+  blurb?: string;
+  columns?: Column[];
+  actions?: Action[];
+  copyright?: string;
+  socials?: Link[];
+  backToTop?: boolean;
+}
+
+const {
+  wordmark = "SAXEVENTOS",
+  brand = "saxeventos",
+  blurb = "We draw every frame by hand and ship a new chapter every season. Come make a little trouble with us.",
+  columns = [
+    {
+      title: "Play",
+      links: [
+        { label: "Download", href: "#" },
+        { label: "Patch notes", href: "#" },
+        { label: "Roadmap", href: "#" },
+        { label: "Wiki", href: "#" },
+      ],
+    },
+    {
+      title: "Shop",
+      links: [
+        { label: "Sticker packs", href: "#" },
+        { label: "Plushies", href: "#" },
+        { label: "Art prints", href: "#" },
+        { label: "Gift cards", href: "#" },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { label: "Fan art", href: "#" },
+        { label: "Events", href: "#" },
+        { label: "Creators", href: "#" },
+      ],
+    },
+    {
+      title: "Studio",
+      links: [
+        { label: "About", href: "#" },
+        { label: "Careers", href: "#" },
+        { label: "Press kit", href: "#" },
+        { label: "Contact", href: "#" },
+      ],
+    },
+  ],
+  copyright = "©" + new Date().getFullYear() + " saxeventos.",
+  socials = [
+    { label: "YouTube", href: "#" },
+    { label: "Instagram", href: "#" },
+    { label: "TikTok", href: "#" },
+  ],
+  backToTop = true,
+} = Astro.props;
+
+const doodles = [
+  "𝅜",
+  "𝅝",
+  "𝅗𝅥",
+  "𝅘𝅥",
+  "𝅘𝅥𝅮",
+  "𝅘𝅥𝅯",
+  "𝅘𝅥𝅰",
+  "𝅘𝅥𝅱",
+  "𝅘𝅥𝅱",
+  "𝅘𝅥𝅲",
+  "♭",
+  "♮",
+  "♯",
+  "𝄞",
+  "𝄢",
+];
+---
+
+<footer class="dcf" data-footer>
+  <div class="dcf-top">
+    <div class="dcf-brand">
+      <span>{brand}</span>
+    </div>
+    {blurb && <p class="dcf-blurb">{blurb}</p>}
+    {
+      columns.length > 0 && (
+        <nav class="dcf-cols" aria-label="Footer">
+          {columns.map((column) => (
+            <div>
+              <h3>{column.title}</h3>
+              <ul>
+                {column.links.map((link) => (
+                  <li>
+                    {link.href ? (
+                      <a href={link.href}>{link.label}</a>
+                    ) : (
+                      <span>{link.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      )
+    }
+  </div>
+
+  <div class="dcf-world">
+    <div class="dcf-stage">
+      <div class="dcf-doodles" aria-hidden="true">
+        {
+          doodles.map((doodle, i) => (
+            <span style={`--x:${5 + i * 12}%;--delay:${i * -0.8}s`}>
+              {doodle}
+            </span>
+          ))
+        }
+      </div>
+      <h2 class="dcf-wordmark" aria-label={wordmark}>
+        {
+          Array.from(wordmark.toUpperCase()).map((letter, i) => (
+            <span aria-hidden="true" style={`--i:${i}`}>
+              {letter === " " ? "\u00a0" : letter}
+            </span>
+          ))
+        }
+      </h2>
+      <div class="dcf-bubble" role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+  <br />
+  <div class="dcf-bar">
+    <p>{copyright}</p>
+    {
+      socials.length > 0 && (
+        <ul aria-label="Social media">
+          {socials.map((link) => (
+            <li>
+              {link.href ? (
+                <a href={link.href}>{link.label}</a>
+              ) : (
+                <span>{link.label}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      backToTop && (
+        <button type="button" class="dcf-totop" data-to-top>
+          Subir ↑
+        </button>
+      )
+    }
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-footer]").forEach((footer) => {
+    const bubble = footer.querySelector<HTMLElement>(".dcf-bubble");
+    let timer: ReturnType<typeof setTimeout>;
+    footer
+      .querySelectorAll<HTMLButtonElement>(".dcf-character")
+      .forEach((character) => {
+        character.addEventListener("click", () => {
+          if (!bubble) return;
+          bubble.textContent = character.dataset.says || "";
+          bubble.style.left = character.style.getPropertyValue("--x");
+          bubble.style.top = character.style.getPropertyValue("--y");
+          bubble.hidden = false;
+          character.classList.remove("is-hop");
+          void character.offsetWidth;
+          character.classList.add("is-hop");
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            bubble.hidden = true;
+            character.classList.remove("is-hop");
+          }, 2600);
+        });
+      });
+    footer.querySelector("[data-to-top]")?.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    });
+  });
+</script>
+
+<style>
+  .dcf {
+    --ink: var(--color-ink, #0d0d0d);
+    --paper: var(--color-bg, #fff);
+    --accent: #ff6b2c;
+    --pad: clamp(16px, 4vw, 56px);
+    overflow: hidden;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, sans-serif;
+  }
+  .dcf a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .dcf a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 5px;
+  }
+  .dcf :focus-visible {
+    outline: 2px dashed var(--ink);
+    outline-offset: 4px;
+  }
+  .dcf ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .dcf-top,
+  .dcf-world,
+  .dcf-bar {
+    max-width: 1360px;
+    margin: auto;
+    padding-inline: var(--pad);
+  }
+  .dcf-top {
+    display: grid;
+    grid-template-columns: 1.1fr 2fr;
+    gap: 14px clamp(24px, 5vw, 80px);
+    padding-top: clamp(28px, 4.5vw, 56px);
+  }
+  .dcf-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    font-weight: 800;
+  }
+  .dcf-logo {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 24px;
+  }
+  .dcf-blurb {
+    grid-column: 1;
+    max-width: 34ch;
+    font:
+      15px/1.55 Georgia,
+      serif;
+    opacity: 0.7;
+  }
+  .dcf-cols {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .dcf-cols h3 {
+    margin: 0 0 12px;
+    font:
+      800 12px/1.2 system-ui,
+      sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .dcf-cols li {
+    margin-bottom: 7px;
+    font-size: 14px;
+  }
+  .dcf-world {
+    padding-top: clamp(80px, 12vw, 160px);
+  }
+  .dcf-stage {
+    position: relative;
+    padding-top: 9%;
+    border-bottom: 3px solid var(--ink);
+  }
+  .dcf-wordmark {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font:
+      900 clamp(35px, 12vw, 180px)/0.8 "Arial Black",
+      sans-serif;
+    letter-spacing: -0.055em;
+    white-space: nowrap;
+  }
+  .dcf-wordmark span {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  .dcf-wordmark span:hover {
+    transform: rotate(-4deg) translateY(-5px);
+  }
+  .dcf-character {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: clamp(36px, 7vw, 95px);
+    height: clamp(55px, 10vw, 140px);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transform: translate(-50%, -75%);
+  }
+  .dcf-character svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: var(--paper);
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .dcf-character .ink {
+    fill: var(--ink);
+  }
+  .dcf-character .line {
+    fill: none;
+  }
+  .dcf-character .accent {
+    fill: var(--accent);
+  }
+  .dcf-character .red {
+    fill: #ff4d4d;
+  }
+  .dcf-character.is-hop svg {
+    animation: hop 0.6s ease;
+  }
+  .dcf-bubble {
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -150%);
+    width: max-content;
+    max-width: min(220px, 65vw);
+    padding: 7px 12px;
+    border: 2px solid;
+    border-radius: 16px;
+    background: var(--paper);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .dcf-doodles {
+    position: absolute;
+    inset: -45% 0 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .dcf-doodles span {
+    position: absolute;
+    left: var(--x);
+    color: var(--accent);
+    font-size: clamp(18px, 2vw, 30px);
+    animation: drift 6s linear var(--delay) infinite;
+  }
+  .dcf-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0 48px;
+    text-align: center;
+  }
+  .dcf-cta p {
+    margin: 0;
+    font:
+      clamp(17px, 1.9vw, 22px)/1.4 Georgia,
+      serif;
+  }
+  .dcf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .dcf-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 20px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper) !important;
+    font-size: 14px;
+    font-weight: 750;
+  }
+  .dcf-btn.outline {
+    background: var(--paper);
+    color: var(--ink) !important;
+  }
+  .dcf-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 26px;
+    padding-block: 18px 22px;
+    border-top: 1px dashed currentColor;
+    font-size: 13px;
+  }
+  .dcf-bar p {
+    margin: 0 auto 0 0;
+  }
+  .dcf-bar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+  }
+  .dcf-totop {
+    padding: 6px 12px;
+    border: 1px solid;
+    border-radius: 999px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  @keyframes hop {
+    50% {
+      transform: translateY(-20%);
+    }
+  }
+  @keyframes drift {
+    from {
+      transform: translateY(-30px) rotate(0);
+    }
+    to {
+      transform: translateY(240px) rotate(90deg);
+    }
+  }
+  @media (max-width: 860px) {
+    .dcf-top {
+      grid-template-columns: 1fr;
+    }
+    .dcf-blurb,
+    .dcf-cols {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .dcf-cols {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 14px;
+    }
+    .dcf-bar p {
+      width: 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dcf *,
+    .dcf *::before,
+    .dcf *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

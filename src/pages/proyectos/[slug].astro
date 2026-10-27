@@ -1,0 +1,9 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import { projects } from '../../data/projects';
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { title: project.title } }));
+}
+const { title } = Astro.props;
+---
+<LandingLayout title={`${title} | Moisés`}><main class="section"><div class="container"><a href="/proyectos">← Todos los proyectos</a><p class="eyebrow" style="margin-top: 4rem">Caso de estudio</p><h1>{title}</h1><p class="text-muted">Una selección de decisiones, procesos y resultados.</p></div></main></LandingLayout>
