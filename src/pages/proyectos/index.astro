@@ -1,5 +1,0 @@
----
-import LandingLayout from '../../layouts/LandingLayout.astro';
-import { projects as proyectos } from '../../data/projects';
----
-<LandingLayout title="Proyectos | Moisés"><main class="section"><div class="container"><p class="eyebrow">Proyectos</p><h1>Trabajo que habla por sí solo.</h1><div class="grid grid--2">{proyectos.map((proyecto) => <a class="card" style="padding: 2rem" href={`/proyectos/${proyecto.slug}`}><h2>{proyecto.title}</h2><p class="text-muted">Ver caso de estudio →</p></a>)}</div></div></main></LandingLayout>
