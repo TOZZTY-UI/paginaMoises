@@ -1,29 +1,16 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
+import { images } from '../data/image';
 
-const images = import.meta.glob<{ default: string }>('../assets/images/**/*.{jpg,jpeg,png}', { eager: true, query: '?url' });
-const IMAGES = [
-  { src: "public/images/4to_medio/20241207_110445.jpg", title: "20241207_110445" },
-  { src: "public/images/4to_medio/20241207_214512.jpg", title: "20241207_214512" },
-  { src: "public/images/bodas/20240217_204605.jpg", title: "Ether IV" },
-  { src: "public/images/bodas/20241109_214752.jpg.jpeg", title: "Quantum V" },
-  { src: "public/images/bodas/20250119_000712.jpg", title: "Nebula VI" },
-  { src: "public/images/bodas/20250125_213347(0).jpg", title: "Cyber VII" },
-  { src: "public/images/bodas/asdas.jpeg", title: "Flux VIII" },
-  { src: "public/images/bodas/sdasdas.jpeg", title: "Aether IX" },
-  { src: "public/images/bodas/sdasdsadas.jpeg", title: "Chroma X" },
-  { src: "public/images/bodas/WhatsApp Image 2026-02-02 at 11.22.38 PM.jpeg", title: "Chroma X" },
-  { src: "public/images/bodas/WhatsApp Image 2026-02-02 at 11.24.37 PM.jpeg", title: "Chroma X" },
-  { src: "public/images/bodas/WhatsApp Image 2026-02-02 at 11.30.01 PM.jpeg", title: "Chroma X" },
-  { src: "public/images/bodas/WhatsApp Image 2026-asdsa.jpeg", title: "  X" },
-
-
-];
-const cards = IMAGES.map((item, index) => {
+const imageFiles = import.meta.glob<{ default: string }>('../assets/images/**/*.{jpg,jpeg,png,webp,avif}', { eager: true, query: '?url' });
+const galleryImages = Object.values(images).flat().flatMap((item) => {
+  const src = imageFiles[item.src.replace(/^src\//, '../')]?.default;
+  return src ? [{ ...item, src }] : [];
+});
+const cards = galleryImages.map((item, index) => {
   const angle = index * 137.5 * Math.PI / 180;
   return {
     ...item,
-    src: images[item.src.replace('public/images/', '../assets/images/')]?.default,
     index,
     cos: Math.cos(angle),
     sin: Math.sin(angle),
@@ -34,7 +21,7 @@ const cards = IMAGES.map((item, index) => {
 });
 ---
 
-<LandingLayout title="Galería | Moisés">
+<LandingLayout title="Galería | Moisés" showFooter={false}>
 <main>
 <section class="tunnel" data-perspective-tunnel aria-label="Galería inmersiva 3D" tabindex="0">
   <div class="grid-bg" aria-hidden="true"></div>
@@ -64,8 +51,8 @@ const cards = IMAGES.map((item, index) => {
         style={`z-index:${card.index + 1}`}
       >
         <div class="card-inner">
-          <img src={card.src} alt={card.title} loading="lazy" draggable="false" />
-          <div class="card-gradient"><span>{card.title}</span></div>
+          <img src={card.src} alt={card.alt} loading="lazy" draggable="false" />
+          <div class="card-gradient"><span>{card.name}</span></div>
         </div>
       </div>
     ))}
@@ -84,6 +71,21 @@ const cards = IMAGES.map((item, index) => {
   const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
   document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((root) => {
     const cardNodes = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+    // Mezclar las posiciones en cada visita, sin modificar el diccionario original.
+    for (let i = cardNodes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cardNodes[i], cardNodes[j]] = [cardNodes[j], cardNodes[i]];
+    }
+    cardNodes.forEach((card, index) => {
+      const angle = index * 137.5 * Math.PI / 180;
+      card.dataset.index = String(index);
+      card.dataset.cos = String(Math.cos(angle));
+      card.dataset.sin = String(Math.sin(angle));
+      card.dataset.radiusX = String(0.28 + (index % 3) * 0.08);
+      card.dataset.radiusY = String(0.26 + (index % 2) * 0.09);
+      card.dataset.rotation = String((index % 2 === 0 ? 1 : -1) * (3 + (index % 5) * 2));
+      card.style.zIndex = String(index + 1);
+    });
     const intro = root.querySelector<HTMLElement>('[data-intro]');
     const prompt = root.querySelector<HTMLElement>('[data-prompt]');
     const galleryEnd = root.querySelector<HTMLElement>('[data-gallery-end]');
@@ -187,7 +189,8 @@ const cards = IMAGES.map((item, index) => {
 </script>
 
 <style>
-  .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100svh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; transform-style: preserve-3d; }
+  main { margin-top: -120px; }
+  .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; transform-style: preserve-3d; }
   .grid-bg,.glow,.ring,.card-plane { position:absolute; pointer-events:none; }
   .grid-bg { inset:0; background-image:radial-gradient(#1e1b4b 1px,transparent 1px); background-size:28px 28px; mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 60%,transparent 100%); opacity:.65; }
   .glow { inset:0; background:radial-gradient(circle at center,rgba(99,102,241,.2),transparent 75%); }

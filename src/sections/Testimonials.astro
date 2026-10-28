@@ -1,4 +1,14 @@
 ---
+import { testimonials } from "../data/testimonials";
 ---
 
 <!-- Testimonios. -->
+<section class="testimonials">
+  <h2>Testimonios</h2>
+  {testimonials.map((testimonial, index) => (
+    <div class="testimonial">
+      <p>"{testimonial.message}"</p>
+      <span>- {testimonial.name}</span>
+    </div>
+  ))}
+</section>

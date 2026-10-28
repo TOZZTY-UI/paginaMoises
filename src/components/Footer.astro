@@ -1,4 +1,6 @@
 ---
+import { socialLinks } from "../data/socialLinks";
+import { navigation } from "../data/navigation";
 interface Link {
   label: string;
   href?: string;
@@ -17,7 +19,6 @@ interface Props {
   columns?: Column[];
   actions?: Action[];
   copyright?: string;
-  socials?: Link[];
   backToTop?: boolean;
 }
 
@@ -28,12 +29,7 @@ const {
   columns = [
     {
       title: "Explora",
-      links: [
-        { label: "Inicio", href: "/" },
-        { label: "Servicios", href: "/servicios" },
-        { label: "Galería", href: "/galeria" },
-        { label: "Sobre mí", href: "/sobre-mi" },
-      ],
+      links: navigation,
     },
     {
       title: "Información",
@@ -51,7 +47,6 @@ const {
     },
   ],
   copyright = "©" + new Date().getFullYear() + " saxeventos.",
-  socials = [],
   backToTop = true,
 } = Astro.props;
 
@@ -131,15 +126,11 @@ const doodles = [
   <div class="dcf-bar">
     <p>{copyright}</p>
     {
-      socials.length > 0 && (
+      socialLinks.length > 0 && (
         <ul aria-label="Social media">
-          {socials.map((link) => (
+          {socialLinks.map((link) => (
             <li>
-              {link.href ? (
-                <a href={link.href}>{link.label}</a>
-              ) : (
-                <span>{link.label}</span>
-              )}
+              <a href={link.url}>{link.name}</a>
             </li>
           ))}
         </ul>

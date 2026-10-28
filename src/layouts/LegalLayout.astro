@@ -1,9 +1,9 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import LandingLayout from './LandingLayout.astro';
 
 interface Props { title: string }
 const { title } = Astro.props;
 ---
-<BaseLayout title={title}>
+<LandingLayout title={title}>
   <slot />
-</BaseLayout>
+</LandingLayout>
