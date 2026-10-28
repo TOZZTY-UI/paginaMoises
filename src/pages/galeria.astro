@@ -1,5 +1,6 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
+import Button from '../components/Button.astro';
 import { images } from '../data/image';
 
 const imageFiles = import.meta.glob<{ default: string }>('../assets/images/**/*.{jpg,jpeg,png,webp,avif}', { eager: true, query: '?url' });
@@ -60,7 +61,7 @@ const cards = galleryImages.map((item, index) => {
   <div class="gallery-end" data-gallery-end inert aria-hidden="true">
     <h2>¿Quieres aparecer en la galería?</h2>
     <p>Conoce nuestros servicios para tu próximo evento.</p>
-    <a href="/servicios">Ver servicios</a>
+    <Button href="/servicios" name="Ver servicios" />
   </div>
 </section>
 </main>
@@ -89,6 +90,11 @@ const cards = galleryImages.map((item, index) => {
     const intro = root.querySelector<HTMLElement>('[data-intro]');
     const prompt = root.querySelector<HTMLElement>('[data-prompt]');
     const galleryEnd = root.querySelector<HTMLElement>('[data-gallery-end]');
+    const navbar = document.querySelector<HTMLElement>('.navbar-container');
+    if (navbar) {
+      navbar.classList.add('gallery-nav-hidden');
+      navbar.inert = true;
+    }
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let width = root.clientWidth;
     let height = root.clientHeight;
@@ -147,6 +153,12 @@ const cards = galleryImages.map((item, index) => {
       const introAlpha = progress < .12 ? map(progress, 0, .12, .25, 1) : progress > .85 ? map(progress, .85, 1, 1, 0) : 1;
       if (intro) { intro.style.transform = `scale(${titleScale})`; intro.style.opacity = `${introAlpha}`; }
       if (prompt) prompt.style.opacity = `${map(progress, 0, .12, 1, 0)}`;
+      if (navbar) {
+        const visible = progress >= .96;
+        if (!visible && !navbar.inert && navbar.contains(document.activeElement)) root.focus();
+        navbar.classList.toggle('gallery-nav-hidden', !visible);
+        navbar.inert = !visible;
+      }
       if (galleryEnd) {
         const visible = progress >= .96;
         galleryEnd.classList.toggle('is-visible', visible);
@@ -184,11 +196,17 @@ const cards = galleryImages.map((item, index) => {
     document.addEventListener('astro:before-swap', () => {
       cancelAnimationFrame(raf);
       observer.disconnect();
+      if (navbar) {
+        navbar.classList.remove('gallery-nav-hidden');
+        navbar.inert = false;
+      }
     }, { once: true });
   });
 </script>
 
 <style>
+  :global(.navbar-container) { transition: opacity .35s ease, visibility .35s ease; }
+  :global(.navbar-container.gallery-nav-hidden) { opacity: 0; visibility: hidden; pointer-events: none; }
   main { margin-top: -120px; }
   .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; transform-style: preserve-3d; }
   .grid-bg,.glow,.ring,.card-plane { position:absolute; pointer-events:none; }
@@ -202,7 +220,6 @@ const cards = galleryImages.map((item, index) => {
   .gallery-end.is-visible { opacity:1; transform:translateY(0); pointer-events:auto; }
   .gallery-end h2 { font-size:clamp(2rem, 5vw, 3.5rem); }
   .gallery-end p { margin:20px 0; }
-  .gallery-end a { display:inline-block; padding:12px 24px; background:#fff; color:#0a0a0a; font-weight:700; }
   @media (prefers-reduced-motion: reduce) { .gallery-end { transition:none; transform:none; } }
   .scroll-prompt { position:absolute; bottom:32px; z-index:20; display:flex; flex-direction:column; align-items:center; gap:8px; font:11px/1.5 monospace; text-transform:uppercase; letter-spacing:.3em; color:#a3a3a3; pointer-events:none; }
   .scroll-prompt i { width:1px; height:24px; background:linear-gradient(#818cf8,transparent); }

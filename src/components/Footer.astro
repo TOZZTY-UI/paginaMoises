@@ -130,7 +130,9 @@ const doodles = [
         <ul aria-label="Social media">
           {socialLinks.map((link) => (
             <li>
-              <a href={link.url}>{link.name}</a>
+              <a href={link.url} aria-label={link.name} title={link.name}>
+                <span class="social-icon" set:html={link.icon} aria-hidden="true" />
+              </a>
             </li>
           ))}
         </ul>
@@ -405,6 +407,24 @@ const doodles = [
     display: flex;
     flex-wrap: wrap;
     gap: 4px 18px;
+  }
+  .dcf-bar ul a {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .dcf-bar ul a:hover,
+  .dcf-bar ul a:focus-visible {
+    transform: translateY(-2px);
+    opacity: .72;
+  }
+  .social-icon,
+  .social-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
   .dcf-totop {
     padding: 6px 12px;
