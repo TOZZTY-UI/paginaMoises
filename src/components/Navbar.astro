@@ -1,6 +1,7 @@
 
 ---
 const links = [
+  { label: "Inicio", href: "/" },
   { label: "Contacto", href: "/contacto" },
   { label: "FAQ", href: "/faq" },
   { label: "Galería", href: "/galeria" },
@@ -22,10 +23,10 @@ const currentPath = Astro.url.pathname;
           href={link.href}
           class:list={[
             "nav-link",
-            { active: link.label === "SERVICES" }
+            { active: link.href === currentPath || (link.href !== "/" && currentPath.startsWith(`${link.href}/`)) }
           ]}
           aria-current={
-            link.href === currentPath ? "page" : undefined
+            link.href === currentPath || (link.href !== "/" && currentPath.startsWith(`${link.href}/`)) ? "page" : undefined
           }
         >
           {link.label}
@@ -33,8 +34,7 @@ const currentPath = Astro.url.pathname;
       ))}
     </div>
 
-    <!-- Acceso -->
-    
+    <button class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">☰</button>
   </nav>
 
   <!-- Menú móvil -->
@@ -81,6 +81,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .menu-button {
+    display: none;
     cursor: pointer;
     transition: transform .25s, background .25s;
   }
@@ -179,6 +180,10 @@ const currentPath = Astro.url.pathname;
 
     .desktop-links {
       display: none;
+    }
+
+    .menu-button {
+      display: grid;
     }
 
     .login span:last-child {

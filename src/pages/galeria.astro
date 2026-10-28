@@ -1,4 +1,7 @@
 ---
+import LandingLayout from '../layouts/LandingLayout.astro';
+
+const images = import.meta.glob<{ default: string }>('../assets/images/**/*.{jpg,jpeg,png}', { eager: true, query: '?url' });
 const IMAGES = [
   { src: "public/images/4to_medio/20241207_110445.jpg", title: "20241207_110445" },
   { src: "public/images/4to_medio/20241207_214512.jpg", title: "20241207_214512" },
@@ -20,6 +23,7 @@ const cards = IMAGES.map((item, index) => {
   const angle = index * 137.5 * Math.PI / 180;
   return {
     ...item,
+    src: images[item.src.replace('public/images/', '../assets/images/')]?.default,
     index,
     cos: Math.cos(angle),
     sin: Math.sin(angle),
@@ -30,20 +34,19 @@ const cards = IMAGES.map((item, index) => {
 });
 ---
 
+<LandingLayout title="Galería | Moisés">
+<main>
 <section class="tunnel" data-perspective-tunnel aria-label="Galería inmersiva 3D" tabindex="0">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
-  <div class="ring ring-one" aria-hidden="true"></div>
-  <div class="ring ring-two" aria-hidden="true"></div>
 
   <div class="intro" data-intro>
-    <p class="eyebrow">Warp Drive Sequence</p>
-    <h1>INTO THE<br />ETHER.</h1>
-    <p class="description">Desplázate con el mouse o el trackpad para viajar por este corredor espacial 3D.</p>
+    <h1>Galería</h1>
+    <p class="description">Desplázate para ver las imágenes.</p>
   </div>
 
   <div class="scroll-prompt" data-prompt aria-hidden="true">
-    <span>Scroll to Explore</span>
+    <span>Desliza para explorar</span>
     <i></i>
   </div>
 
@@ -67,7 +70,14 @@ const cards = IMAGES.map((item, index) => {
       </div>
     ))}
   </div>
+  <div class="gallery-end" data-gallery-end inert aria-hidden="true">
+    <h2>¿Quieres aparecer en la galería?</h2>
+    <p>Conoce nuestros servicios para tu próximo evento.</p>
+    <a href="/servicios">Ver servicios</a>
+  </div>
 </section>
+</main>
+</LandingLayout>
 
 <script>
   // El código se ejecuta en el navegador; Astro genera el HTML estático.
@@ -76,6 +86,7 @@ const cards = IMAGES.map((item, index) => {
     const cardNodes = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
     const intro = root.querySelector<HTMLElement>('[data-intro]');
     const prompt = root.querySelector<HTMLElement>('[data-prompt]');
+    const galleryEnd = root.querySelector<HTMLElement>('[data-gallery-end]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let width = root.clientWidth;
     let height = root.clientHeight;
@@ -101,6 +112,7 @@ const cards = IMAGES.map((item, index) => {
       targetY = (e.clientY / window.innerHeight - .5) * 2;
     };
     const wheel = (e: WheelEvent) => {
+      if ((targetProgress >= 1 && e.deltaY > 0) || (targetProgress <= 0 && e.deltaY < 0)) return;
       e.preventDefault();
       targetProgress = clamp(targetProgress + e.deltaY * .0008, 0, 1);
     };
@@ -109,6 +121,7 @@ const cards = IMAGES.map((item, index) => {
       if (lastTouchY === null) return;
       const y = e.touches[0]?.clientY;
       if (y === undefined) return;
+      if ((targetProgress >= 1 && y < lastTouchY) || (targetProgress <= 0 && y > lastTouchY)) { lastTouchY = y; return; }
       e.preventDefault();
       targetProgress = clamp(targetProgress + (lastTouchY - y) * .002, 0, 1);
       lastTouchY = y;
@@ -132,6 +145,12 @@ const cards = IMAGES.map((item, index) => {
       const introAlpha = progress < .12 ? map(progress, 0, .12, .25, 1) : progress > .85 ? map(progress, .85, 1, 1, 0) : 1;
       if (intro) { intro.style.transform = `scale(${titleScale})`; intro.style.opacity = `${introAlpha}`; }
       if (prompt) prompt.style.opacity = `${map(progress, 0, .12, 1, 0)}`;
+      if (galleryEnd) {
+        const visible = progress >= .96;
+        galleryEnd.classList.toggle('is-visible', visible);
+        galleryEnd.inert = !visible;
+        galleryEnd.setAttribute('aria-hidden', String(!visible));
+      }
       for (const card of cardNodes) {
         const i = Number(card.dataset.index);
         const start = (i / cardNodes.length) * .45;
@@ -168,16 +187,20 @@ const cards = IMAGES.map((item, index) => {
 </script>
 
 <style>
-  .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100svh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; touch-action: none; transform-style: preserve-3d; }
+  .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100svh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; transform-style: preserve-3d; }
   .grid-bg,.glow,.ring,.card-plane { position:absolute; pointer-events:none; }
   .grid-bg { inset:0; background-image:radial-gradient(#1e1b4b 1px,transparent 1px); background-size:28px 28px; mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 60%,transparent 100%); opacity:.65; }
   .glow { inset:0; background:radial-gradient(circle at center,rgba(99,102,241,.2),transparent 75%); }
-  .ring { width:48vmin; height:48vmin; border:1px solid rgba(129,140,248,.12); border-radius:50%; }
-  .ring-two { width:76vmin; height:76vmin; border-style:dashed; border-color:rgba(255,255,255,.12); }
   .intro { z-index:0; text-align:center; padding:0 24px; max-width:680px; pointer-events:none; transform-origin:center; will-change:transform,opacity; }
   .eyebrow { color:#a5b4fc; font:12px/1.6 monospace; text-transform:uppercase; letter-spacing:.4em; margin:0 0 16px; }
   h1 { margin:0; font-size:clamp(3.2rem,10vw,7.5rem); font-weight:800; line-height:.9; letter-spacing:-.065em; background:linear-gradient(#fff 15%,rgba(255,255,255,.38)); background-clip:text; -webkit-background-clip:text; color:transparent; }
   .description { color:#a3a3a3; max-width:38ch; margin:20px auto 0; font-size:clamp(14px,2vw,17px); font-weight:300; }
+  .gallery-end { position:absolute; z-index:30; max-width:560px; padding:24px; text-align:center; opacity:0; transform:translateY(12px); transition:opacity .7s ease, transform .7s ease; pointer-events:none; }
+  .gallery-end.is-visible { opacity:1; transform:translateY(0); pointer-events:auto; }
+  .gallery-end h2 { font-size:clamp(2rem, 5vw, 3.5rem); }
+  .gallery-end p { margin:20px 0; }
+  .gallery-end a { display:inline-block; padding:12px 24px; background:#fff; color:#0a0a0a; font-weight:700; }
+  @media (prefers-reduced-motion: reduce) { .gallery-end { transition:none; transform:none; } }
   .scroll-prompt { position:absolute; bottom:32px; z-index:20; display:flex; flex-direction:column; align-items:center; gap:8px; font:11px/1.5 monospace; text-transform:uppercase; letter-spacing:.3em; color:#a3a3a3; pointer-events:none; }
   .scroll-prompt i { width:1px; height:24px; background:linear-gradient(#818cf8,transparent); }
   .card-plane { inset:0; transform-style:preserve-3d; }

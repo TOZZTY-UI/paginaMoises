@@ -24,50 +24,34 @@ interface Props {
 const {
   wordmark = "SAXEVENTOS",
   brand = "saxeventos",
-  blurb = "We draw every frame by hand and ship a new chapter every season. Come make a little trouble with us.",
+  blurb = "Música para acompañar tus momentos especiales.",
   columns = [
     {
-      title: "Play",
+      title: "Explora",
       links: [
-        { label: "Download", href: "#" },
-        { label: "Patch notes", href: "#" },
-        { label: "Roadmap", href: "#" },
-        { label: "Wiki", href: "#" },
+        { label: "Inicio", href: "/" },
+        { label: "Servicios", href: "/servicios" },
+        { label: "Galería", href: "/galeria" },
+        { label: "Sobre mí", href: "/sobre-mi" },
       ],
     },
     {
-      title: "Shop",
+      title: "Información",
       links: [
-        { label: "Sticker packs", href: "#" },
-        { label: "Plushies", href: "#" },
-        { label: "Art prints", href: "#" },
-        { label: "Gift cards", href: "#" },
+        { label: "Preguntas frecuentes", href: "/faq" },
+        { label: "Privacidad", href: "/privacidad" },
+        { label: "Términos", href: "/terminos" },
       ],
     },
     {
-      title: "Community",
+      title: "Contacto",
       links: [
-        { label: "Fan art", href: "#" },
-        { label: "Events", href: "#" },
-        { label: "Creators", href: "#" },
-      ],
-    },
-    {
-      title: "Studio",
-      links: [
-        { label: "About", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "Press kit", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Contacto", href: "/contacto" },
       ],
     },
   ],
   copyright = "©" + new Date().getFullYear() + " saxeventos.",
-  socials = [
-    { label: "YouTube", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "TikTok", href: "#" },
-  ],
+  socials = [],
   backToTop = true,
 } = Astro.props;
 
