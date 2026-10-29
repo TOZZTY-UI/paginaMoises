@@ -31,7 +31,10 @@ export const seo = {
   terminos: {
     title: 'Términos y condiciones | SaxEventos',
     description: 'Consulta los términos y condiciones de SaxEventos.',
-  },
+  },  repertorio: {
+    title: 'Repertorio Musical | SaxEventos',
+    description: 'Explora nuestro repertorio musical para eventos.',
+  }
 } as const;
 
 export type SEOPage = keyof typeof seo;

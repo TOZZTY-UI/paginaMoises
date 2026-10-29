@@ -60,7 +60,7 @@ const icons: Record<string, string> = {
   .sidebar-link.unavailable { color: #929995; }
   .sidebar-link small { margin-left: auto; font-size: 10px; font-weight: 400; }
   .page-frame { position: relative; min-height: 100vh; background: var(--color-bg, #fff); transform-origin: right top; transition: transform .6s cubic-bezier(.22,1,.36,1), border-radius .6s, box-shadow .6s; }
-  .sidebar-toggle { position: sticky; top: max(16px, env(safe-area-inset-top)); z-index: 5; display: grid; place-items: center; width: 52px; height: 52px; margin: 0 0 -52px 20px; transform: translateY(16px); border: 0; border-radius: 50%; background: var(--sidebar-accent); color: #06120d; cursor: pointer; }
+  .sidebar-toggle { position: sticky; top: max(16px, env(safe-area-inset-top)); z-index: 5; display: grid; place-items: center; width: 52px; height: 52px; margin: 0 0 -52px 20px; transform: translateY(16px); border: 0; border-radius: 50%; background: var(--sidebar-accent); color: #06120d; cursor: pointer; transition: opacity .22s ease, visibility .22s, background-color .2s ease; }
   .sidebar-toggle svg { width: 24px; height: 24px; }
   .sidebar-toggle:focus-visible, .sidebar-link:focus-visible { outline: 3px solid var(--sidebar-accent); outline-offset: 4px; }
   .sidebar-toggle:focus-visible { outline-color: #fff; box-shadow: 0 0 0 5px #0d0d11; }
@@ -74,7 +74,7 @@ const icons: Record<string, string> = {
     .sidebar-shell.is-open .sidebar-toggle { opacity: 0; visibility: hidden; pointer-events: none; }
   }
   @media (max-width: 480px) { .sidebar { width: min(240px, 68vw); } .sidebar-close { left: min(196px, calc(68vw - 44px)); } .sidebar-shell.is-open .page-frame { transform: perspective(1600px) translateX(min(240px, 68vw)) scale(.85) rotateY(-5deg); } }
-  @media (prefers-reduced-motion: reduce) { .sidebar, .sidebar-link, .page-frame, .page-dismiss { transition: none; } .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)); } }
+  @media (prefers-reduced-motion: reduce) { .sidebar, .sidebar-link, .page-frame, .page-dismiss, .sidebar-toggle { transition: none; } .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)); } }
 </style>
 
 <script>

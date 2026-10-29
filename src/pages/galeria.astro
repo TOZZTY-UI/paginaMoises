@@ -115,23 +115,33 @@ const cards = galleryImages.map((item, index) => {
     let pointerX = 0;
     let pointerY = 0;
     let raf = 0;
+    let lastFrame = 0;
     let lastTouchY: number | null = null;
+
+    const scheduleFrame = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
 
     const recalc = () => {
       width = root.clientWidth;
       height = root.clientHeight;
       mobile = width < 768;
       root.style.perspective = mobile ? '900px' : '1200px';
+      const cardWidth = mobile ? clamp(width * .38, 130, 180) : clamp(width * .18, 180, 270);
+      cardNodes.forEach((card) => { card.style.width = `${cardWidth}px`; });
+      scheduleFrame();
     };
     const move = (e: PointerEvent) => {
       if (reducedMotion.matches) return;
       targetX = (e.clientX / window.innerWidth - .5) * 2;
       targetY = (e.clientY / window.innerHeight - .5) * 2;
+      scheduleFrame();
     };
     const wheel = (e: WheelEvent) => {
       if ((targetProgress >= 1 && e.deltaY > 0) || (targetProgress <= 0 && e.deltaY < 0)) return;
       e.preventDefault();
       targetProgress = clamp(targetProgress + e.deltaY * .0008, 0, 1);
+      scheduleFrame();
     };
     const touchStart = (e: TouchEvent) => { lastTouchY = e.touches[0]?.clientY ?? null; };
     const touchMove = (e: TouchEvent) => {
@@ -141,6 +151,7 @@ const cards = galleryImages.map((item, index) => {
       if ((targetProgress >= 1 && y < lastTouchY) || (targetProgress <= 0 && y > lastTouchY)) { lastTouchY = y; return; }
       e.preventDefault();
       targetProgress = clamp(targetProgress + (lastTouchY - y) * .002, 0, 1);
+      scheduleFrame();
       lastTouchY = y;
     };
     const keydown = (e: KeyboardEvent) => {
@@ -149,15 +160,23 @@ const cards = galleryImages.map((item, index) => {
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
         e.preventDefault(); targetProgress = clamp(targetProgress - .08, 0, 1);
       }
+      scheduleFrame();
     };
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
     const map = (v: number, a: number, b: number, c: number, d: number) => lerp(c, d, clamp((v - a) / (b - a), 0, 1));
     const fade = (p: number) => p < .18 ? map(p, 0, .18, 0, 1) : p > .82 ? map(p, .82, .98, 1, 0) : 1;
-    function frame() {
-      const smoothing = reducedMotion.matches ? 1 : .085;
+    function frame(time: number) {
+      raf = 0;
+      const elapsed = lastFrame ? Math.min(time - lastFrame, 64) : 16.67;
+      lastFrame = time;
+      const smoothing = reducedMotion.matches ? 1 : 1 - Math.pow(1 - .085, elapsed / 16.67);
+      const pointerSmoothing = reducedMotion.matches ? 1 : 1 - Math.pow(1 - .075, elapsed / 16.67);
       progress = lerp(progress, targetProgress, smoothing);
-      pointerX = lerp(pointerX, targetX, .075);
-      pointerY = lerp(pointerY, targetY, .075);
+      pointerX = lerp(pointerX, targetX, pointerSmoothing);
+      pointerY = lerp(pointerY, targetY, pointerSmoothing);
+      if (Math.abs(progress - targetProgress) < .0001) progress = targetProgress;
+      if (Math.abs(pointerX - targetX) < .001) pointerX = targetX;
+      if (Math.abs(pointerY - targetY) < .001) pointerY = targetY;
       const titleScale = progress < .5 ? map(progress, 0, .5, .7, 1) : map(progress, .5, 1, 1, 1.35);
       const introAlpha = progress < .12 ? map(progress, 0, .12, .25, 1) : progress > .85 ? map(progress, .85, 1, 1, 0) : 1;
       if (intro) { intro.style.transform = `scale(${titleScale})`; intro.style.opacity = `${introAlpha}`; }
@@ -184,12 +203,11 @@ const cards = galleryImages.map((item, index) => {
         const pan = mobile ? 20 : 45;
         const x = baseX - pointerX * pan;
         const y = baseY - pointerY * pan;
-        const w = mobile ? clamp(width * .38, 130, 180) : clamp(width * .18, 180, 270);
-        card.style.width = `${w}px`;
         card.style.opacity = `${fade(local)}`;
         card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${z}px) rotateZ(${card.dataset.rotation}deg)`;
       }
-      raf = requestAnimationFrame(frame);
+      if (progress !== targetProgress || pointerX !== targetX || pointerY !== targetY) scheduleFrame();
+      else lastFrame = 0;
     }
     const observer = new ResizeObserver(recalc);
     observer.observe(root);
@@ -200,7 +218,7 @@ const cards = galleryImages.map((item, index) => {
     root.addEventListener('touchend', () => { lastTouchY = null; });
     root.addEventListener('pointermove', move, { passive: true });
     root.addEventListener('keydown', keydown);
-    raf = requestAnimationFrame(frame);
+    scheduleFrame();
     // Limpieza si Astro reemplaza la página mediante navegación del cliente.
     document.addEventListener('astro:before-swap', () => {
       cancelAnimationFrame(raf);

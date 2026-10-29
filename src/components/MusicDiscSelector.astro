@@ -1,0 +1,678 @@
+
+---
+import { repertoire2 as repertoire } from '../data/repertoire';
+
+type Song = {
+  song: string;
+  artist?: string;
+  album?: string;
+  image?: string;
+  imagen?: string;
+  link?: string;
+};
+
+const collection: Record<string, Song[]> =
+  Array.isArray(repertoire)
+    ? { Repertorio: repertoire }
+    : repertoire as Record<string, Song[]>;
+
+const colors = [
+  '#d94c87',
+  '#13b987',
+  '#6376d9',
+  '#d5a34e',
+  '#945ac5',
+  '#20b9d6',
+];
+
+const genres = Object.entries(collection).map(
+  ([name, songs], index) => ({
+    name,
+    label: name.replaceAll('_', ' '),
+    songs,
+    color: colors[index % colors.length],
+  })
+);
+---
+
+<section class="music-library" data-music-library>
+  <header class="intro">
+    <span class="eyebrow">SAXOEVENTOS COLLECTION</span>
+    <h2>Explora nuestro repertorio</h2>
+    <p>Selecciona un estuche para descubrir sus discos.</p>
+  </header>
+
+  <!-- ESTUCHES DE LOS GÉNEROS -->
+  <div class="album-grid" data-album-grid>
+    {genres.map((genre, index) => (
+      <button
+        type="button"
+        class="album-button"
+        data-album={index}
+        aria-expanded="false"
+        style={`--accent:${genre.color}`}
+      >
+        <span class="jewel-case">
+          <span class="case-spine"></span>
+
+          <span class="case-cover">
+            <span class="brand">SAXOEVENTOS</span>
+
+            <span class="cover-disc" aria-hidden="true">
+              <span class="cover-hole"></span>
+            </span>
+
+            <strong>{genre.label}</strong>
+            <small>MUSIC COLLECTION</small>
+          </span>
+
+          <span class="case-glass"></span>
+        </span>
+
+        <span class="album-details">
+          <strong>{genre.label}</strong>
+          <small>
+            {genre.songs.length} canciones
+          </small>
+        </span>
+      </button>
+    ))}
+  </div>
+
+  <!-- CONTENIDO DE CADA ESTUCHE -->
+  {genres.map((genre, genreIndex) => (
+    <div
+      class="album-view"
+      data-album-view={genreIndex}
+      hidden
+    >
+      <div class="view-header">
+        <div>
+          <span class="eyebrow">COLECCIÓN MUSICAL</span>
+
+          <h3 tabindex="-1" data-album-title>
+            {genre.label}
+          </h3>
+
+          <p>{genre.songs.length} canciones disponibles</p>
+        </div>
+
+        <button
+          type="button"
+          class="back-button"
+          data-back
+        >
+          ← Volver a los álbumes
+        </button>
+      </div>
+
+      <div class="disc-grid">
+        {genre.songs.map((song, index) => {
+          const cover = song.image || song.imagen;
+
+          return (
+            <article class="music-card">
+              <div class="disc-area">
+                <div
+                  class="compact-disc"
+                  style={`--disc-color:${colors[(genreIndex + index) % colors.length]}`}
+                >
+                  {cover && (
+                    <img
+                      src={cover}
+                      alt={`Carátula de ${song.album || song.song}`}
+                      width="240"
+                      height="240"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+
+                  <span class="disc-groove"></span>
+                  <span class="disc-hole"></span>
+                </div>
+              </div>
+
+              <div class="song-details">
+                <strong>{song.song}</strong>
+
+                {song.artist && (
+                  <span>{song.artist}</span>
+                )}
+
+                {song.album && (
+                  <small>{song.album}</small>
+                )}
+              </div>
+
+              {song.link && (
+                <a
+                  class="play-button"
+                  href={song.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Escuchar ${song.song}`}
+                >
+                  ▶ Escuchar canción
+                </a>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(
+    '[data-music-library]'
+  ).forEach((root) => {
+
+    const albumGrid = root.querySelector<HTMLElement>(
+      '[data-album-grid]'
+    );
+
+    const albumButtons = root.querySelectorAll<
+      HTMLButtonElement
+    >('[data-album]');
+
+    const albumViews = root.querySelectorAll<
+      HTMLElement
+    >('[data-album-view]');
+
+    let activeIndex: string | null = null;
+
+    function openAlbum(index: string) {
+      activeIndex = index;
+
+      if (albumGrid) {
+        albumGrid.hidden = true;
+      }
+
+      albumViews.forEach((view) => {
+        const isActive =
+          view.dataset.albumView === index;
+
+        view.hidden = !isActive;
+
+        if (isActive) {
+          view.querySelector<HTMLElement>(
+            '[data-album-title]'
+          )?.focus();
+        }
+      });
+
+      albumButtons.forEach((button) => {
+        button.setAttribute(
+          'aria-expanded',
+          String(button.dataset.album === index)
+        );
+      });
+    }
+
+    function closeAlbum() {
+      if (albumGrid) {
+        albumGrid.hidden = false;
+      }
+
+      albumViews.forEach((view) => {
+        view.hidden = true;
+      });
+
+      const previousButton = Array.from(
+        albumButtons
+      ).find(
+        button => button.dataset.album === activeIndex
+      );
+
+      albumButtons.forEach((button) => {
+        button.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+      });
+
+      previousButton?.focus();
+      activeIndex = null;
+    }
+
+    albumButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        openAlbum(button.dataset.album ?? '0');
+      });
+    });
+
+    root.querySelectorAll<HTMLButtonElement>(
+      '[data-back]'
+    ).forEach((button) => {
+      button.addEventListener('click', closeAlbum);
+    });
+
+  });
+</script>
+
+<style>
+  .music-library {
+    max-width: 1150px;
+    margin: auto;
+    padding: clamp(24px, 5vw, 60px);
+    background: #101116;
+    color: #f6f6f8;
+    border-radius: 28px;
+    font-family: inherit;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  .intro {
+    text-align: center;
+    margin-bottom: 42px;
+  }
+
+  .eyebrow {
+    color: #20e5a0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .2em;
+  }
+
+  .intro h2 {
+    font-size: clamp(28px, 5vw, 46px);
+    letter-spacing: -.04em;
+    line-height: 1.1;
+    margin: 12px 0;
+  }
+
+  .intro p,
+  .view-header p {
+    color: #a2a5b0;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* CUADRÍCULA DE ESTUCHES */
+
+  .album-grid {
+    display: grid;
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+    gap: 32px 22px;
+  }
+
+  .album-button {
+    min-width: 0;
+    border: 0;
+    padding: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .album-button:focus-visible,
+  .back-button:focus-visible,
+  .play-button:focus-visible {
+    outline: 3px solid #20e5a0;
+    outline-offset: 5px;
+  }
+
+  /* ESTUCHE DE CD */
+
+  .jewel-case {
+    display: block;
+    position: relative;
+    aspect-ratio: 1;
+    padding: 5px 5px 5px 15px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: linear-gradient(
+      125deg,
+      #f0f1f5,
+      #949aa4 8%,
+      #e1e3e9 15%,
+      #5a606c 100%
+    );
+    box-shadow:
+      5px 8px 22px #0008,
+      inset 0 0 0 1px #ffffff80;
+    transition:
+      transform .35s ease,
+      box-shadow .35s ease;
+  }
+
+  .album-button:hover .jewel-case {
+    transform: translateY(-7px) rotate(-2deg);
+    box-shadow: 9px 18px 32px #000a;
+  }
+
+  .case-spine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    width: 7px;
+    background: repeating-linear-gradient(
+      to bottom,
+      #ffffffb0 0 10px,
+      #4b5060a0 10px 12px
+    );
+  }
+
+  .case-cover {
+    width: 100%;
+    height: 100%;
+    padding: clamp(8px, 2vw, 18px);
+    background:
+      radial-gradient(
+        circle at 80% 20%,
+        #ffffff50,
+        transparent 42%
+      ),
+      linear-gradient(
+        145deg,
+        var(--accent),
+        #161723
+      );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .brand {
+    align-self: flex-start;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+
+  .case-cover strong {
+    font-size: clamp(13px, 2vw, 23px);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .case-cover small {
+    font-size: 8px;
+    letter-spacing: .12em;
+  }
+
+  .cover-disc {
+    width: 48%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+      #f0ffff,
+      var(--accent),
+      #70dfe8,
+      #f2bce6,
+      #393b60,
+      #f0ffff
+    );
+    box-shadow: 3px 7px 18px #0008;
+  }
+
+  .cover-hole {
+    width: 32%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 5px solid #252833;
+    background: #e4e4e4;
+  }
+
+  .case-glass {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      #ffffff55 0%,
+      transparent 30%,
+      transparent 75%,
+      #ffffff2c 100%
+    );
+  }
+
+  .album-details {
+    display: grid;
+    gap: 5px;
+    padding-top: 14px;
+  }
+
+  .album-details strong {
+    font-size: 14px;
+  }
+
+  .album-details small {
+    font-size: 12px;
+    color: #aaaeb8;
+  }
+
+  /* INTERIOR DEL ÁLBUM */
+
+  .view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .view-header h3 {
+    margin: 8px 0;
+    font-size: clamp(26px, 4vw, 40px);
+    outline: none;
+  }
+
+  .back-button {
+    border: 1px solid #454851;
+    border-radius: 30px;
+    padding: 12px 18px;
+    background: #282b34;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+  }
+
+  .back-button:hover {
+    background: #383c47;
+  }
+
+  /* DISCOS DE CANCIONES */
+
+  .disc-grid {
+    display: grid;
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .music-card {
+    min-width: 0;
+    padding: 18px;
+    background: #1d1f27;
+    border: 1px solid #343741;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .disc-area {
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .compact-disc {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: conic-gradient(
+      #e5ffff,
+      var(--disc-color),
+      #62d9e7,
+      #dfb9da,
+      #3a3c61,
+      var(--disc-color)
+    );
+    box-shadow: 0 10px 25px #0008;
+  }
+
+  .compact-disc img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .disc-groove {
+    position: absolute;
+    inset: 8%;
+    border: 1px solid #ffffff60;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 12px #ffffff08,
+      0 0 0 25px #00000008;
+    pointer-events: none;
+  }
+
+  .disc-hole {
+    position: relative;
+    z-index: 1;
+    width: 25%;
+    aspect-ratio: 1;
+    border: 5px solid #252936;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      #aeb0bb 0 22%,
+      #eeeeee 25% 58%,
+      #323844 62%
+    );
+    box-shadow: 0 0 0 3px #ffffff90;
+  }
+
+  .song-details {
+    display: grid;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .song-details strong {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .song-details span,
+  .song-details small {
+    font-size: 12px;
+    color: #adb0bd;
+  }
+
+  .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+    padding: 12px;
+    border-radius: 12px;
+    background: #20d99c;
+    color: #08140f;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s ease;
+  }
+
+  .play-button:hover {
+    background: #58f2b8;
+  }
+
+  /* RESPONSIVE */
+
+  @media (max-width: 850px) {
+    .album-grid {
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .album-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 25px 14px;
+    }
+
+    .disc-grid {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .music-card {
+      padding: 12px;
+    }
+
+    .view-header {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .music-library {
+      padding: 24px 12px;
+      border-radius: 18px;
+    }
+
+    .case-cover {
+      padding: 8px;
+    }
+
+    .brand {
+      font-size: 7px;
+    }
+
+    .album-details strong {
+      font-size: 12px;
+    }
+
+    .song-details strong {
+      font-size: 12px;
+    }
+
+    .play-button {
+      font-size: 11px;
+      padding: 10px 5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jewel-case,
+    .play-button {
+      transition: none;
+    }
+
+    .album-button:hover .jewel-case {
+      transform: none;
+    }
+  }
+</style>
