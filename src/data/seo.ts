@@ -1,5 +1,9 @@
-// Metadatos de las páginas que usan LandingLayout.
+// Metadatos de las páginas.
 export const seo = {
+  home: {
+    title: 'SaxEventos | Saxofonista para matrimonios y eventos',
+    description: 'Música de saxofón en vivo para matrimonios, celebraciones y eventos en Chile.',
+  },
   servicios: {
     title: 'Servicios | SaxEventos',
     description: 'Conoce los servicios disponibles de SaxEventos.',

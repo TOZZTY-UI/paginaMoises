@@ -151,6 +151,13 @@ const doodles = [
 <script>
   document.querySelectorAll<HTMLElement>("[data-footer]").forEach((footer) => {
     const bubble = footer.querySelector<HTMLElement>(".dcf-bubble");
+    const wordmark = footer.querySelector<HTMLElement>(".dcf-wordmark");
+    if (wordmark && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        wordmark.classList.toggle("is-visible", entry.isIntersecting);
+      }, { threshold: 0.2 });
+      observer.observe(wordmark);
+    }
     let timer: ReturnType<typeof setTimeout>;
     footer
       .querySelectorAll<HTMLButtonElement>(".dcf-character")
@@ -289,8 +296,10 @@ const doodles = [
     display: inline-block;
     transition: transform 0.2s;
   }
-  .dcf-wordmark span:hover {
-    transform: rotate(-4deg) translateY(-5px);
+  @media (hover: hover) {
+    .dcf-wordmark span:hover {
+      transform: rotate(-4deg) translateY(-5px);
+    }
   }
   .dcf-character {
     position: absolute;
@@ -441,6 +450,10 @@ const doodles = [
       transform: translateY(-20%);
     }
   }
+  @keyframes letter-wave {
+    0%, 20%, 100% { transform: rotate(0) translateY(0); }
+    10% { transform: rotate(-4deg) translateY(-5px); }
+  }
   @keyframes drift {
     from {
       transform: translateY(-30px) rotate(0);
@@ -450,6 +463,9 @@ const doodles = [
     }
   }
   @media (max-width: 860px) {
+    .dcf-wordmark.is-visible span {
+      animation: letter-wave 3s ease-in-out calc(var(--i) * 0.1s) infinite;
+    }
     .dcf-top {
       grid-template-columns: 1fr;
     }

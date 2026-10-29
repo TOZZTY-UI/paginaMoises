@@ -1,0 +1,123 @@
+---
+import { sidebarColors, sidebarLinks } from '../data/sidebar';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const icons: Record<string, string> = {
+  home: 'M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  user: 'M20 21a8 8 0 0 0-16 0 M12 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8',
+  music: 'M9 18V5l10-2v13 M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3 M19 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3',
+  image: 'M4 4h16v16H4z M8 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3 M4 17l5-5 3 3 3-3 5 5',
+  list: 'M9 6h12 M9 12h12 M9 18h12 M4 6h.01 M4 12h.01 M4 18h.01',
+  mail: 'M3 5h18v14H3z M3 6l9 7 9-7',
+  message: 'M21 11.5a8.5 8.5 0 0 1-12.8 7.3L3 21l1.8-5A8.5 8.5 0 1 1 21 11.5Z M8 11h8 M8 14h5',
+};
+---
+
+<div class="sidebar-shell" data-sidebar style={`--sidebar-bg:${sidebarColors.background};--sidebar-accent:${sidebarColors.accent}`}>
+  <aside class="sidebar" id="animated-sidebar" aria-label="Menú principal" aria-hidden="true" inert>
+    <div class="sidebar-heading"><span>SaxEventos</span><button class="sidebar-close" type="button" aria-label="Cerrar menú">×</button></div>
+    <nav aria-label="Navegación principal">
+      {sidebarLinks.map((link, index) => {
+        const active = link.href !== '' && (link.href === currentPath || (link.href !== '/' && currentPath.startsWith(`${link.href}/`)));
+        return link.href ? (
+          <a href={link.href} class:list={['sidebar-link', { active }]} aria-current={active ? 'page' : undefined} style={`--index:${index}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[link.icon]} /></svg>
+            <span>{link.label}</span>
+          </a>
+        ) : (
+          <span class="sidebar-link unavailable" style={`--index:${index}`} aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icons[link.icon]} /></svg>
+            <span>{link.label}</span><small>Próximamente</small>
+          </span>
+        );
+      })}
+    </nav>
+  </aside>
+  <div class="page-frame" data-page-frame>
+    <button class="sidebar-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="animated-sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <slot />
+    <button class="page-dismiss" type="button" aria-label="Cerrar menú" tabindex="-1" inert></button>
+  </div>
+</div>
+
+<style>
+  .sidebar-shell { position: relative; min-height: 100vh; background: var(--sidebar-bg); perspective: 1600px; }
+  .sidebar { position: fixed; inset: 0 auto 0 0; width: min(270px, 68vw); box-sizing: border-box; padding: max(32px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom)); overflow-y: auto; color: white; visibility: hidden; transform: translateX(-32px); opacity: 0; transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .35s ease, visibility .55s; }
+  .sidebar-heading { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 12px 28px; font: 700 18px/1.2 system-ui, sans-serif; }
+  .sidebar-heading span:last-child { font-size: 12px; font-weight: 500; color: #a2aaa8; }
+  .sidebar-close { width: 44px; height: 44px; border: 0; border-radius: 50%; background: #29292e; color: white; font-size: 26px; cursor: pointer; }
+  .sidebar-close:focus-visible { outline: 3px solid var(--sidebar-accent); outline-offset: 3px; }
+  .sidebar nav { display: grid; gap: 5px; }
+  .sidebar-link { display: flex; align-items: center; gap: 13px; min-height: 48px; padding: 10px 12px; box-sizing: border-box; border-radius: 15px; color: white; font: 600 14px/1.3 system-ui, sans-serif; text-decoration: none; opacity: 0; transform: translateX(-12px); transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease, background .2s ease; }
+  .sidebar-link svg { width: 20px; height: 20px; flex: none; }
+  .sidebar-link.active { background: var(--sidebar-accent); color: #06120d; }
+  .sidebar-link:not(.active):not(.unavailable):hover { background: #29292e; }
+  .sidebar-link.unavailable { color: #929995; }
+  .sidebar-link small { margin-left: auto; font-size: 10px; font-weight: 400; }
+  .page-frame { position: relative; min-height: 100vh; background: var(--color-bg, #fff); transform-origin: right top; transition: transform .6s cubic-bezier(.22,1,.36,1), border-radius .6s, box-shadow .6s; }
+  .sidebar-toggle { position: sticky; top: max(16px, env(safe-area-inset-top)); z-index: 5; display: grid; place-items: center; width: 52px; height: 52px; margin: 0 0 -52px 20px; transform: translateY(16px); border: 0; border-radius: 50%; background: var(--sidebar-accent); color: #06120d; cursor: pointer; }
+  .sidebar-toggle svg { width: 24px; height: 24px; }
+  .sidebar-toggle:focus-visible, .sidebar-link:focus-visible { outline: 3px solid var(--sidebar-accent); outline-offset: 4px; }
+  .sidebar-toggle:focus-visible { outline-color: #fff; box-shadow: 0 0 0 5px #0d0d11; }
+  .page-dismiss { position: absolute; inset: 0; z-index: 4; width: 100%; border: 0; background: #0003; cursor: pointer; border-radius: inherit; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .4s ease, visibility .4s; }
+  .sidebar-shell.is-open .page-dismiss { opacity: 1; visibility: visible; pointer-events: auto; }
+  .sidebar-shell.is-open .sidebar { visibility: visible; opacity: 1; transform: translateX(0); }
+  .sidebar-shell.is-open .sidebar-link { opacity: 1; transform: translateX(0); transition-delay: calc(var(--index) * 40ms); }
+  .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)) scale(.85) rotateY(-5deg); border-radius: 30px; box-shadow: -18px 20px 60px #0008; }
+  @media (max-width: 768px) { .sidebar-shell.is-open .sidebar-toggle { opacity: 0; visibility: hidden; pointer-events: none; } }
+  @media (max-width: 480px) { .sidebar { width: min(240px, 68vw); } .sidebar-shell.is-open .page-frame { transform: translateX(min(240px, 68vw)) scale(.85) rotateY(-5deg); } }
+  @media (prefers-reduced-motion: reduce) { .sidebar, .sidebar-link, .page-frame, .page-dismiss { transition: none; } .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)); } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-sidebar]').forEach((shell) => {
+    const sidebar = shell.querySelector<HTMLElement>('#animated-sidebar');
+    const frame = shell.querySelector<HTMLElement>('[data-page-frame]');
+    const toggle = shell.querySelector<HTMLButtonElement>('.sidebar-toggle');
+    const dismiss = shell.querySelector<HTMLButtonElement>('.page-dismiss');
+    const closeButton = shell.querySelector<HTMLButtonElement>('.sidebar-close');
+    if (!sidebar || !frame || !toggle || !dismiss || !closeButton) return;
+    let oldOverflow = '';
+    const close = (restoreFocus = true) => {
+      shell.classList.remove('is-open');
+      sidebar.inert = true;
+      sidebar.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+      dismiss.inert = true;
+      document.body.style.overflow = oldOverflow;
+      if (restoreFocus) toggle.focus({ preventScroll: true });
+    };
+    const open = () => {
+      oldOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      sidebar.inert = false;
+      sidebar.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
+      dismiss.inert = false;
+      shell.classList.add('is-open');
+      closeButton.focus();
+    };
+    toggle.addEventListener('click', () => shell.classList.contains('is-open') ? close() : open());
+    dismiss.addEventListener('click', () => close());
+    closeButton.addEventListener('click', () => close());
+    sidebar.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => close(false)));
+    document.addEventListener('keydown', (event) => {
+      if (!shell.classList.contains('is-open')) return;
+      if (event.key === 'Escape') { event.preventDefault(); close(); }
+      if (event.key === 'Tab') {
+        const links = Array.from(sidebar.querySelectorAll<HTMLAnchorElement>('a'));
+        const first = links[0];
+        const last = links[links.length - 1];
+        if (event.shiftKey && document.activeElement === closeButton) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === closeButton && !first) { event.preventDefault(); closeButton.focus(); }
+        else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); closeButton.focus(); }
+        else if (!event.shiftKey && document.activeElement === toggle) { event.preventDefault(); first?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); closeButton.focus(); }
+      }
+    });
+  });
+</script>

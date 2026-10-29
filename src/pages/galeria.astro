@@ -23,7 +23,6 @@ const cards = galleryImages.map((item, index) => {
 ---
 
 <LandingLayout page="galeria" showFooter={false}>
-<main>
 <section class="tunnel" data-perspective-tunnel aria-label="Galería inmersiva 3D" tabindex="0">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
@@ -64,7 +63,6 @@ const cards = galleryImages.map((item, index) => {
     <Button href="/servicios" name="Ver servicios" />
   </div>
 </section>
-</main>
 </LandingLayout>
 
 <script>
@@ -207,7 +205,6 @@ const cards = galleryImages.map((item, index) => {
 <style>
   :global(.navbar-container) { transition: opacity .35s ease, visibility .35s ease; }
   :global(.navbar-container.gallery-nav-hidden) { opacity: 0; visibility: hidden; pointer-events: none; }
-  main { margin-top: -120px; }
   .tunnel { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; isolation: isolate; background: #0a0a0a; color: #fff; user-select: none; transform-style: preserve-3d; }
   .grid-bg,.glow,.ring,.card-plane { position:absolute; pointer-events:none; }
   .grid-bg { inset:0; background-image:radial-gradient(#1e1b4b 1px,transparent 1px); background-size:28px 28px; mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 60%,transparent 100%); opacity:.65; }
@@ -220,6 +217,15 @@ const cards = galleryImages.map((item, index) => {
   .gallery-end.is-visible { opacity:1; transform:translateY(0); pointer-events:auto; }
   .gallery-end h2 { font-size:clamp(2rem, 5vw, 3.5rem); }
   .gallery-end p { margin:20px 0; }
+  @media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .gallery-end.is-visible :global(.button) { background: transparent; color: var(--color-accent, #8fffa8); box-shadow: 0 0 25px rgba(143, 255, 168, .25); }
+    .gallery-end.is-visible :global(.star-1) { top: -80%; left: -30%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+    .gallery-end.is-visible :global(.star-2) { top: -25%; left: 10%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+    .gallery-end.is-visible :global(.star-3) { top: 55%; left: 25%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+    .gallery-end.is-visible :global(.star-4) { top: 30%; left: 80%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+    .gallery-end.is-visible :global(.star-5) { top: 25%; left: 115%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+    .gallery-end.is-visible :global(.star-6) { top: 5%; left: 60%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2; }
+  }
   @media (prefers-reduced-motion: reduce) { .gallery-end { transition:none; transform:none; } }
   .scroll-prompt { position:absolute; bottom:32px; z-index:20; display:flex; flex-direction:column; align-items:center; gap:8px; font:11px/1.5 monospace; text-transform:uppercase; letter-spacing:.3em; color:#a3a3a3; pointer-events:none; }
   .scroll-prompt i { width:1px; height:24px; background:linear-gradient(#818cf8,transparent); }

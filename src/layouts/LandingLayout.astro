@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
+import AnimatedSidebar from '../components/AnimatedSidebar.astro';
 import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import { seo, type SEOPage } from '../data/seo';
@@ -30,10 +30,11 @@ const pageDescription = description ?? seoData?.description ?? '';
     <slot name="head" />
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    {showFooter && <Footer />}
+    <AnimatedSidebar>
+      <main>
+        <slot />
+      </main>
+      {showFooter && <Footer />}
+    </AnimatedSidebar>
   </body>
 </html>
