@@ -1,0 +1,25 @@
+/* Navegación normal entre documentos; no modifica el ciclo de vida de los scripts. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: page-leave 180ms ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-enter 300ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes page-leave {
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}

@@ -18,4 +18,11 @@ h2 { font-size: clamp(2.25rem, 5vw, 4.5rem); }
 h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
 main { overflow: hidden; }
 :focus-visible { outline: 3px solid var(--color-accent-strong); outline-offset: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .block-reveal { animation: block-appear .55s cubic-bezier(.22, 1, .36, 1) both; }
+  @keyframes block-appear {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }

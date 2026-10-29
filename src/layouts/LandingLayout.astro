@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/page-transitions.css';
 import AnimatedSidebar from '../components/AnimatedSidebar.astro';
 import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
@@ -38,3 +39,7 @@ const pageDescription = description ?? seoData?.description ?? '';
     </AnimatedSidebar>
   </body>
 </html>
+
+<script>
+  import '../scripts/block-reveal';
+</script>

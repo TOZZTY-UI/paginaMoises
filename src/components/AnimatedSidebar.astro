@@ -110,7 +110,18 @@ const icons: Record<string, string> = {
     toggle.addEventListener('click', () => shell.classList.contains('is-open') ? close() : open());
     dismiss.addEventListener('click', () => close());
     closeButton.addEventListener('click', () => close());
-    sidebar.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => close(false)));
+    let navigating = false;
+    sidebar.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
+      const destination = new URL(link.href, location.href);
+      if (destination.origin !== location.origin) return;
+      if (navigating) { event.preventDefault(); return; }
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { close(false); return; }
+      event.preventDefault();
+      navigating = true;
+      close(false);
+      window.setTimeout(() => { window.location.assign(destination.href); }, 320);
+    }));
     document.addEventListener('keydown', (event) => {
       if (!shell.classList.contains('is-open')) return;
       if (event.key === 'Escape') { event.preventDefault(); close(); }

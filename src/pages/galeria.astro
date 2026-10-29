@@ -81,6 +81,15 @@ const cards = galleryImages.map((item, index) => {
   const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
   document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((root) => {
     const cardNodes = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+    cardNodes.forEach((card) => {
+      const image = card.querySelector<HTMLImageElement>('img');
+      const container = card.querySelector<HTMLElement>('.card-inner');
+      if (!image || !container || image.complete) return;
+      container.classList.add('image-loading');
+      const finish = () => container.classList.remove('image-loading');
+      image.addEventListener('load', finish, { once: true });
+      image.addEventListener('error', finish, { once: true });
+    });
     // Mezclar las posiciones en cada visita, sin modificar el diccionario original.
     for (let i = cardNodes.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -261,6 +270,11 @@ const cards = galleryImages.map((item, index) => {
   .card-plane { inset:0; transform-style:preserve-3d; }
   .tunnel-card { position:absolute; left:50%; top:50%; aspect-ratio:4/5; opacity:0; transform-style:preserve-3d; will-change:transform,opacity; pointer-events:auto; cursor:pointer; }
   .card-inner { width:100%; height:100%; overflow:hidden; position:relative; background:#171717; border-radius:16px; box-shadow:0 28px 70px rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.16); transition:border-color .4s,box-shadow .4s; }
+  .card-inner.image-loading::after { content:''; position:absolute; inset:0; background:#292929; pointer-events:none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-inner.image-loading::after { animation: skeleton-pulse 1.5s ease-in-out infinite alternate; }
+    @keyframes skeleton-pulse { from { opacity:.65; } to { opacity:1; } }
+  }
   .card-inner:hover { border-color:rgba(129,140,248,.75); box-shadow:0 28px 70px rgba(99,102,241,.25); }
   .card-inner :global(img) { width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; }
   .card-inner:hover :global(img) { transform:scale(1.1); }
