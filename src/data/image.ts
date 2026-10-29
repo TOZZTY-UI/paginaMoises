@@ -16,8 +16,8 @@ export const images = {
         { src: "src/assets/images/funerario/20260108_132903.jpg.jpeg", name: null, alt: "funerario" },
         { src: "src/assets/images/funerario/20260109_115317.jpg.jpeg", name: null, alt: "funerario" },
         { src: "src/assets/images/funerario/20260109_115417.jpg.jpeg", name: null, alt: "funerario" },
-        { src: "src/assets/images/funerario/20260109_161919.heic", name: null, alt: "funerario" },
-        { src: "src/assets/images/funerario/20260109_162323.heic", name: null, alt: "funerario" },
+        { src: "src/assets/images/funerario/20260109_161919.jpg", name: null, alt: "funerario" },
+        { src: "src/assets/images/funerario/20260109_162323.jpg", name: null, alt: "funerario" },
         { src: "src/assets/images/funerario/file_00000000127071f5a9e18618770dd612.png", name: null, alt: "funerario" }
     ],
 

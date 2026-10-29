@@ -1,13 +1,24 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
 import Button from '../components/Button.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { images } from '../data/image';
 
-const imageFiles = import.meta.glob<{ default: string }>('../assets/images/**/*.{jpg,jpeg,png,webp,avif}', { eager: true, query: '?url' });
-const galleryImages = Object.values(images).flat().flatMap((item) => {
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>([
+  '../assets/images/bodas/*.{jpg,jpeg,png,webp,avif}',
+  '../assets/images/funerario/*.{jpg,jpeg,png,webp,avif}',
+  '../assets/images/4to_medio/*.{jpg,jpeg,png,webp,avif}',
+], { eager: true });
+const categoryAlt: Record<string, string> = {
+  bodas: 'Fotografía de un matrimonio',
+  funerario: 'Fotografía de una ceremonia funeraria',
+  '4to_medio': 'Fotografía de una celebración de cuarto medio',
+};
+const galleryImages = Object.entries(images).flatMap(([category, items]) => items.flatMap((item) => {
   const src = imageFiles[item.src.replace(/^src\//, '../')]?.default;
-  return src ? [{ ...item, src }] : [];
-});
+  return src ? [{ ...item, src, alt: categoryAlt[category] }] : [];
+}));
 const cards = galleryImages.map((item, index) => {
   const angle = index * 137.5 * Math.PI / 180;
   return {
@@ -51,7 +62,7 @@ const cards = galleryImages.map((item, index) => {
         style={`z-index:${card.index + 1}`}
       >
         <div class="card-inner">
-          <img src={card.src} alt={card.alt} loading="lazy" draggable="false" />
+          <Image src={card.src} alt={card.alt} width={Math.min(card.src.width, 960)} widths={[320, 640, 960].filter((width) => width <= card.src.width)} sizes="(max-width: 767px) 180px, 270px" format="webp" quality={80} loading="lazy" decoding="async" draggable="false" />
           <div class="card-gradient"><span>{card.name}</span></div>
         </div>
       </div>
@@ -233,8 +244,8 @@ const cards = galleryImages.map((item, index) => {
   .tunnel-card { position:absolute; left:50%; top:50%; aspect-ratio:4/5; opacity:0; transform-style:preserve-3d; will-change:transform,opacity; pointer-events:auto; cursor:pointer; }
   .card-inner { width:100%; height:100%; overflow:hidden; position:relative; background:#171717; border-radius:16px; box-shadow:0 28px 70px rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.16); transition:border-color .4s,box-shadow .4s; }
   .card-inner:hover { border-color:rgba(129,140,248,.75); box-shadow:0 28px 70px rgba(99,102,241,.25); }
-  img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; }
-  .card-inner:hover img { transform:scale(1.1); }
+  .card-inner :global(img) { width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s ease; }
+  .card-inner:hover :global(img) { transform:scale(1.1); }
   .card-gradient { position:absolute; inset:0; display:flex; align-items:end; padding:20px; background:linear-gradient(transparent 40%,rgba(0,0,0,.8)); }
   .card-gradient span { color:rgba(255,255,255,.95); text-transform:uppercase; letter-spacing:.18em; font:12px/1.5 monospace; text-shadow:0 1px 8px #000; }
   @media (prefers-color-scheme:light) { .tunnel { background:#fafafa; color:#171717; } .grid-bg { background-image:radial-gradient(#cbd5e1 1px,transparent 1px);opacity:.7; } .glow { background:radial-gradient(circle at center,rgba(99,102,241,.15),transparent 70%); } .ring-two { border-color:rgba(100,116,139,.25); } .eyebrow { color:#4f46e5; } h1 { background:linear-gradient(#0a0a0a,#737373); background-clip:text;-webkit-background-clip:text; } .description { color:#525252; } }

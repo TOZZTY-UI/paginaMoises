@@ -15,7 +15,10 @@ const icons: Record<string, string> = {
 
 <div class="sidebar-shell" data-sidebar style={`--sidebar-bg:${sidebarColors.background};--sidebar-accent:${sidebarColors.accent}`}>
   <aside class="sidebar" id="animated-sidebar" aria-label="Menú principal" aria-hidden="true" inert>
-    <div class="sidebar-heading"><span>SaxEventos</span><button class="sidebar-close" type="button" aria-label="Cerrar menú">×</button></div>
+    <div class="sidebar-heading"><span>SaxEventos</span></div>
+    <button class="sidebar-close" type="button" aria-label="Cerrar menú">
+      <i class="fi fi-rr-angle-small-right" aria-hidden="true"></i>
+    </button>
     <nav aria-label="Navegación principal">
       {sidebarLinks.map((link, index) => {
         const active = link.href !== '' && (link.href === currentPath || (link.href !== '/' && currentPath.startsWith(`${link.href}/`)));
@@ -43,13 +46,13 @@ const icons: Record<string, string> = {
 </div>
 
 <style>
-  .sidebar-shell { position: relative; min-height: 100vh; background: var(--sidebar-bg); perspective: 1600px; }
+  .sidebar-shell { position: relative; min-height: 100vh; background: var(--sidebar-bg); }
   .sidebar { position: fixed; inset: 0 auto 0 0; width: min(270px, 68vw); box-sizing: border-box; padding: max(32px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom)); overflow-y: auto; color: white; visibility: hidden; transform: translateX(-32px); opacity: 0; transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .35s ease, visibility .55s; }
   .sidebar-heading { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 12px 28px; font: 700 18px/1.2 system-ui, sans-serif; }
-  .sidebar-heading span:last-child { font-size: 12px; font-weight: 500; color: #a2aaa8; }
-  .sidebar-close { width: 44px; height: 44px; border: 0; border-radius: 50%; background: #29292e; color: white; font-size: 26px; cursor: pointer; }
+  .sidebar-close { position: fixed; top: 50%; left: min(226px, calc(68vw - 44px)); transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: transparent; color: white; cursor: pointer; }
+  .sidebar-close i { display: flex; font-size: 20px; }
   .sidebar-close:focus-visible { outline: 3px solid var(--sidebar-accent); outline-offset: 3px; }
-  .sidebar nav { display: grid; gap: 5px; }
+  .sidebar nav { display: grid; gap: 5px; padding-right: 34px; }
   .sidebar-link { display: flex; align-items: center; gap: 13px; min-height: 48px; padding: 10px 12px; box-sizing: border-box; border-radius: 15px; color: white; font: 600 14px/1.3 system-ui, sans-serif; text-decoration: none; opacity: 0; transform: translateX(-12px); transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .3s ease, background .2s ease; }
   .sidebar-link svg { width: 20px; height: 20px; flex: none; }
   .sidebar-link.active { background: var(--sidebar-accent); color: #06120d; }
@@ -65,9 +68,9 @@ const icons: Record<string, string> = {
   .sidebar-shell.is-open .page-dismiss { opacity: 1; visibility: visible; pointer-events: auto; }
   .sidebar-shell.is-open .sidebar { visibility: visible; opacity: 1; transform: translateX(0); }
   .sidebar-shell.is-open .sidebar-link { opacity: 1; transform: translateX(0); transition-delay: calc(var(--index) * 40ms); }
-  .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)) scale(.85) rotateY(-5deg); border-radius: 30px; box-shadow: -18px 20px 60px #0008; }
+  .sidebar-shell.is-open .page-frame { transform: perspective(1600px) translateX(min(270px, 68vw)) scale(.85) rotateY(-5deg); border-radius: 30px; box-shadow: -18px 20px 60px #0008; }
   @media (max-width: 768px) { .sidebar-shell.is-open .sidebar-toggle { opacity: 0; visibility: hidden; pointer-events: none; } }
-  @media (max-width: 480px) { .sidebar { width: min(240px, 68vw); } .sidebar-shell.is-open .page-frame { transform: translateX(min(240px, 68vw)) scale(.85) rotateY(-5deg); } }
+  @media (max-width: 480px) { .sidebar { width: min(240px, 68vw); } .sidebar-close { left: min(196px, calc(68vw - 44px)); } .sidebar-shell.is-open .page-frame { transform: perspective(1600px) translateX(min(240px, 68vw)) scale(.85) rotateY(-5deg); } }
   @media (prefers-reduced-motion: reduce) { .sidebar, .sidebar-link, .page-frame, .page-dismiss { transition: none; } .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)); } }
 </style>
 
