@@ -1,6 +1,8 @@
 ---
 import { socialLinks } from "../data/socialLinks";
 import { navigation } from "../data/navigation";
+import { Image } from "astro:assets";
+import firma from "../assets/images/Firma.png";
 interface Link {
   label: string;
   href?: string;
@@ -72,7 +74,7 @@ const doodles = [
 <footer class="dcf" data-footer>
   <div class="dcf-top">
     <div class="dcf-brand">
-      <span>{brand}</span>
+      <Image src={firma} alt={`Firma de ${brand}`} width={240} format="webp" loading="lazy" />
     </div>
     {blurb && <p class="dcf-blurb">{blurb}</p>}
     {
@@ -237,6 +239,11 @@ const doodles = [
     gap: 10px;
     font-size: 19px;
     font-weight: 800;
+  }
+  .dcf-brand :global(img) {
+    width: min(240px, 100%);
+    height: auto;
+    filter: invert(1);
   }
   .dcf-logo {
     display: grid;
