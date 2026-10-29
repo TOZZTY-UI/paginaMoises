@@ -69,7 +69,10 @@ const icons: Record<string, string> = {
   .sidebar-shell.is-open .sidebar { visibility: visible; opacity: 1; transform: translateX(0); }
   .sidebar-shell.is-open .sidebar-link { opacity: 1; transform: translateX(0); transition-delay: calc(var(--index) * 40ms); }
   .sidebar-shell.is-open .page-frame { transform: perspective(1600px) translateX(min(270px, 68vw)) scale(.85) rotateY(-5deg); border-radius: 30px; box-shadow: -18px 20px 60px #0008; }
-  @media (max-width: 768px) { .sidebar-shell.is-open .sidebar-toggle { opacity: 0; visibility: hidden; pointer-events: none; } }
+  @media (max-width: 768px) {
+    .sidebar-toggle { position: fixed; top: max(16px, env(safe-area-inset-top)); right: 16px; margin: 0; transform: none; }
+    .sidebar-shell.is-open .sidebar-toggle { opacity: 0; visibility: hidden; pointer-events: none; }
+  }
   @media (max-width: 480px) { .sidebar { width: min(240px, 68vw); } .sidebar-close { left: min(196px, calc(68vw - 44px)); } .sidebar-shell.is-open .page-frame { transform: perspective(1600px) translateX(min(240px, 68vw)) scale(.85) rotateY(-5deg); } }
   @media (prefers-reduced-motion: reduce) { .sidebar, .sidebar-link, .page-frame, .page-dismiss { transition: none; } .sidebar-shell.is-open .page-frame { transform: translateX(min(270px, 68vw)); } }
 </style>
