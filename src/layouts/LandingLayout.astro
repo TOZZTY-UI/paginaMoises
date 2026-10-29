@@ -2,9 +2,21 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+import { seo, type SEOPage } from '../data/seo';
 
-interface Props { title: string; showFooter?: boolean }
-const { title, showFooter = true } = Astro.props;
+type Props = {
+  showFooter?: boolean;
+  image?: string;
+} & (
+  | { page: SEOPage; title?: string; description?: string }
+  | { page?: never; title: string; description: string }
+);
+
+const { page, title, description, image, showFooter = true } = Astro.props;
+const seoData = page ? seo[page] : undefined;
+const pageTitle = title ?? seoData?.title ?? '';
+const pageDescription = description ?? seoData?.description ?? '';
 ---
 
 <!doctype html>
@@ -13,13 +25,15 @@ const { title, showFooter = true } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <SEO title={pageTitle} description={pageDescription} image={image} />
     <slot name="head" />
   </head>
   <body>
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
     {showFooter && <Footer />}
   </body>
 </html>

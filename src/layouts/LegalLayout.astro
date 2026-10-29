@@ -1,9 +1,10 @@
 ---
 import LandingLayout from './LandingLayout.astro';
+import type { SEOPage } from '../data/seo';
 
-interface Props { title: string }
-const { title } = Astro.props;
+interface Props { page: SEOPage }
+const { page } = Astro.props;
 ---
-<LandingLayout title={title}>
+<LandingLayout page={page}>
   <slot />
 </LandingLayout>
