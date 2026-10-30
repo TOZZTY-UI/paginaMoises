@@ -276,6 +276,11 @@
       var(--disc-color)
     );
     box-shadow: 0 10px 25px #0008;
+    animation: disc-spin 15s linear infinite;
+  }
+
+  @keyframes disc-spin {
+    to { transform: rotate(360deg); }
   }
 
   .compact-disc img {
@@ -411,6 +416,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .compact-disc {
+      animation: none;
+    }
     .jewel-case,
     .play-button {
       transition: none;

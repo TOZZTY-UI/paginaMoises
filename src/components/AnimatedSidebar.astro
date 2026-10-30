@@ -1,5 +1,7 @@
 ---
 import { sidebarColors, sidebarLinks } from '../data/sidebar';
+import { Image } from 'astro:assets';
+import firma from '../assets/images/Firma.png';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const icons: Record<string, string> = {
@@ -15,7 +17,7 @@ const icons: Record<string, string> = {
 
 <div class="sidebar-shell" data-sidebar style={`--sidebar-bg:${sidebarColors.background};--sidebar-accent:${sidebarColors.accent}`}>
   <aside class="sidebar" id="animated-sidebar" aria-label="Menú principal" aria-hidden="true" inert>
-    <div class="sidebar-heading"><span>SaxEventos</span></div>
+    <div class="sidebar-heading"><Image src={firma} alt="Firma de Moisés Larenas, saxofonista" width={240} format="webp" loading="lazy" /></div>
     <button class="sidebar-close" type="button" aria-label="Cerrar menú">
       <i class="fi fi-rr-angle-small-right" aria-hidden="true"></i>
     </button>

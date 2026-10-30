@@ -25,7 +25,8 @@ document.querySelectorAll<HTMLElement>('[data-sidebar]').forEach((shell) => {
     toggle.setAttribute('aria-label', 'Cerrar menú');
     dismiss.inert = false;
     shell.classList.add('is-open');
-    closeButton.focus();
+    if (window.matchMedia('(min-width: 769px)').matches) sidebar.querySelector<HTMLAnchorElement>('a')?.focus();
+    else closeButton.focus();
   };
   toggle.addEventListener('click', () => shell.classList.contains('is-open') ? close() : open());
   dismiss.addEventListener('click', () => close());
@@ -49,6 +50,11 @@ document.querySelectorAll<HTMLElement>('[data-sidebar]').forEach((shell) => {
       const links = Array.from(sidebar.querySelectorAll<HTMLAnchorElement>('a'));
       const first = links[0];
       const last = links[links.length - 1];
+      if (window.matchMedia('(min-width: 769px)').matches) {
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+        return;
+      }
       if (event.shiftKey && document.activeElement === closeButton) { event.preventDefault(); last?.focus(); }
       else if (!event.shiftKey && document.activeElement === closeButton && !first) { event.preventDefault(); closeButton.focus(); }
       else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); closeButton.focus(); }
