@@ -47,6 +47,8 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
   let raf = 0;
   let lastFrame = 0;
   let lastTouchY: number | null = null;
+  // Mantener un ritmo parecido aunque se agreguen más fotografías.
+  const scrollScale = clamp(12 / Math.max(cardNodes.length, 1), .25, 1);
 
   const scheduleFrame = () => {
     if (!raf) raf = requestAnimationFrame(frame);
@@ -70,7 +72,7 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
   const wheel = (e: WheelEvent) => {
     if ((targetProgress >= 1 && e.deltaY > 0) || (targetProgress <= 0 && e.deltaY < 0)) return;
     e.preventDefault();
-    targetProgress = clamp(targetProgress + e.deltaY * .0008, 0, 1);
+    targetProgress = clamp(targetProgress + e.deltaY * .0008 * scrollScale, 0, 1);
     scheduleFrame();
   };
   const touchStart = (e: TouchEvent) => { lastTouchY = e.touches[0]?.clientY ?? null; };
@@ -80,15 +82,15 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
     if (y === undefined) return;
     if ((targetProgress >= 1 && y < lastTouchY) || (targetProgress <= 0 && y > lastTouchY)) { lastTouchY = y; return; }
     e.preventDefault();
-    targetProgress = clamp(targetProgress + (lastTouchY - y) * .002, 0, 1);
+    targetProgress = clamp(targetProgress + (lastTouchY - y) * .002 * scrollScale, 0, 1);
     scheduleFrame();
     lastTouchY = y;
   };
   const keydown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-      e.preventDefault(); targetProgress = clamp(targetProgress + .08, 0, 1);
+      e.preventDefault(); targetProgress = clamp(targetProgress + .08 * scrollScale, 0, 1);
     } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-      e.preventDefault(); targetProgress = clamp(targetProgress - .08, 0, 1);
+      e.preventDefault(); targetProgress = clamp(targetProgress - .08 * scrollScale, 0, 1);
     }
     scheduleFrame();
   };
@@ -123,10 +125,12 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
       galleryEnd.inert = !visible;
       galleryEnd.setAttribute('aria-hidden', String(!visible));
     }
+    // Cada foto recorre el túnel en una ventana corta: solo unas pocas coinciden.
+    const visibleWindow = mobile ? 2.5 : 3;
+    const timeline = clamp(progress / .94, 0, 1) * (Math.max(cardNodes.length - 1, 0) + visibleWindow);
     for (const card of cardNodes) {
       const i = Number(card.dataset.index);
-      const start = (i / cardNodes.length) * .45;
-      const local = clamp((progress - start) / .55, 0, 1);
+      const local = clamp((timeline - i) / visibleWindow, 0, 1);
       const z = lerp(mobile ? -1200 : -1700, mobile ? 350 : 500, local);
       const baseX = Number(card.dataset.cos) * width * Number(card.dataset.radiusX);
       const baseY = Number(card.dataset.sin) * height * Number(card.dataset.radiusY);
