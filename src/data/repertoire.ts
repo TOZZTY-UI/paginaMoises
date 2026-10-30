@@ -75,8 +75,6 @@ Bailables: [
 Bossa_Nova: [
   {artist:"Luis Miguel",link:"https://music.apple.com/cl/album/cuando-calienta-el-sol/671129332?i=671129680",album:"Soy Como Quiero Ser",song:"Cuando Calienta El Sol",image:"https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/d9/58/af/d958afe4-2f9c-cf24-4070-37fc970061ce/825646432202.jpg/600x600bb.jpg"},
   {artist:"Luis Miguel",link:"https://music.apple.com/cl/album/suave/100986900?i=100986783",album:"Aries",song:"Suave",image:"https://is1-ssl.mzstatic.com/image/thumb/Music/8b/1f/1d/mzi.iofcclws.jpg/600x600bb.jpg"},
-  // Pendiente: confirmar intérprete o versión.
-  {artist:"",link:"",album:"",song:"Cuan bello",image:""},
   {artist:"Eric Benét ft. Faith Evans",link:"https://music.apple.com/cl/album/georgy-porgy-feat-faith-evans/342313154?i=342313206",album:"A Day In the Life",song:"Georgy Porgy (feat. Faith Evans)",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2d/f4/0f/2df40f4d-4cb8-1dfb-e302-c22ff681ea8f/mzi.lpemlfnl.jpg/600x600bb.jpg"},
   {artist:"Bruno Mars",link:"https://music.apple.com/us/album/treasure/581806371?i=581806439",album:"Unorthodox Jukebox",song:"Treasure",image:"https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/15/63/53/156353b8-d45b-a17d-f553-2d125aeb3cb3/075679957474.jpg/600x600bb.jpg"},
   {artist:"Emmanuel",link:"https://music.apple.com/cl/album/la-chica-de-humo/1502726892?i=1502726893",album:"Quisiera",song:"La Chica de Humo",image:"https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/63/46/2c/63462c42-9d72-5f6d-e27b-9f5af2ee01b3/0.jpg/600x600bb.jpg"},
@@ -93,18 +91,21 @@ Bossa_Nova: [
   {artist:"Alexandra Stan",link:"https://music.apple.com/cl/album/mr-saxobeat-radio-edit/1531503556?i=1531503560",album:"Saxobeats",song:"Mr. Saxobeat (Radio Edit)",image:"https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/fc/d8/76/fcd87668-a4dd-8ca9-d61d-cedac9d0fc01/19UM1IM10780.rgb.jpg/600x600bb.jpg"},
   {artist:"Clean Bandit ft. Sean Paul & Anne-Marie",link:"https://music.apple.com/cl/album/rockabye-feat-sean-paul-anne-marie/1436733958?i=1436734184",album:"What Is Love?",song:"Rockabye (feat. Sean Paul & Anne-Marie)",image:"https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/1d/96/cb/1d96cba9-6687-25df-35bb-f6f602caff25/190295552602.jpg/600x600bb.jpg"},
   {artist:"Michael Jackson",link:"https://music.apple.com/cl/album/human-nature/269572838?i=269573405",album:"Thriller",song:"Human Nature",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg"},
-  // Pendiente: confirmar intérprete o versión.
-  {artist:"Honda Disco",link:"",album:"",song:"I Still See Your Smile",image:""},
-  // Pendiente: confirmar intérprete o versión.
-  {artist:"Honda Disco",link:"",album:"",song:"One More Chance",image:""},
   {artist:"Los Enanitos Verdes",link:"https://music.apple.com/cl/album/lamento-boliviano/721632150?i=721632344",album:"Big Bang",song:"Lamento Boliviano",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e5/64/3c/e5643c58-0281-6735-74af-a53b8dfda4ec/00724382987055.jpg/600x600bb.jpg"},
-  // Pendiente: confirmar intérprete o versión.
-  {artist:"Deep House",link:"",album:"",song:"Dilema",image:""},
   {artist:"Luis Miguel",link:"https://music.apple.com/cl/album/oro-de-ley/1422838915?i=1422838918",album:"20 Años",song:"Oro De Ley",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cd/b2/cb/cdb2cb8f-265f-f1af-acb7-d298122fa869/090317153520.jpg/600x600bb.jpg"},
   {artist:"*NSYNC",link:"https://music.apple.com/cl/album/its-gonna-be-me/303171298?i=303171383",album:"No Strings Attached",song:"It's Gonna Be Me",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/36/22/d6/3622d665-873c-57b8-392b-971292e6086f/012414170224.jpg/600x600bb.jpg"},
   {artist:"David Guetta ft. Sia",link:"https://music.apple.com/cl/album/titanium-feat-sia/726390068?i=726390516",album:"Nothing But the Beat Ultimate",song:"Titanium (feat. Sia)",image:"https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/f0/a4/2c/f0a42c10-829c-8b84-7ac2-271f45d4687e/dj.zykhivrk.jpg/600x600bb.jpg"},
   {artist:"Mark Ronson ft. Bruno Mars",link:"https://music.apple.com/cl/album/uptown-funk-feat-bruno-mars/956024314?i=956024318",album:"Uptown Special",song:"Uptown Funk (feat. Bruno Mars)",image:"https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/43/03/57/430357e0-e142-8d4d-ca56-87f4bd41e017/886444976145.jpg/600x600bb.jpg"},
   {artist:"KAROL G",link:"https://music.apple.com/cl/album/mi-ex-ten%C3%ADa-raz%C3%B3n/1699662660?i=1699662669",album:"MAÑANA SERÁ BONITO (BICHOTA SEASON)",song:"MI EX TENÍA RAZÓN",image:"https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/56/45/46/5645464b-7fad-b6ea-6c15-9dbf754a8d83/23UMGIM68667.rgb.jpg/600x600bb.jpg"}
 ]
-
 }
+/*
+  Pendiente: confirmar intérprete o versión.
+{artist:"Gloria Estefan",link:"",album:"",song:"I Still See Your Smile",image:""},
+Pendiente: confirmar intérprete o versión.
+{artist:"Onda Disco",link:"",album:"",song:"One More Chance",image:""},
+Pendiente: confirmar intérprete o versión.
+{artist:"Deep House",link:"",album:"",song:"Dilema",image:""},
+Pendiente: confirmar intérprete o versión.
+{artist:"",link:"",album:"",song:"cuan bello",image:""},
+   */
