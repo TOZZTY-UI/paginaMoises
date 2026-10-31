@@ -1,5 +1,5 @@
 ---
-import LandingLayout from '../../layouts/LandingLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { services as servicios } from '../../data/services';
 ---
-<LandingLayout page="servicios"><main class="section"><div class="container"><p class="eyebrow">Servicios</p><h1>Ideas que se convierten en resultados.</h1><div class="grid grid--3">{servicios.map((servicio) => <a class="card" style="padding: 2rem" href={`/servicios/${servicio.slug}`}><h2>{servicio.title}</h2><p class="text-muted">Descubre cómo podemos ayudarte.</p></a>)}</div></div></main></LandingLayout>
+<BaseLayout page="servicios"><main class="section"><div class="container"><p class="eyebrow">Servicios</p><h1>Ideas que se convierten en resultados.</h1><div class="grid grid--3">{servicios.map((servicio) => <a class="card" style="padding: 2rem" href={`/servicios/${servicio.slug}`}><h2>{servicio.title}</h2><p class="text-muted">Descubre cómo podemos ayudarte.</p></a>)}</div></div></main></BaseLayout>

@@ -1,7 +1,7 @@
 .dcf {
     --ink: var(--color-ink, #0d0d0d);
     --paper: var(--color-bg, #fff);
-    --accent: #ff6b2c;
+    --accent: var(--color-primary);
     --pad: clamp(16px, 4vw, 56px);
     overflow: hidden;
     background: var(--paper);

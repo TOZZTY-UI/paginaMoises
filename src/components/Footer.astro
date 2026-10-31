@@ -1,6 +1,6 @@
 ---
 import { socialLinks } from "../data/socialLinks";
-import { navigation } from "../data/navigation";
+import { navigation, footerLinks } from "../data/navigation";
 import { Image } from "astro:assets";
 import firma from "../assets/images/Firma.png";
 interface Link {
@@ -31,20 +31,19 @@ const {
   columns = [
     {
       title: "Explora",
-      links: navigation,
+      links: footerLinks,
     },
     {
       title: "Información",
       links: [
-        { label: "Preguntas frecuentes", href: "/faq" },
-        { label: "Privacidad", href: "/privacidad" },
-        { label: "Términos", href: "/terminos" },
+        { label: "Preguntas frecuentes", href: navigation.find((link) => link.id === 'faq')?.href },
+        ...navigation.filter((link) => link.id === 'privacidad' || link.id === 'terminos'),
       ],
     },
     {
       title: "Contacto",
       links: [
-        { label: "Contacto", href: "/contacto" },
+        ...navigation.filter((link) => link.id === 'contacto'),
       ],
     },
   ],

@@ -14,8 +14,8 @@
     margin-inline: auto;
     min-height: 72px;
     padding: 12px 28px;
-    background: #0d0d11;
-    border: 1px solid #29292e;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
     border-radius: 100px;
     display: flex;
     align-items: center;
@@ -47,8 +47,8 @@
     height: 38px;
     border: 0;
     border-radius: 50%;
-    background: #00ef93;
-    color: #06120d;
+    background: var(--color-primary);
+    color: #090909;
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -61,7 +61,7 @@
   }
 
   .menu-button:hover {
-    background: #3bffb2;
+    background: var(--color-primary-hover);
     transform: scale(1.08);
   }
 
@@ -80,7 +80,7 @@
 
   .nav-link {
     text-decoration: none;
-    color: #d7d7d9;
+    color: var(--color-text-muted);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .4px;
@@ -91,19 +91,19 @@
   }
 
   .nav-link:hover {
-    color: #00ef93;
+    color: var(--color-primary-hover);
   }
 
   .nav-link.active {
-    color: #06120d;
-    background: #00ef93;
+    color: #090909;
+    background: var(--color-primary);
   }
 
   .login {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: var(--color-text);
     text-decoration: none;
     font-size: 11px;
     font-weight: 600;
@@ -111,7 +111,7 @@
   }
 
   .login:hover .user-circle {
-    background: #3bffb2;
+    background: var(--color-primary-hover);
   }
 
   .navbar-container.is-compact .navbar {
@@ -125,14 +125,14 @@
     z-index: 2;
     width: 64px;
     height: 64px;
-    background: #3b82f6;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-text);
     box-shadow: 0 8px 20px #0003;
   }
-  .menu-button:hover { background: #2563eb; }
+  .menu-button:hover { background: var(--color-secondary-hover); }
   .menu-button svg { width: 32px; height: 32px; transition: transform .3s ease; }
   .menu-button[aria-expanded="true"] svg { transform: rotate(45deg); }
-  .menu-button:focus-visible, .mobile-menu a:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
+  .menu-button:focus-visible, .mobile-menu a:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 4px; }
 
   .mobile-menu {
     position: absolute;
@@ -150,7 +150,7 @@
     align-items: center;
     gap: 5px;
     width: 68px;
-    color: #202632;
+     color: var(--color-text);
     font-size: 11px;
     font-weight: 700;
     line-height: 1.2;
@@ -177,14 +177,14 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: white;
-    color: #667085;
+     background: var(--color-card);
+     color: var(--color-text-muted);
     box-shadow: 0 6px 18px #0003;
     transition: transform .2s ease, color .2s ease;
   }
   .menu-icon svg { width: 21px; height: 21px; }
-  .mobile-menu a:hover .menu-icon, .mobile-menu a[aria-current="page"] .menu-icon { color: #2563eb; transform: scale(1.08); }
-  .menu-label { padding: 2px 4px; border-radius: 4px; background: white; }
+   .mobile-menu a:hover .menu-icon, .mobile-menu a[aria-current="page"] .menu-icon { color: var(--color-primary); transform: scale(1.08); }
+   .menu-label { padding: 2px 4px; border-radius: 4px; background: var(--color-card); }
 
   @media (min-width: 769px) {
     .navbar { position: relative; }
@@ -248,7 +248,7 @@
       gap: 12px;
       overflow-y: auto;
       padding: calc(max(16px, env(safe-area-inset-top)) + 90px) 24px max(24px, env(safe-area-inset-bottom));
-      background: #0d0d11;
+       background: var(--color-background);
       transform: translateX(-100%);
       visibility: hidden;
       transition: transform .4s cubic-bezier(.4, 0, .2, 1), visibility .4s;
@@ -262,7 +262,7 @@
       width: 100%;
       flex-direction: row;
       gap: 16px;
-      color: white;
+       color: var(--color-text);
       font-size: 20px;
       text-align: left;
       opacity: 1;

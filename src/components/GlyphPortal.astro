@@ -1,0 +1,352 @@
+---
+/**
+ * Glyph Portal © 2026 Christian Katzmann. MIT.
+ * Astro adaptation of the supplied React component.
+ * Origin: UsefulPortal.astro on https://ktzm.dk → UsefulPortal.tsx → ClarityPortal.tsx.
+ * A scroll-driven camera through live type. Keep this notice with copies.
+ */
+interface Props {
+  word?: string;
+  focusChar?: string;
+  interactive?: boolean;
+  scrollLength?: number;
+  fontFamily?: string;
+  fontWeight?: number;
+  annotations?: boolean;
+  enterLabel?: string;
+  class?: string;
+  style?: string;
+}
+const {
+  word = 'SUBLIME', focusChar = '', interactive = true,
+  scrollLength = 2.4, fontFamily = 'Arial Black, Arial, sans-serif',
+  fontWeight = 900, annotations = false, enterLabel = 'Entrar',
+  class: className = '', style = ''
+} = Astro.props;
+const label = word.trim().normalize('NFC') || 'SUBLIME';
+const letters = Array.from(label);
+const length = Number.isFinite(scrollLength) ? Math.max(1, Math.min(8, scrollLength)) : 2.4;
+const weight = Number.isFinite(fontWeight) ? Math.max(100, Math.min(900, fontWeight)) : 900;
+const id = `glyph-${crypto.randomUUID()}`;
+const clipId = `${id}-clip`;
+---
+<section
+  id={id}
+  class={`glyph-portal ${className}`}
+  style={`--gp-length:${length};--gp-font:${fontFamily};--gp-weight:${weight};${style}`}
+  data-glyph-portal
+  data-word={label}
+  data-focus={focusChar}
+  data-interactive={String(interactive)}
+  data-annotations={String(annotations)}
+  aria-label={label}
+>
+  <div class="gp-stage" data-stage>
+    <div class="gp-field" data-field aria-hidden="true" inert style={`clip-path:url(#${clipId})`}>
+      <slot name="background">
+        <div class="gp-default-field"></div>
+      </slot>
+    </div>
+    <svg class="gp-art" data-art aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id={clipId} clipPathUnits="userSpaceOnUse">
+          <text data-glyph-clip x="0" y="0" style={`font-family:${fontFamily};font-weight:${weight};font-size:100px;font-kerning:none;letter-spacing:0;`}>{label}</text>
+        </clipPath>
+      </defs>
+      <text data-glyph x="0" y="0" style={`font-family:${fontFamily};font-weight:${weight};font-size:100px;font-kerning:none;letter-spacing:0;`}>{label}</text>
+      <g data-marks visibility={annotations ? 'visible' : 'hidden'}><path /></g>
+    </svg>
+    <div class="gp-fallback" data-fallback aria-hidden="true">{label}</div>
+    <div class="gp-choice-layer" data-choices role="radiogroup" aria-label="Elegir una letra">
+      {letters.map((letter, i) => (
+        <button type="button" role="radio" aria-checked="false" tabindex="-1" data-letter={i} aria-label={`Letra ${letter}, posición ${i + 1}`} />
+      ))}
+    </div>
+    <label class="gp-touch-select" data-touch>
+      <span>Letra de entrada</span>
+      <select data-select aria-label="Elegir letra">
+        {letters.map((letter, i) => <option value={i}>{i + 1} · {letter}</option>)}
+      </select>
+    </label>
+    <div class="gp-front" data-front><slot name="front" /></div>
+    <div class="gp-caption" data-caption>
+      <span data-hint>{interactive ? 'Desplázate para entrar' : 'Continúa desplazándote'}</span>
+      <a href={`#${id}-content`}>{enterLabel} <span aria-hidden="true">↘</span></a>
+    </div>
+  </div>
+  <div class="gp-content" id={`${id}-content`} data-content tabindex="-1">
+    <slot>
+      <div class="gp-default-copy">
+        <h2>Una letra se convierte en un lugar.</h2>
+        <p>Agrega aquí tu contenido usando el slot predeterminado.</p>
+      </div>
+    </slot>
+  </div>
+</section>
+
+<script>
+  type Point = { x: number; y: number; radius: number; index: number };
+  type LetterInfo = { x: number; y: number; width: number; height: number; index: number };
+  const clamp = (value: number, a = 0, b = 1) => Math.min(b, Math.max(a, value));
+  const smooth = (a: number, b: number, value: number) => {
+    const t = clamp((value - a) / (b - a));
+    return t * t * (3 - 2 * t);
+  };
+
+  function findInk(ctx: CanvasRenderingContext2D, char: string, font: string) {
+    ctx.font = font;
+    const metric = ctx.measureText(char);
+    const pad = 8;
+    const left = Math.ceil(metric.actualBoundingBoxLeft);
+    const top = Math.ceil(metric.actualBoundingBoxAscent);
+    const width = Math.max(1, Math.ceil(left + metric.actualBoundingBoxRight) + pad * 2);
+    const height = Math.max(1, Math.ceil(top + metric.actualBoundingBoxDescent) + pad * 2);
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+    ctx.font = font;
+    ctx.fontKerning = 'none';
+    ctx.fillStyle = '#000';
+    ctx.fillText(char, pad + left, pad + top);
+    const pixels = ctx.getImageData(0, 0, width, height).data;
+    const row = new Uint16Array(width + 1);
+    let best = 0, bx = 0, by = 0;
+    for (let y = 0; y < height; y++) {
+      let diagonal = 0;
+      for (let x = 0; x < width; x++) {
+        const above = row[x + 1];
+        row[x + 1] = pixels[(y * width + x) * 4 + 3] > 245
+          ? Math.min(above, row[x], diagonal) + 1 : 0;
+        diagonal = above;
+        if (row[x + 1] > best) { best = row[x + 1]; bx = x; by = y; }
+      }
+    }
+    return best < 3 ? null : {
+      x: (bx + 1 - best / 2 - pad - left) / 3,
+      y: (by + 1 - best / 2 - pad - top) / 3,
+      radius: Math.max(1, (best / 2 - 1) / 3),
+    };
+  }
+
+  function initialize(section: HTMLElement) {
+    if (section.dataset.initialized) return;
+    section.dataset.initialized = 'true';
+    const stage = section.querySelector<HTMLElement>('[data-stage]')!;
+    const field = section.querySelector<HTMLElement>('[data-field]')!;
+    const art = section.querySelector<SVGSVGElement>('[data-art]')!;
+    const glyph = section.querySelector<SVGTextElement>('[data-glyph]')!;
+    const clipGlyph = section.querySelector<SVGTextElement>('[data-glyph-clip]')!;
+    const clip = clipGlyph.closest('clipPath')!;
+    const choices = section.querySelector<HTMLElement>('[data-choices]')!;
+    const buttons = Array.from(choices.querySelectorAll<HTMLButtonElement>('[data-letter]'));
+    const select = section.querySelector<HTMLSelectElement>('[data-select]')!;
+    const marks = section.querySelector<SVGGElement>('[data-marks]')!;
+    const word = section.dataset.word ?? 'SUBLIME';
+    const focusChar = section.dataset.focus ?? '';
+    const interactive = section.dataset.interactive === 'true';
+    const length = Number.parseFloat(section.style.getPropertyValue('--gp-length')) || 2.4;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const context = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+    const fontFamily = getComputedStyle(glyph).fontFamily;
+    const fontWeight = getComputedStyle(glyph).fontWeight;
+    const chars = Array.from(word);
+    let candidates: Point[] = [], letters: LetterInfo[] = [];
+    let selected: Point | null = null;
+    let bounds = { x: 0, y: 0, width: 1, height: 1 };
+    let center = { x: 0, y: 0 };
+    let W = 1, H = 1, startScale = 1, endScale = 1;
+    let raf = 0;
+    let active = true;
+    const parent = (() => {
+      for (let p = section.parentElement; p; p = p.parentElement) {
+        if (p !== document.body && p !== document.documentElement && /(auto|scroll)/.test(getComputedStyle(p).overflowY)) return p;
+      }
+      return null;
+    })();
+
+    function measure() {
+      if (!context) return false;
+      context.font = `${fontWeight} 100px ${fontFamily}`;
+      context.fontKerning = 'none';
+      const metric = context.measureText(word);
+      bounds = {
+        x: -metric.actualBoundingBoxLeft,
+        y: -metric.actualBoundingBoxAscent,
+        width: metric.actualBoundingBoxLeft + metric.actualBoundingBoxRight,
+        height: metric.actualBoundingBoxAscent + metric.actualBoundingBoxDescent,
+      };
+      if (!bounds.width || !bounds.height) return false;
+      center = { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+      candidates = []; letters = [];
+      let offset = 0;
+      for (let i = 0; i < chars.length; i++) {
+        const char = chars[i];
+        context.font = `${fontWeight} 100px ${fontFamily}`;
+        const advance = context.measureText(chars.slice(0, i).join('')).width;
+        const m = context.measureText(char);
+        letters.push({ index: i, x: advance - m.actualBoundingBoxLeft,
+          y: -m.actualBoundingBoxAscent, width: m.actualBoundingBoxLeft + m.actualBoundingBoxRight,
+          height: m.actualBoundingBoxAscent + m.actualBoundingBoxDescent });
+        const pixel = findInk(context, char, `${fontWeight} 300px ${fontFamily}`);
+        if (pixel) candidates.push({ index: i, x: pixel.x + advance, y: pixel.y, radius: pixel.radius });
+        offset += char.length;
+      }
+      const preferred = focusChar ? chars.findIndex(c => c === focusChar) : -1;
+      selected = candidates.find(p => p.index === preferred)
+        ?? [...candidates].sort((a, b) => b.radius - a.radius)[0] ?? null;
+      return true;
+    }
+
+    function choose(index: number) {
+      const point = candidates.find(p => p.index === index);
+      if (!point) return;
+      selected = point;
+      endScale = Math.max(startScale, Math.hypot(W, H) / (point.radius * 1.35));
+      buttons.forEach((button, i) => {
+        button.setAttribute('aria-checked', String(i === index));
+        button.tabIndex = i === index ? 0 : -1;
+      });
+      select.value = String(index);
+      section.dataset.gpFocus = chars[index];
+      render();
+    }
+
+    function progress() {
+      const offset = parent ? parent.getBoundingClientRect().top + parent.clientTop : 0;
+      return clamp((offset - section.getBoundingClientRect().top) / (H * length));
+    }
+
+    function layout() {
+      W = stage.clientWidth;
+      H = stage.clientHeight;
+      if (!W || !H) return;
+      art.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      if (!measure()) return;
+      startScale = Math.min(W * 0.84 / bounds.width, H * 0.38 / bounds.height);
+      section.style.setProperty('--gp-word-size', `${100 * startScale}px`);
+      endScale = selected ? Math.max(startScale, Math.hypot(W, H) / (selected.radius * 1.35)) : startScale;
+      buttons.forEach((button, i) => {
+        const l = letters[i];
+        const x = W / 2 + (l.x - center.x) * startScale;
+        const y = H * 0.46 + (l.y - center.y) * startScale;
+        Object.assign(button.style, {
+          left: `${x}px`, top: `${y}px`, width: `${Math.max(1, l.width * startScale)}px`,
+          height: `${Math.max(44, l.height * startScale)}px`,
+        });
+        button.disabled = !candidates.some(p => p.index === i);
+      });
+      const chosen = selected;
+      if (chosen) choose(chosen.index);
+      section.dataset.ready = 'true';
+      render();
+    }
+
+    function render() {
+      if (!selected || !W || !H) return;
+      const p = motion.matches ? 0 : progress();
+      const t = clamp(p / 0.78);
+      const eased = t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2;
+      const scale = startScale * Math.pow(endScale / startScale, eased);
+      const blend = endScale === startScale ? 0 : (1 / scale - 1 / startScale) / (1 / endScale - 1 / startScale);
+      const cx = center.x + (selected.x - center.x) * blend;
+      const cy = center.y + (selected.y - center.y) * blend;
+      const roll = -4 * smooth(0.06, 0.5, t) * (1 - smooth(0.62, 0.92, t));
+      const transform = `translate(${W / 2} ${H * (0.46 + 0.04 * eased)}) scale(${scale}) rotate(${roll}) translate(${-cx} ${-cy})`;
+      // The SVG artwork and the HTML field must share the exact same camera.
+      // Without this, the clip path stays at the SVG origin while the word zooms.
+      glyph.setAttribute('transform', transform);
+      clipGlyph.setAttribute('transform', transform);
+      field.style.clipPath = (t >= 1 || motion.matches) ? 'none' : `url(#${clip.id})`;
+      section.style.setProperty('--gp-caption-opacity', String(1 - smooth(0.01, 0.16, p)));
+      section.style.setProperty('--gp-reveal', String(motion.matches ? 1 : smooth(0.78, 0.92, p)));
+      section.style.setProperty('--gp-content-events', (p >= 0.9 || motion.matches) ? 'auto' : 'none');
+      const choosing = interactive && !motion.matches && p < 0.04;
+      choices.inert = !choosing;
+      section.dataset.choosing = String(choosing);
+      marks.style.opacity = String(1 - smooth(0.015, 0.17, p));
+      section.dispatchEvent(new CustomEvent('glyphportal:progress', { detail: { progress: p } }));
+    }
+    function schedule() {
+      if (!active || raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; render(); });
+    }
+    function resize() { cancelAnimationFrame(raf); raf = 0; layout(); }
+    function onLetter(e: Event) {
+      if (section.dataset.choosing !== 'true') return;
+      const target = (e.target as Element).closest<HTMLButtonElement>('[data-letter]');
+      if (target) choose(Number(target.dataset.letter));
+    }
+    function onKey(e: KeyboardEvent) {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      const options = candidates.map(p => p.index).sort((a, b) => a - b);
+      if (!options.length) return;
+      const old = selected ? options.indexOf(selected.index) : 0;
+      const next = e.key === 'Home' ? 0 : e.key === 'End' ? options.length - 1
+        : (old + (e.key === 'ArrowLeft' ? -1 : 1) + options.length) % options.length;
+      choose(options[next]);
+      buttons[options[next]]?.focus({ preventScroll: true });
+    }
+    choices.addEventListener('pointerover', onLetter);
+    choices.addEventListener('click', onLetter);
+    choices.addEventListener('focusin', onLetter);
+    choices.addEventListener('keydown', onKey);
+    select.addEventListener('change', () => choose(Number(select.value)));
+    const observer = new ResizeObserver(resize);
+    observer.observe(stage);
+    const visibility = new IntersectionObserver(([entry]) => {
+      active = entry.isIntersecting;
+      if (active) schedule();
+      else { cancelAnimationFrame(raf); raf = 0; }
+    }, { root: parent, rootMargin: '100% 0px' });
+    visibility.observe(section);
+    (parent ?? window).addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', resize);
+    motion.addEventListener('change', resize);
+    layout();
+    document.fonts.ready.then(() => { if (section.isConnected) layout(); });
+  }
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-glyph-portal]').forEach(initialize);
+  }
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+  .glyph-portal {
+    --gp-paper: #fff; --gp-ink: #0c1212; --gp-field: #0b3b2a;
+    --gp-foreground: #fbfbfa;
+    position: relative; isolation: isolate;
+    background: var(--gp-paper); color: var(--gp-ink);
+    min-height: calc((var(--gp-length) + 1) * 100svh);
+  }
+  .gp-stage { position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate; }
+  .gp-field { position: absolute; inset: 0; background: var(--gp-field); pointer-events: none; }
+  .gp-default-field { width:100%; height:100%; background: radial-gradient(circle at 18% 8%,rgba(68,125,98,.72),transparent 34%),radial-gradient(circle at 82% 20%,rgba(251,251,250,.12),transparent 28%),linear-gradient(135deg,#0b3b2a,#14573f 48%,#082d22); }
+  .gp-art { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .gp-art [data-glyph] { fill:var(--gp-ink); }
+  .gp-art [data-marks] { fill:none; stroke:var(--gp-ink); }
+  .gp-fallback { position:absolute; inset:0; display:grid; place-items:center; font-family:var(--gp-font);font-weight:var(--gp-weight); font-size: min(calc(95vw / 7),38vh); color:var(--gp-field); white-space:nowrap; overflow:hidden; }
+  .glyph-portal[data-ready] .gp-fallback { display:none; }
+  .gp-choice-layer { position:absolute; inset:0; visibility:hidden; pointer-events:none; }
+  .glyph-portal[data-choosing="true"] .gp-choice-layer { visibility:visible; }
+  .gp-choice-layer button { position:absolute; border:0; padding:0; background:transparent; cursor:pointer; pointer-events:auto; }
+  .gp-choice-layer button:focus-visible { outline:2px solid var(--gp-field); outline-offset:3px; }
+  .gp-touch-select { display:none; position:absolute; top:74%; left:50%; transform:translateX(-50%); align-items:center; gap:10px; font-size:12px; z-index:3; white-space:nowrap; }
+  .gp-touch-select select { min-height:44px; background:var(--gp-paper); color:var(--gp-ink); border:1px solid #cbd5d1; border-radius:5px; padding:0 10px; }
+  @media(any-pointer:coarse) { .glyph-portal[data-choosing="true"] .gp-touch-select { display:flex; } }
+  .gp-caption { position:absolute; bottom:9%; left:8%; right:8%;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;opacity:var(--gp-caption-opacity,1); }
+  .gp-caption a { color:inherit; min-height:44px; display:inline-flex; align-items:center; gap:12px; text-decoration:none; }
+  .gp-caption a:focus-visible { outline:2px solid currentColor; outline-offset:4px; }
+  .gp-front { position:absolute; inset:0; opacity:var(--gp-caption-opacity,1); pointer-events:none; }
+  .gp-content { position:relative; min-height:100svh; margin-top:calc((var(--gp-length) - 1) * 100svh); padding:clamp(32px,7vw,100px); box-sizing:border-box; display:grid; align-content:center;background:var(--gp-field); color:var(--gp-foreground); opacity:var(--gp-reveal,0); pointer-events:var(--gp-content-events,none); overflow-wrap:anywhere; }
+  .gp-default-copy h2 { font:400 clamp(32px,5vw,72px)/1.05 Georgia,serif; letter-spacing:-.035em; max-width:13ch; margin:0 0 24px; }
+  .gp-default-copy p { max-width:40ch; line-height:1.6; }
+  @media(prefers-reduced-motion:reduce) {
+    .glyph-portal { min-height:0; }
+    .gp-stage { position:relative; height:65svh; }
+    .gp-field { clip-path:none!important; }
+    .gp-content { margin-top:0!important; min-height:0; opacity:1!important; pointer-events:auto!important; }
+    .gp-caption [data-hint] { display:none; }
+  }
+</style>

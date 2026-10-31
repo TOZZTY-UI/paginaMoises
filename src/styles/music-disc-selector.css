@@ -2,8 +2,8 @@
     max-width: 1150px;
     margin: auto;
     padding: clamp(24px, 5vw, 60px);
-    background: #101116;
-    color: #f6f6f8;
+    background: var(--color-surface);
+    color: var(--color-text);
     border-radius: 28px;
     font-family: inherit;
   }
@@ -18,7 +18,7 @@
   }
 
   .eyebrow {
-    color: #20e5a0;
+     color: var(--color-primary);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .2em;
@@ -33,7 +33,7 @@
 
   .intro p,
   .view-header p {
-    color: #a2a5b0;
+     color: var(--color-text-muted);
     font-size: 14px;
     margin-top: 10px;
   }
@@ -61,7 +61,7 @@
   .album-button:focus-visible,
   .back-button:focus-visible,
   .play-button:focus-visible {
-    outline: 3px solid #20e5a0;
+     outline: 3px solid var(--color-primary);
     outline-offset: 5px;
   }
 
@@ -119,8 +119,8 @@
       ),
       linear-gradient(
         145deg,
-        var(--accent),
-        #161723
+         var(--accent, var(--color-secondary)),
+         var(--color-card)
       );
     display: flex;
     flex-direction: column;
@@ -198,7 +198,7 @@
 
   .album-details small {
     font-size: 12px;
-    color: #aaaeb8;
+     color: var(--color-text-muted);
   }
 
   /* INTERIOR DEL ÁLBUM */
@@ -218,18 +218,18 @@
   }
 
   .back-button {
-    border: 1px solid #454851;
+     border: 1px solid var(--color-border);
     border-radius: 30px;
     padding: 12px 18px;
-    background: #282b34;
-    color: white;
+     background: var(--color-card);
+     color: var(--color-text);
     cursor: pointer;
     font: inherit;
     font-size: 13px;
   }
 
   .back-button:hover {
-    background: #383c47;
+     background: var(--color-surface);
   }
 
   /* DISCOS DE CANCIONES */
@@ -244,8 +244,8 @@
   .music-card {
     min-width: 0;
     padding: 18px;
-    background: #1d1f27;
-    border: 1px solid #343741;
+     background: var(--color-card);
+     border: 1px solid var(--color-border);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -333,7 +333,7 @@
   .song-details span,
   .song-details small {
     font-size: 12px;
-    color: #adb0bd;
+     color: var(--color-text-muted);
   }
 
   .play-button {
@@ -344,8 +344,8 @@
     margin-top: auto;
     padding: 12px;
     border-radius: 12px;
-    background: #20d99c;
-    color: #08140f;
+     background: var(--color-primary);
+     color: #090909;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
@@ -353,7 +353,7 @@
   }
 
   .play-button:hover {
-    background: #58f2b8;
+     background: var(--color-primary-hover);
   }
 
   /* RESPONSIVE */

@@ -1,5 +1,5 @@
 ---
-import LandingLayout from '../layouts/LandingLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -33,7 +33,7 @@ const cards = galleryImages.map((item, index) => {
 });
 ---
 
-<LandingLayout page="galeria" showFooter={false}>
+<BaseLayout page="galeria" showFooter={false}>
 <section class="tunnel" data-perspective-tunnel aria-label="Galería inmersiva 3D" tabindex="0">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="glow" aria-hidden="true"></div>
@@ -74,7 +74,7 @@ const cards = galleryImages.map((item, index) => {
     <Button href="/servicios" name="Ver servicios" />
   </div>
 </section>
-</LandingLayout>
+</BaseLayout>
 
 <script src="../scripts/galeria.ts"></script>
 

@@ -16,7 +16,9 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spa
 h1 { font-size: clamp(2.8rem, 7vw, 6.5rem); }
 h2 { font-size: clamp(2.25rem, 5vw, 4.5rem); }
 h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
-main { overflow: hidden; }
+/* Keep horizontal overflow contained without creating a scroll container that
+   would break sticky, scroll-driven sections. */
+main { overflow-x: clip; overflow-y: visible; }
 :focus-visible { outline: 3px solid var(--color-accent-strong); outline-offset: 4px; }
 @media (prefers-reduced-motion: no-preference) {
   .block-reveal { animation: block-appear .55s cubic-bezier(.22, 1, .36, 1) both; }

@@ -1,14 +1,11 @@
 ---
-import { testimonials } from "../data/testimonials";
+import TestimonialsStack from '../components/TestimonialsStack.astro';
+import { testimonials } from '../data/testimonials';
 ---
 
-<!-- Testimonios. -->
-<section class="testimonials">
-  <h2>Testimonios</h2>
-  {testimonials.map((testimonial, index) => (
-    <div class="testimonial">
-      <p>"{testimonial.message}"</p>
-      <span>- {testimonial.name}</span>
-    </div>
-  ))}
-</section>
+<TestimonialsStack
+  testimonials={testimonials}
+  title="Historias que se escuchan y se recuerdan"
+  subtitle="La experiencia de nuestros clientes"
+  variant="dark"
+/>

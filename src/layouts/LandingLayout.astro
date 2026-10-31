@@ -1,23 +1,18 @@
 ---
+import SEO from '../components/SEO.astro';
 import '../styles/global.css';
 import '../styles/page-transitions.css';
-import AnimatedSidebar from '../components/AnimatedSidebar.astro';
-import Footer from '../components/Footer.astro';
-import SEO from '../components/SEO.astro';
 import { seo, type SEOPage } from '../data/seo';
 
-type Props = {
-  showFooter?: boolean;
+interface Props {
+  page: SEOPage;
+  title?: string;
+  description?: string;
   image?: string;
-} & (
-  | { page: SEOPage; title?: string; description?: string }
-  | { page?: never; title: string; description: string }
-);
+}
 
-const { page, title, description, image, showFooter = true } = Astro.props;
-const seoData = page ? seo[page] : undefined;
-const pageTitle = title ?? seoData?.title ?? '';
-const pageDescription = description ?? seoData?.description ?? '';
+const { page, title, description, image } = Astro.props;
+const seoData = seo[page];
 ---
 
 <!doctype html>
@@ -27,16 +22,11 @@ const pageDescription = description ?? seoData?.description ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/webp" href="/logo.webp" />
-    <SEO title={pageTitle} description={pageDescription} image={image} />
+    <SEO title={title ?? seoData.title} description={description ?? seoData.description} image={image} />
     <slot name="head" />
   </head>
   <body>
-    <AnimatedSidebar>
-      <main>
-        <slot />
-      </main>
-      {showFooter && <Footer />}
-    </AnimatedSidebar>
+    <slot />
   </body>
 </html>
 

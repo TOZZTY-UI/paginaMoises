@@ -1,8 +1,41 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import LandingLayout from '../layouts/LandingLayout.astro';
+import Hero from '../sections/Hero.astro';
+import ContactCTA from '../sections/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/landing.css';
+import TestimonialsStack from '../components/TestimonialsStack.astro';
+import { testimonials } from '../data/testimonials';
+
 ---
 
-<BaseLayout page="home">
-<h1>Saxofonista para matrimonios y eventos en Chile</h1>
+<LandingLayout page="home">
+  <main>
+    <Hero />
 
-</BaseLayout>
+    <section class="landing-intro" aria-labelledby="intro-title">
+      <p class="section-index">La experiencia</p>
+      <div>
+        <h2 id="intro-title">No es música de fondo.<br /><em>Es parte de la memoria.</em></h2>
+        <p class="intro-text">Cada presentación se adapta al pulso de tu celebración: elegante cuando debe serlo, cercana cuando la fiesta comienza.</p>
+      </div>
+    </section>
+
+    <section class="landing-services" aria-labelledby="services-title">
+      <div class="section-heading">
+        <p class="section-index">Dónde suena</p>
+        <h2 id="services-title">Momentos con<br /><em>carácter propio.</em></h2>
+      </div>
+      <div class="service-list">
+        <a class="service-item" href="/servicios"><span class="service-number">01</span><span><strong>Matrimonios</strong><small>La ceremonia, el cóctel y ese baile que nadie olvida.</small></span><b aria-hidden="true">↗</b></a>
+        <a class="service-item" href="/servicios"><span class="service-number">02</span><span><strong>Celebraciones</strong><small>Cumpleaños, aniversarios y reuniones con una energía distinta.</small></span><b aria-hidden="true">↗</b></a>
+        <a class="service-item" href="/servicios"><span class="service-number">03</span><span><strong>Eventos de empresa</strong><small>Una presencia sofisticada para abrir, acompañar o cerrar.</small></span><b aria-hidden="true">↗</b></a>
+      </div>
+    </section>
+
+    <TestimonialsStack testimonials={testimonials} title="Historias que se escuchan y se recuerdan" subtitle="La experiencia de nuestros clientes" variant="dark" />
+    <ContactCTA />
+    
+ </main>
+  <Footer />
+</LandingLayout>
