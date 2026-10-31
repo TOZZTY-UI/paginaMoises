@@ -1,610 +1,538 @@
 
----
-export interface Testimonial {
-  id: string;
-  name: string;
-  role?: string;
-  company?: string;
-  avatar?: string;
-  rating: number;
-  comment: string;
-  date?: string;
-}
+  ---
+  export interface Testimonial {
+    id: string;
+    name: string;
+    role?: string;
+    company?: string;
+    avatar?: string;
+    rating: number;
+    comment: string;
+    date?: string;
+  }
 
-interface Props {
-  testimonials: Testimonial[];
-  title?: string;
-  subtitle?: string;
-  variant?: 'dark' | 'light';
-  incrementY?: number;
-  incrementZ?: number;
-  incrementRotation?: number;
-}
+  interface Props {
+    testimonials: Testimonial[];
+    title?: string;
+    subtitle?: string;
+    variant?: 'dark' | 'light';
+    incrementY?: number;
+    incrementZ?: number;
+    incrementRotation?: number;
+  }
 
-const {
-  testimonials,
-  title = 'Lo que dicen nuestros clientes',
-  subtitle = 'Experiencias que dejan huella',
-  variant = 'dark',
-  incrementY = 12,
-  incrementZ = 12,
-  incrementRotation = 5,
-} = Astro.props;
+  const {
+    testimonials,
+    title = 'Lo que dicen nuestros clientes',
+    subtitle = 'Experiencias que dejan huella',
+    variant = 'dark',
+    incrementY = 12,
+    incrementZ = 12,
+    incrementRotation = 5,
+  } = Astro.props;
 
-const cards = testimonials.map((item, index) => ({
-  ...item,
-  rating: Math.max(0, Math.min(5, item.rating)),
-  index,
-}));
----
+  // La primera tarjeta del arreglo queda al frente y es la primera en salir
+  // durante el desplazamiento.
+  const cards = testimonials.map((item, index) => ({
+    ...item,
+    rating: Math.max(0, Math.min(5, item.rating)),
+    index,
+  }));
+  ---
 
-<section
-  class:list={['testimonials-section', variant]}
-  data-testimonials
-  aria-label="Testimonios de clientes"
-  style={`--card-count:${Math.max(cards.length, 1)}`}
->
-  <div class="section-heading">
-    <span class="eyebrow">SAXOEVENTOS · EXPERIENCIAS</span>
-    <h2>{title}</h2>
-    <p>{subtitle}</p>
-  </div>
+  <section
+    class:list={['testimonials-section', variant]}
+    data-testimonials
+    aria-label="Testimonios de clientes"
+    style={`--card-count:${Math.max(cards.length, 1)}`}
+  >
+    <div class="section-heading">
+      <span class="eyebrow">SAXOEVENTOS · EXPERIENCIAS</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
 
-  <div class="scroll-container" data-scroll-container>
-    <div class="sticky-stage" data-sticky-stage>
-      <div class="cards-container">
-        {cards.map((review, index) => (
-          <article
-            class="testimonial-card"
-            data-card
-            data-index={index}
-            style={`
-              --index:${index};
-              --stack-y:${index * incrementY}px;
-              --stack-z:${index * incrementZ}px;
-              --rotation:${(index % 2 === 0 ? -1 : 1) * incrementRotation}deg;
-              --rating:${review.rating * 20}%;
-              --z-order:${index + 1};
-            `}
-          >
-            <div class="card-top">
-              <span class="quote-icon" aria-hidden="true">“</span>
-              <span class="review-number">
-                {String(index + 1).padStart(2, '0')}
-                /
-                {String(cards.length).padStart(2, '0')}
-              </span>
-            </div>
-
-            <div
-              class="rating"
-              role="img"
-              aria-label={`${review.rating} de 5 estrellas`}
+    <div class="scroll-container" data-scroll-container>
+      <div class="sticky-stage" data-sticky-stage>
+        <div class="cards-container">
+          {cards.map((review, index) => (
+            <article
+              class="testimonial-card"
+              data-card
+              data-index={index}
+              style={`
+                --index:${index};
+                --stack-y:${index * incrementY}px;
+                --stack-z:${index * incrementZ}px;
+                --rotation:${(index % 2 === 0 ? -1 : 1) * incrementRotation}deg;
+                --rating:${review.rating * 20}%;
+                --z-order:${index === 0 ? cards.length + 1 : cards.length - index};
+              `}
             >
-              <span class="stars-base" aria-hidden="true">
-                ★★★★★
-                <span class="stars-filled">★★★★★</span>
-              </span>
-              <span class="rating-value">{review.rating.toFixed(1)}</span>
-            </div>
-
-            <blockquote class="review-text">
-              {review.comment}
-            </blockquote>
-
-            <div class="card-footer">
-              <div class="client">
-                {review.avatar ? (
-                  <img
-                    src={review.avatar}
-                    alt=""
-                    width="52"
-                    height="52"
-                    loading="lazy"
-                    decoding="async"
-                    class="avatar"
-                  />
-                ) : (
-                  <span class="avatar-placeholder" aria-hidden="true">
-                    {review.name.slice(0, 1).toUpperCase()}
-                  </span>
-                )}
-
-                <div class="client-info">
-                  <strong>{review.name}</strong>
-                  {review.role && <span>{review.role}</span>}
-                  {review.company && <small>{review.company}</small>}
-                </div>
+              <div class="card-top">
+                <span class="quote-icon" aria-hidden="true">“</span>
+                <span class="review-number">
+                  {String(index + 1).padStart(2, '0')}
+                  /
+                  {String(cards.length).padStart(2, '0')}
+                </span>
               </div>
 
-              {review.date && (
-                <time class="review-date">{review.date}</time>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
+              <div
+                class="rating"
+                role="img"
+                aria-label={`${review.rating} de 5 estrellas`}
+              >
+                <span class="stars-base" aria-hidden="true">
+                  ★★★★★
+                  <span class="stars-filled">★★★★★</span>
+                </span>
+                <span class="rating-value">{review.rating.toFixed(1)}</span>
+              </div>
 
-      <div class="scroll-hint" aria-hidden="true">
-        <span>DESLIZA PARA EXPLORAR</span>
-        <span>↓</span>
+              <blockquote class="review-text">
+                {review.comment}
+              </blockquote>
+
+              <div class="card-footer">
+                <div class="client">
+                  {review.avatar ? (
+                    <img
+                      src={review.avatar}
+                      alt=""
+                      width="52"
+                      height="52"
+                      loading="lazy"
+                      decoding="async"
+                      class="avatar"
+                    />
+                  ) : (
+                    <span class="avatar-placeholder" aria-hidden="true">
+                      {review.name.slice(0, 1).toUpperCase()}
+                    </span>
+                  )}
+
+                  <div class="client-info">
+                    <strong>{review.name}</strong>
+                    {review.role && <span>{review.role}</span>}
+                    {review.company && <small>{review.company}</small>}
+                  </div>
+                </div>
+
+                {review.date && (
+                  <time class="review-date">{review.date}</time>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+          <span>DESLIZA PARA EXPLORAR</span>
+          <span>↓</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<script>
-  function initTestimonials(section: HTMLElement) {
-    const container = section.querySelector<HTMLElement>(
-      '[data-scroll-container]'
-    );
+  <script>
+    function initTestimonials(section: HTMLElement) {
+      const container = section.querySelector<HTMLElement>('[data-scroll-container]');
+      const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-card]'));
+      if (!container || !cards.length) return;
 
-    const cards = Array.from(
-      section.querySelectorAll<HTMLElement>('[data-card]')
-    );
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const clamp = (n: number) => Math.max(0, Math.min(1, n));
+      let raf = 0;
 
-    if (!container || cards.length === 0) return;
+      function update() {
+        raf = 0;
+        if (reducedMotion.matches) {
+          section.classList.remove('is-animated');
+          cards.forEach((card) => {
+            card.style.transform = '';
+            card.style.opacity = '';
+            card.style.filter = '';
+            card.style.pointerEvents = '';
+          });
+          return;
+        }
 
-    const reducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    );
+        section.classList.add('is-animated');
+        const viewport = window.innerHeight;
+        const rect = container!.getBoundingClientRect();
+        const travel = Math.max(1, rect.height - viewport);
+        const progress = clamp(-rect.top / travel);
+        const steps = Math.max(1, cards.length - 1);
 
-    const clamp = (value: number, min = 0, max = 1) =>
-      Math.max(min, Math.min(max, value));
-
-    let raf = 0;
-
-    function update() {
-      raf = 0;
-
-      if (reducedMotion.matches) {
-        section.classList.remove('is-animated');
-        cards.forEach(card => {
-          card.style.transform = '';
-          card.style.opacity = '';
-          card.style.filter = '';
+        cards.forEach((card, index) => {
+          // El primer cliente siempre ocupa el frente de la pila.
+          card.style.zIndex = String(index === 0 ? cards.length + 1 : cards.length - index);
+          // Primero sale la tarjeta 01, luego 02; la última permanece visible.
+          const local = index === cards.length - 1
+            ? 0
+            : clamp(progress * steps - index);
+          const ease = local * local * (3 - 2 * local);
+          const initialY = index * 12;
+          const rotation = (index % 2 === 0 ? -1 : 1) * Math.min(3, index * 1.5);
+          // Movimiento hacia arriba sin afectar la posición de las demás tarjetas.
+          const y = initialY - ease * Math.max(viewport * 1.1, 650);
+          // La primera tarjeta debe estar físicamente delante en el espacio 3D;
+          // de lo contrario, la última puede taparla aunque tenga menor z-index.
+          const depth = (cards.length - index) * 8;
+          card.style.transform = `translate3d(0, ${y}px, ${depth}px) rotate(${rotation * (1 - ease)}deg)`;
+          card.style.opacity = String(1 - clamp((local - 0.75) / 0.25));
+          card.style.filter = 'none';
+          card.style.pointerEvents = local > 0.9 ? 'none' : 'auto';
         });
-        return;
       }
 
-      section.classList.add('is-animated');
-
-      const rect = container!.getBoundingClientRect();
-      const viewport = window.innerHeight;
-
-      const startPoint = viewport * 0.5;
-      const travel = Math.max(
-        1,
-        rect.height - viewport * 0.6
-      );
-
-      const progress = clamp(
-        (startPoint - rect.top) / travel
-      );
-
-      cards.forEach((card, index) => {
-        const count = cards.length;
-
-        // Recorrido inverso: la última tarjeta visible es la primera en salir.
-        const sequenceIndex = count - 1 - index;
-        const start = sequenceIndex / (count + 0.5);
-        const end = (sequenceIndex + 1) / (count + 0.5);
-
-        const local = clamp(
-          (progress - start) / (end - start)
-        );
-
-        const smooth = local * local * (3 - 2 * local);
-
-        const incrementY =
-          parseFloat(
-            getComputedStyle(card).getPropertyValue('--stack-y')
-          ) || 0;
-
-        const incrementZ =
-          parseFloat(
-            getComputedStyle(card).getPropertyValue('--stack-z')
-          ) || 0;
-
-        const initialRotation =
-          parseFloat(
-            getComputedStyle(card).getPropertyValue('--rotation')
-          ) || 0;
-
-        // La tarjeta final (cliente 1, al fondo) sube al cierre pero se
-        // queda como testimonio visible en el escenario.
-        const translateY = sequenceIndex === count - 1
-          ? -35 * smooth
-          : -155 * smooth;
-        const rotation = initialRotation * (1 - smooth);
-
-        card.style.transform = `
-          translate3d(
-            0,
-            calc(${incrementY}px + ${translateY}%),
-            ${incrementZ}px
-          )
-          rotate(${rotation}deg)
-        `;
-
-        // La primera tarjeta queda como cierre de la secuencia: nunca se
-        // desvanece, para que el primer testimonio siempre sea visible.
-        const fade = sequenceIndex === count - 1
-          ? 1
-          : clamp((1 - local) / 0.12);
-        card.style.opacity = String(fade);
-
-        // Las tarjetas que todavía esperan su turno permanecen nítidas y
-        // quietas. El movimiento empieza únicamente al entrar en su tramo.
-        card.style.filter = 'none';
-      });
+      function scheduleUpdate() {
+        if (!raf) raf = requestAnimationFrame(update);
+      }
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+      reducedMotion.addEventListener('change', scheduleUpdate);
+      scheduleUpdate();
     }
 
-    function scheduleUpdate() {
-      if (raf) return;
-      raf = requestAnimationFrame(update);
-    }
+    document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
 
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0]?.isIntersecting) {
-          scheduleUpdate();
-        }
-      },
-      { rootMargin: '200px' }
-    );
+  </script>
 
-    observer.observe(container);
-
-    window.addEventListener(
-      'scroll',
-      scheduleUpdate,
-      { passive: true }
-    );
-
-    window.addEventListener('resize', scheduleUpdate);
-    reducedMotion.addEventListener('change', scheduleUpdate);
-
-    scheduleUpdate();
-  }
-
-  document.querySelectorAll<HTMLElement>(
-    '[data-testimonials]'
-  ).forEach(initTestimonials);
-</script>
-
-<style>
-  .testimonials-section {
-    --background: #090909;
-    --surface: #191b1a;
-    --text: #f6e4b3;
-    --muted: #c6bca9;
-    --accent: #e7b64b;
-    --border: #46322a;
-
-    background: var(--background);
-    color: var(--text);
-    padding: clamp(72px, 10vw, 128px) 20px 0;
-    overflow: clip;
-    position: relative;
-    isolation: isolate;
-  }
-
-  .testimonials-section.light {
-    --background: #faf8f4;
-    --surface: #ffffff;
-    --text: #211c19;
-    --muted: #736d65;
-    --accent: #956521;
-    --border: #e0d9cd;
-  }
-
-  .section-heading {
-    max-width: 850px;
-    position: relative;
-    z-index: 5;
-    margin: 0 auto clamp(42px, 7vw, 80px);
-    text-align: center;
-  }
-
-  .eyebrow {
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .2em;
-  }
-
-  .section-heading h2 {
-    font-size: clamp(32px, 6vw, 64px);
-    font-weight: 800;
-    letter-spacing: -.045em;
-    line-height: 1.08;
-    margin: 16px 0;
-  }
-
-  .section-heading p {
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  .scroll-container {
-    position: relative;
-    height: max(760px, calc(var(--card-count) * 58svh));
-  }
-
-  .sticky-stage {
-    position: sticky;
-    top: clamp(4rem, 10vh, 7rem);
-    height: calc(100svh - clamp(4rem, 10vh, 7rem));
-    min-height: 620px;
-    display: grid;
-    place-items: center;
-    perspective: 1100px;
-    transform-style: preserve-3d;
-  }
-
-  .cards-container {
-    position: relative;
-    width: min(100%, 620px);
-    min-height: 440px;
-    transform-style: preserve-3d;
-  }
-
-  .testimonial-card {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    max-width: 620px;
-    z-index: var(--z-order);
-    min-height: 390px;
-    padding: clamp(25px, 5vw, 42px);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border: 1px solid var(--border);
-    border-radius: 28px;
-    background: var(--surface);
-    color: var(--text);
-    box-shadow: 0 20px 55px #00000030;
-    margin: 0;
-    backface-visibility: hidden;
-    overflow: hidden;
-  }
-
-  .testimonial-card::before {
-    content: '';
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    right: -80px;
-    top: -80px;
-    background: var(--accent);
-    opacity: .045;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-  }
-
-  .quote-icon {
-    font-family: Georgia, serif;
-    font-size: 85px;
-    line-height: .6;
-    color: var(--accent);
-  }
-
-  .review-number {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: .13em;
-  }
-
-  .rating {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .stars-base {
-    position: relative;
-    color: #5d5953;
-    font-size: 23px;
-    letter-spacing: 3px;
-    white-space: nowrap;
-  }
-
-  .stars-filled {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: var(--rating);
-    overflow: hidden;
-    color: var(--accent);
-  }
-
-  .rating-value {
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .review-text {
-    margin: 0;
-    font-size: clamp(18px, 3vw, 26px);
-    line-height: 1.5;
-    font-weight: 500;
-    letter-spacing: -.02em;
-    flex: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 22px;
-    border-top: 1px solid var(--border);
-  }
-
-  .client {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    min-width: 0;
-  }
-
-  .avatar,
-  .avatar-placeholder {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    flex: none;
-    object-fit: cover;
-  }
-
-  .avatar-placeholder {
-    display: grid;
-    place-items: center;
-    background: var(--accent);
-    color: var(--background);
-    font-size: 22px;
-    font-weight: 800;
-  }
-
-  .client-info {
-    display: grid;
-    gap: 3px;
-  }
-
-  .client-info strong {
-    font-size: 14px;
-  }
-
-  .client-info span,
-  .client-info small {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .review-date {
-    color: var(--muted);
-    font-size: 11px;
-  }
-
-  .scroll-hint {
-    display: none;
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .15em;
-    align-items: center;
-    gap: 15px;
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-  }
-
-  /* ACTIVACIÓN DE LA PILA ANIMADA */
-
-  .is-animated .scroll-container {
-    height: calc(
-      (var(--card-count) + 1) * 68svh
-    );
-  }
-
-  .is-animated .sticky-stage {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    min-height: 0;
-  }
-
-  .is-animated .cards-container {
-    height: 440px;
-  }
-
-  .is-animated .testimonial-card {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    z-index: var(--z-order);
-    will-change: transform, opacity;
-  }
-
-  .is-animated .scroll-hint {
-    display: flex;
-  }
-
-  @media (max-width: 650px) {
+  <style>
     .testimonials-section {
-      padding: 65px 15px 0;
+      --background: #090909;
+      --surface: #191b1a;
+      --text: #f6e4b3;
+      --muted: #c6bca9;
+      --accent: #e7b64b;
+      --border: #46322a;
+
+      background: var(--background);
+      color: var(--text);
+      padding: clamp(72px, 10vw, 128px) 20px 0;
+      overflow: clip;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .testimonials-section.light {
+      --background: #faf8f4;
+      --surface: #ffffff;
+      --text: #211c19;
+      --muted: #736d65;
+      --accent: #956521;
+      --border: #e0d9cd;
     }
 
     .section-heading {
-      margin-bottom: 35px;
+      max-width: 850px;
+      position: relative;
+      z-index: 5;
+      margin: 0 auto clamp(42px, 7vw, 80px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.08;
+      margin: 16px 0;
+    }
+
+    .section-heading p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .scroll-container {
+      position: relative;
+      height: max(760px, calc(var(--card-count) * 58svh));
     }
 
     .sticky-stage {
-      min-height: 460px;
+      position: sticky;
+      top: clamp(4rem, 10vh, 7rem);
+      height: calc(100svh - clamp(4rem, 10vh, 7rem));
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      perspective: 1100px;
+      transform-style: preserve-3d;
     }
 
     .cards-container {
-      min-height: 390px;
+      position: relative;
+      width: min(100%, 620px);
+      min-height: 440px;
+      transform-style: preserve-3d;
     }
 
     .testimonial-card {
-      padding: 25px;
-      min-height: 355px;
-      border-radius: 22px;
-      gap: 14px;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      max-width: 620px;
+      z-index: var(--z-order);
+      min-height: 390px;
+      padding: clamp(25px, 5vw, 42px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 20px 55px #00000030;
+      margin: 0;
+      backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -80px;
+      top: -80px;
+      background: var(--accent);
+      opacity: .045;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+
+    .quote-icon {
+      font-family: Georgia, serif;
+      font-size: 85px;
+      line-height: .6;
+      color: var(--accent);
+    }
+
+    .review-number {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .13em;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stars-base {
+      position: relative;
+      color: #5d5953;
+      font-size: 23px;
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+
+    .stars-filled {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--rating);
+      overflow: hidden;
+      color: var(--accent);
+    }
+
+    .rating-value {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .review-text {
-      font-size: 19px;
+      margin: 0;
+      font-size: clamp(18px, 3vw, 26px);
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: -.02em;
+      flex: 1;
     }
 
-    .is-animated .cards-container {
-      height: min(440px, 65svh);
-      min-height: 0;
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
     }
 
-    .is-animated .testimonial-card {
-      min-height: 0;
-      height: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-container {
-      height: auto !important;
+    .client {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
     }
 
-    .sticky-stage {
-      position: relative !important;
-      height: auto !important;
+    .avatar,
+    .avatar-placeholder {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      flex: none;
+      object-fit: cover;
     }
 
-    .cards-container {
-      height: auto !important;
+    .avatar-placeholder {
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--background);
+      font-size: 22px;
+      font-weight: 800;
     }
 
-    .testimonial-card {
-      position: relative !important;
-      transform: none !important;
-      opacity: 1 !important;
-      filter: none !important;
-      margin-bottom: 20px !important;
+    .client-info {
+      display: grid;
+      gap: 3px;
+    }
+
+    .client-info strong {
+      font-size: 14px;
+    }
+
+    .client-info span,
+    .client-info small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .review-date {
+      color: var(--muted);
+      font-size: 11px;
     }
 
     .scroll-hint {
-      display: none !important;
+      display: none;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      align-items: center;
+      gap: 15px;
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
     }
-  }
-</style>
+
+    /* ACTIVACIÓN DE LA PILA ANIMADA */
+
+    .is-animated .scroll-container {
+      /* Cada tarjeta avanza después de aproximadamente el 45% de la
+         pantalla, evitando que haya demasiado espacio entre transiciones. */
+      height: calc(var(--card-count) * 45svh + 55svh  );
+    }
+
+    .is-animated .sticky-stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      min-height: 0;
+    }
+
+    .is-animated .cards-container {
+      height: min(440px, 70svh);
+    }
+
+    .is-animated .testimonial-card {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      z-index: var(--z-order);
+      will-change: transform, opacity;
+    }
+
+    .is-animated .scroll-hint {
+      display: flex;
+    }
+
+    @media (max-width: 650px) {
+      .testimonials-section {
+        padding: 65px 15px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 35px;
+      }
+
+      .sticky-stage {
+        min-height: 460px;
+      }
+
+      .cards-container {
+        min-height: 390px;
+      }
+
+      .testimonial-card {
+        padding: 25px;
+        min-height: 355px;
+        border-radius: 22px;
+        gap: 14px;
+      }
+
+      .review-text {
+        font-size: 19px;
+      }
+
+      .is-animated .cards-container {
+        height: min(440px, 65svh);
+        min-height: 0;
+      }
+
+      .is-animated .testimonial-card {
+        min-height: 0;
+        height: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-container {
+        height: auto !important;
+      }
+
+      .sticky-stage {
+        position: relative !important;
+        height: auto !important;
+      }
+
+      .cards-container {
+        height: auto !important;
+        min-height: 0 !important;
+      }
+
+      .testimonial-card {
+        position: relative !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        margin-bottom: 20px !important;
+      }
+
+      .scroll-hint {
+        display: none !important;
+      }
+    }
+  </style>

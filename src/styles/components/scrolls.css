@@ -1,0 +1,69 @@
+/* From Uiverse.io by ArturCodeCraft */ 
+/* <reset-style> ============================ */
+a {
+  text-decoration: none;
+}
+/* <main-style> ============================ */
+.main__scroll-text {
+  color: var(--gp-foreground, rgba(28,28,30,1));
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.glyph-portal .hero-scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(2rem, 7vh, 5rem);
+  z-index: 3;
+  transform: translateX(-50%);
+}
+
+.glyph-portal .hero-scroll-indicator .main__action {
+  pointer-events: auto;
+}
+
+.glyph-portal .hero-scroll-indicator .main__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  color: var(--gp-foreground, rgba(28,28,30,1));
+}
+
+.glyph-portal .hero-scroll-indicator svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.glyph-portal .hero-scroll-indicator svg path:last-child {
+  fill: var(--gp-foreground, rgba(28,28,30,1));
+}
+
+.main__scroll-box {
+  animation: scroll-down 3s ease-in-out infinite;
+}
+
+/* Animate scroll icon */
+@keyframes scroll-down {
+  0%, 100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main__scroll-box {
+    animation: none;
+  }
+}

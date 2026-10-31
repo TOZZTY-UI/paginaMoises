@@ -1,6 +1,7 @@
 
 ---
 import GlyphPortal from "../components/GlyphPortal.astro";
+import Scrolls from "../components/scrolls.astro";
 ---
 
 <GlyphPortal
@@ -10,6 +11,9 @@ import GlyphPortal from "../components/GlyphPortal.astro";
   enterLabel="Descubrir SaxoEventos"
   style="--gp-paper:#090909; --gp-ink:#E7B64B; --gp-field:#781016; --gp-foreground:#F6E4B3;"
 >
+  <div slot="front" class="hero-scroll-indicator">
+    <Scrolls />
+  </div>
   <h2>La música se convierte en experiencia.</h2>
   <p>Bienvenido a SaxoEventos.</p>
 </GlyphPortal>
