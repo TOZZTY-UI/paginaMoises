@@ -16,6 +16,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.2",
+    "gsap": "^3.15.0",
     "sharp-cli": "^6.1.0",
     "tailwindcss": "^4.3.3"
   }

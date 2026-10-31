@@ -136,68 +136,74 @@
   </section>
 
   <script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
     function initTestimonials(section: HTMLElement) {
+      if (section.dataset.scrollInitialized) return;
       const container = section.querySelector<HTMLElement>('[data-scroll-container]');
       const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-card]'));
       if (!container || !cards.length) return;
+      section.dataset.scrollInitialized = 'true';
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const clamp = (n: number) => Math.max(0, Math.min(1, n));
-      let raf = 0;
+      const mm = gsap.matchMedia();
 
-      function update() {
-        raf = 0;
-        if (reducedMotion.matches) {
-          section.classList.remove('is-animated');
-          cards.forEach((card) => {
-            card.style.transform = '';
-            card.style.opacity = '';
-            card.style.filter = '';
-            card.style.pointerEvents = '';
-          });
-          return;
-        }
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        section.classList.remove('is-animated');
+        cards.forEach((card) => gsap.set(card, { clearProps: 'transform,opacity,filter,pointerEvents' }));
+      });
 
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
         section.classList.add('is-animated');
-        const viewport = window.innerHeight;
-        const rect = container!.getBoundingClientRect();
-        const travel = Math.max(1, rect.height - viewport);
-        const progress = clamp(-rect.top / travel);
         const steps = Math.max(1, cards.length - 1);
 
         cards.forEach((card, index) => {
-          // El primer cliente siempre ocupa el frente de la pila.
-          card.style.zIndex = String(index === 0 ? cards.length + 1 : cards.length - index);
-          // Primero sale la tarjeta 01, luego 02; la última permanece visible.
-          const local = index === cards.length - 1
-            ? 0
-            : clamp(progress * steps - index);
-          const ease = local * local * (3 - 2 * local);
-          const initialY = index * 12;
           const rotation = (index % 2 === 0 ? -1 : 1) * Math.min(3, index * 1.5);
-          // Movimiento hacia arriba sin afectar la posición de las demás tarjetas.
-          const y = initialY - ease * Math.max(viewport * 1.1, 650);
-          // La primera tarjeta debe estar físicamente delante en el espacio 3D;
-          // de lo contrario, la última puede taparla aunque tenga menor z-index.
           const depth = (cards.length - index) * 8;
-          card.style.transform = `translate3d(0, ${y}px, ${depth}px) rotate(${rotation * (1 - ease)}deg)`;
-          card.style.opacity = String(1 - clamp((local - 0.75) / 0.25));
-          card.style.filter = 'none';
-          card.style.pointerEvents = local > 0.9 ? 'none' : 'auto';
+          card.style.zIndex = String(index === 0 ? cards.length + 1 : cards.length - index);
+          gsap.set(card, { y: index * 12, z: depth, rotation, autoAlpha: 1 });
         });
-      }
 
-      function scheduleUpdate() {
-        if (!raf) raf = requestAnimationFrame(update);
-      }
-      window.addEventListener('scroll', scheduleUpdate, { passive: true });
-      window.addEventListener('resize', scheduleUpdate);
-      reducedMotion.addEventListener('change', scheduleUpdate);
-      scheduleUpdate();
+        const timeline = gsap.timeline({
+          defaults: { ease: 'power2.inOut' },
+          scrollTrigger: {
+            trigger: container,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.55,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        cards.slice(0, -1).forEach((card, index) => {
+          timeline.to(card, {
+            y: () => -Math.max(window.innerHeight * 1.1, 650),
+            rotation: 0,
+            autoAlpha: 0,
+            duration: 1,
+            onStart: () => { card.style.pointerEvents = 'none'; },
+            onReverseComplete: () => { card.style.pointerEvents = 'auto'; },
+          }, index / steps);
+        });
+
+        return () => timeline.kill();
+      });
+
+      const cleanup = () => {
+        mm.revert();
+        delete section.dataset.scrollInitialized;
+      };
+      document.addEventListener('astro:before-swap', cleanup, { once: true });
+      reducedMotion.addEventListener('change', () => ScrollTrigger.refresh());
     }
 
     document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
-
+    document.addEventListener('astro:page-load', () => {
+      document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
+    });
   </script>
 
   <style>
