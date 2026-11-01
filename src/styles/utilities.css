@@ -9,6 +9,6 @@
 .grid { display: grid; gap: 1.5rem; }
 .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); padding: .75rem 1rem; border-radius: 999px; background: var(--color-ink); color: #fff; }
+.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); padding: .75rem 1rem; border-radius: 999px; background: var(--color-ink); color: var(--negro); }
 .skip-link:focus { transform: translateY(0); }
 @media (max-width: 768px) { .container { width: min(calc(100% - 2rem), var(--container)); } .grid--2, .grid--3 { grid-template-columns: 1fr; } .section { padding-block: 4rem; } }

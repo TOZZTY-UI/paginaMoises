@@ -213,11 +213,11 @@
   <style>
     .testimonials-section {
       --background: var(--negro);
-      --surface: #241b1d;
+      --surface: var(--color-card);
       --text: var(--marfil);
       --muted: var(--gris);
       --accent: var(--dorado);
-      --border: #8d5a66;
+      --border: var(--color-border);
 
       background: var(--background);
       color: var(--text);
@@ -229,11 +229,11 @@
 
     .testimonials-section.light {
       --background: var(--marfil);
-      --surface: #fffaf2;
+      --surface: var(--marfil);
       --text: var(--negro);
-      --muted: #645b58;
+      --muted: var(--gris);
       --accent: var(--burdeos);
-      --border: #cdb8ae;
+      --border: var(--color-border);
     }
 
     .section-heading {
@@ -304,7 +304,7 @@
       background-color: var(--surface);
       opacity: 1;
       color: var(--text);
-      box-shadow: 0 20px 55px #00000030;
+      box-shadow: 0 20px 55px var(--negro-10);
       margin: 0;
       backface-visibility: hidden;
       overflow: hidden;
@@ -350,7 +350,7 @@
 
     .stars-base {
       position: relative;
-      color: #5d5953;
+      color: var(--gris);
       font-size: 23px;
       letter-spacing: 3px;
       white-space: nowrap;

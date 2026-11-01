@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    box-shadow: 0 12px 35px #00000020;
+    box-shadow: 0 12px 35px var(--negro-10);
     transition: width .4s cubic-bezier(.4, 0, .2, 1), padding .4s cubic-bezier(.4, 0, .2, 1), background .4s ease, border-color .4s ease, box-shadow .4s ease;
   }
 
@@ -127,7 +127,7 @@
     height: 64px;
     background: var(--color-secondary);
     color: var(--color-text);
-    box-shadow: 0 8px 20px #0003;
+    box-shadow: 0 8px 20px var(--negro-70);
   }
   .menu-button:hover { background: var(--color-secondary-hover); }
   .menu-button svg { width: 32px; height: 32px; transition: transform .3s ease; }
@@ -179,7 +179,7 @@
     border-radius: 50%;
      background: var(--color-card);
      color: var(--color-text-muted);
-    box-shadow: 0 6px 18px #0003;
+    box-shadow: 0 6px 18px var(--negro-70);
     transition: transform .2s ease, color .2s ease;
   }
   .menu-icon svg { width: 21px; height: 21px; }

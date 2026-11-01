@@ -76,14 +76,14 @@
     overflow: hidden;
     background: linear-gradient(
       125deg,
-      #f0f1f5,
-      #949aa4 8%,
-      #e1e3e9 15%,
-      #5a606c 100%
+      var(--marfil),
+      var(--gris) 8%,
+      var(--marfil) 15%,
+      var(--negro) 100%
     );
     box-shadow:
-      5px 8px 22px #0008,
-      inset 0 0 0 1px #ffffff80;
+      5px 8px 22px var(--negro-70),
+      inset 0 0 0 1px var(--marfil-60);
     transition:
       transform .35s ease,
       box-shadow .35s ease;
@@ -91,7 +91,7 @@
 
   .album-button:hover .jewel-case {
     transform: translateY(-7px) rotate(-2deg);
-    box-shadow: 9px 18px 32px #000a;
+    box-shadow: 9px 18px 32px var(--negro-90);
   }
 
   .case-spine {
@@ -102,8 +102,8 @@
     width: 7px;
     background: repeating-linear-gradient(
       to bottom,
-      #ffffffb0 0 10px,
-      #4b5060a0 10px 12px
+      var(--marfil-70) 0 10px,
+      var(--negro-70) 10px 12px
     );
   }
 
@@ -114,7 +114,7 @@
     background:
       radial-gradient(
         circle at 80% 20%,
-        #ffffff50,
+        var(--marfil-35),
         transparent 42%
       ),
       linear-gradient(
@@ -155,22 +155,22 @@
     display: grid;
     place-items: center;
     background: conic-gradient(
-      #f0ffff,
+      var(--marfil),
       var(--accent),
-      #70dfe8,
-      #f2bce6,
-      #393b60,
-      #f0ffff
+      var(--dorado),
+      var(--marfil),
+      var(--burdeos),
+      var(--marfil)
     );
-    box-shadow: 3px 7px 18px #0008;
+    box-shadow: 3px 7px 18px var(--negro-70);
   }
 
   .cover-hole {
     width: 32%;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 5px solid #252833;
-    background: #e4e4e4;
+    border: 5px solid var(--negro);
+    background: var(--marfil);
   }
 
   .case-glass {
@@ -179,10 +179,10 @@
     pointer-events: none;
     background: linear-gradient(
       115deg,
-      #ffffff55 0%,
+      var(--marfil-35) 0%,
       transparent 30%,
       transparent 75%,
-      #ffffff2c 100%
+      var(--marfil-10) 100%
     );
   }
 
@@ -268,14 +268,14 @@
     place-items: center;
     overflow: hidden;
     background: conic-gradient(
-      #e5ffff,
+      var(--marfil),
       var(--disc-color),
-      #62d9e7,
-      #dfb9da,
-      #3a3c61,
+      var(--dorado),
+      var(--marfil),
+      var(--burdeos),
       var(--disc-color)
     );
-    box-shadow: 0 10px 25px #0008;
+    box-shadow: 0 10px 25px var(--negro-70);
     animation: disc-spin 15s linear infinite;
   }
 
@@ -295,11 +295,11 @@
   .disc-groove {
     position: absolute;
     inset: 8%;
-    border: 1px solid #ffffff60;
+    border: 1px solid var(--marfil-35);
     border-radius: 50%;
     box-shadow:
-      0 0 0 12px #ffffff08,
-      0 0 0 25px #00000008;
+      0 0 0 12px var(--marfil-10),
+      0 0 0 25px var(--negro-10);
     pointer-events: none;
   }
 
@@ -308,15 +308,15 @@
     z-index: 1;
     width: 25%;
     aspect-ratio: 1;
-    border: 5px solid #252936;
+    border: 5px solid var(--negro);
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      #aeb0bb 0 22%,
-      #eeeeee 25% 58%,
-      #323844 62%
+      var(--gris) 0 22%,
+      var(--marfil) 25% 58%,
+      var(--negro) 62%
     );
-    box-shadow: 0 0 0 3px #ffffff90;
+    box-shadow: 0 0 0 3px var(--marfil-60);
   }
 
   .song-details {
@@ -345,7 +345,7 @@
     padding: 12px;
     border-radius: 12px;
      background: var(--color-primary);
-     color: #090909;
+     color: var(--negro);
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;

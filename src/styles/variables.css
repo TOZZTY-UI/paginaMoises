@@ -15,6 +15,14 @@
   --color-text: var(--marfil);
   --color-text-muted: var(--gris);
   --color-border: #8d5a66;
+  --negro-90: color-mix(in srgb, var(--negro) 90%, transparent);
+  --negro-70: color-mix(in srgb, var(--negro) 70%, transparent);
+  --negro-10: color-mix(in srgb, var(--negro) 10%, transparent);
+  --marfil-90: color-mix(in srgb, var(--marfil) 90%, transparent);
+  --marfil-60: color-mix(in srgb, var(--marfil) 60%, transparent);
+  --marfil-70: color-mix(in srgb, var(--marfil) 70%, transparent);
+  --marfil-35: color-mix(in srgb, var(--marfil) 35%, transparent);
+  --marfil-10: color-mix(in srgb, var(--marfil) 10%, transparent);
   --color-bg: var(--color-background);
   --color-ink: var(--color-text);
   --color-muted: var(--color-text-muted);
