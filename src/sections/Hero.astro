@@ -49,21 +49,22 @@ import heroImage from '../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e
   .hero__cta:hover span { transform: translate(3px, -3px); }
   .hero__details { display: flex; flex-wrap: wrap; gap: clamp(1rem, 4vw, 3.5rem); color: var(--gris); font-size: .72rem; animation: hero-content-in .6s .64s cubic-bezier(.4, 0, .2, 1) both; }
   .hero__details a:hover { color: var(--dorado); }
-  .hero__visual { position: relative; min-height: 0; height: 100%; overflow: hidden; clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%); background: var(--burdeos); animation: hero-panel-in .9s cubic-bezier(.4, 0, .2, 1) both; }
+  .hero__visual { position: absolute; inset: 0 0 0 55%; z-index: 2; overflow: hidden; clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%); background: var(--burdeos); animation: hero-image-reveal .85s cubic-bezier(.4, 0, .2, 1) both; }
   .hero__visual::after { position: absolute; inset: 0; content: ''; background: linear-gradient(110deg, color-mix(in srgb, var(--negro) 30%, transparent), transparent 45%), linear-gradient(0deg, color-mix(in srgb, var(--negro) 36%, transparent), transparent 45%); pointer-events: none; }
-  .hero__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 61% 25%; filter: saturate(.82) contrast(1.08); animation: hero-image-settle 1.2s .05s cubic-bezier(.4, 0, .2, 1) both; }
+  .hero__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 61% 25%; filter: saturate(.82) contrast(1.08); animation: hero-image-settle 1.1s .05s cubic-bezier(.4, 0, .2, 1) both; }
   .hero__visual-caption { position: absolute; right: clamp(1.25rem, 4vw, 3rem); bottom: clamp(2rem, 6vw, 5rem); z-index: 1; color: var(--marfil); font-family: Georgia, serif; font-size: clamp(1rem, 1.5vw, 1.25rem); font-style: italic; line-height: 1.25; text-align: right; animation: hero-content-in .65s .7s cubic-bezier(.4, 0, .2, 1) both; }
-  @keyframes hero-panel-in { from { opacity: 0; clip-path: polygon(34% 0, 100% 0, 100% 100%, 16% 100%); } to { opacity: 1; clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%); } }
-  @keyframes hero-image-settle { from { transform: scale(1.08); } to { transform: scale(1); } }
+  @keyframes hero-image-reveal { from { opacity: 0; transform: translateX(8%); clip-path: polygon(38% 0, 100% 0, 100% 100%, 18% 100%); } to { opacity: 1; transform: translateX(0); clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%); } }
+  @keyframes hero-image-settle { from { transform: scale(1.08) translateX(2%); } to { transform: scale(1) translateX(0); } }
   @keyframes hero-content-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes hero-rule-in { from { opacity: 0; transform: scaleX(0); transform-origin: left; } to { opacity: 1; transform: scaleX(1); transform-origin: left; } }
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero__content { min-height: 100svh; }
     .hero__message { padding-block: 5rem 4rem; }
-    .hero__visual { min-height: 32rem; clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%); }
+    .hero__visual { position: relative; inset: auto; z-index: auto; min-height: 32rem; clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%); animation: hero-image-reveal-mobile .75s cubic-bezier(.4, 0, .2, 1) both; }
     .hero__visual img { object-position: 62% 30%; }
   }
+  @keyframes hero-image-reveal-mobile { from { opacity: 0; transform: translateY(7%); clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%); } to { opacity: 1; transform: translateY(0); clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%); } }
   @media (prefers-reduced-motion: reduce) {
     .hero__brand, .hero__eyebrow, .hero h1, .hero__rule, .hero__intro, .hero__cta, .hero__details, .hero__visual, .hero__visual img, .hero__visual-caption { animation: none; opacity: 1; transform: none; clip-path: none; }
     .hero__cta span { transition: none; }

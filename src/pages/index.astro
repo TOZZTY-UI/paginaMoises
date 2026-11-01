@@ -28,3 +28,42 @@ import { testimonials } from '../data/testimonials';
  </main>
   <Footer />
 </LandingLayout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initSectionTransitions = () => {
+    const main = document.querySelector('main');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sections = gsap.utils.toArray<HTMLElement>('main > section:not(.hero)');
+
+    if (!main || main.dataset.sectionTransitionsReady || reducedMotion.matches || !sections.length) return;
+    main.dataset.sectionTransitionsReady = 'true';
+
+    const context = gsap.context(() => {
+      gsap.set(sections, { autoAlpha: 0, y: 34 });
+
+      sections.forEach((section) => {
+        gsap.to(section, {
+          autoAlpha: 1,
+          y: 0,
+          duration: .8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 86%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      });
+    });
+
+    document.addEventListener('astro:before-swap', () => context.revert(), { once: true });
+  };
+
+  initSectionTransitions();
+  document.addEventListener('astro:page-load', initSectionTransitions);
+</script>
