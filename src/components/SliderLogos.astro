@@ -1,0 +1,47 @@
+---
+type Speed = 'normal' | 'slow' | 'fast';
+
+type Logo = {
+  src: string;
+  alt: string;
+};
+
+interface Props {
+  logos: Logo[];
+  speed?: Speed;
+  class?: string;
+}
+
+const {
+  logos,
+  speed = 'normal',
+  class: className,
+} = Astro.props as Props;
+
+const durations: Record<Speed, string> = {
+  normal: '40s',
+  slow: '80s',
+  fast: '5s',
+};
+
+const repeatedLogos = [...logos, ...logos];
+---
+
+<section class:list={['logo-slider', className]}>
+  <div class="logo-slider__viewport">
+    <div class="logo-slider__track" style={`--logo-speed:${durations[speed]}`}>
+      {repeatedLogos.map((logo, index) => (
+        <div
+          class="logo-slider__item"
+        >
+          <span class="logo-slider__wash"></span>
+          <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @import '../styles/components/slider-logos.css';
+</style>

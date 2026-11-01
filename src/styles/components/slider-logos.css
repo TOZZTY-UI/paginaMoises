@@ -1,0 +1,106 @@
+.logo-slider {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  overflow: hidden;
+}
+
+.logo-slider__header-wrap { padding: 1.5rem; }
+
+.logo-slider__header {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.logo-slider h2 {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.logo-slider__header p {
+  align-self: start;
+  justify-self: end;
+  max-width: 28rem;
+  color: var(--color-muted);
+  text-wrap: balance;
+}
+
+.logo-slider__viewport {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.logo-slider__track {
+  display: flex;
+  width: max-content;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding: 1.25rem 0;
+  animation: logo-marquee var(--logo-speed) linear infinite;
+  transition: all .3s ease-in-out;
+}
+
+.logo-slider__track:hover { animation-play-state: paused; }
+
+.logo-slider__item {
+  position: relative;
+  display: grid;
+  width: 10rem;
+  height: 6rem;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.logo-slider__wash {
+  display: none;
+}
+
+.logo-slider img {
+  position: relative;
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 72%;
+  max-height: 68%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1);
+  opacity: 0.1;
+  transition: filter .3s ease, opacity .3s ease, transform .3s ease;
+}
+
+.logo-slider__item:hover img {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 700px) {
+  .logo-slider__header-wrap { padding: 1.5rem; }
+  .logo-slider__header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .logo-slider__header p { max-width: 32rem; }
+  .logo-slider__header p { justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-slider__track { animation-play-state: paused; }
+  .logo-slider img { transition: none; }
+}

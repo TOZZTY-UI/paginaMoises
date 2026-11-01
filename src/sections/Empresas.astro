@@ -1,0 +1,80 @@
+---
+import SliderLogos from '../components/SliderLogos.astro';
+---
+<section class="landing-companies" aria-labelledby="companies-title">
+  <div class="companies-heading">
+    <p class="section-index">También he sonado aquí</p>
+    <div class="companies-copy">
+      <h2 id="companies-title">Una buena canción<br /><em>abre cualquier celebración.</em></h2>
+      <p class="intro-text">Desde eventos corporativos hasta celebraciones íntimas, la música acompaña cada momento sin robarle protagonismo.</p>
+    </div>
+  </div>
+
+  <div class="companies-logos" aria-label="Empresas y organizaciones que han confiado en Moisés">
+    <SliderLogos
+      logos={[
+        { src: 'https://www.metro.cl/images/logo.png', alt: 'Metro S.A.' },
+        { src: 'https://www.jumbo.cl/images/logo-jumbo-50.svg', alt: 'Jumbo' },
+        { src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/500px-BMW.svg.png', alt: 'BMW' },
+        { src: 'https://tcl-s3-bucket.s3.amazonaws.com/web/static/website/images/red-logo.77df778a8ea4.png', alt: 'Toyota' },
+        { src: 'https://www.santarita.com/assets/templates/images/SR-big.png', alt: 'Santa Rita' },
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Logotipo_oficial_del_Gobierno_de_Chile.png', alt: 'Gobierno de Chile' },
+        { src: 'https://www.enjoy.cl/assets/img/logo-header-santiago.svg', alt: 'Enjoy Santiago' },
+        { src: 'https://edge.sitecorecloud.io/sodexofrance1-sodexocorpsites-prod-e74c/media/Project/Sodexo-Corp/Americas/CL/Media/Images/Logos---Icons-100-x-100/Sodexo_Logotype_Blue.png', alt: 'Sodexo' },
+        { src: 'https://espacioabierto.cl/wp-content/uploads/2025/05/cl.png', alt: 'Matrimonios.cl' }
+      ]}
+      speed="slow"
+    />
+  </div>
+</section>
+
+<style>
+  .landing-companies {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .companies-heading {
+    display: grid;
+    grid-template-columns: minmax(9rem, .8fr) minmax(0, 2fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .companies-heading .section-index {
+    margin-top: .55rem;
+  }
+
+  .companies-copy h2 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--color-text);
+    font-size: clamp(2.7rem, 6vw, 6rem);
+    letter-spacing: -.07em;
+  }
+
+  .companies-copy .intro-text {
+    max-width: 30rem;
+    margin-top: 2rem;
+  }
+
+  .companies-logos {
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-block: 1rem;
+    border-block: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  }
+
+  @media (max-width: 760px) {
+    .companies-heading {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .companies-heading .section-index {
+      margin-top: 0;
+    }
+  }
+</style>
