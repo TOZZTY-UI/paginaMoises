@@ -3,6 +3,7 @@
   "title": "Desarrollo web",
   "description": "Servicio de desarrollo web",
   "price": 1000,
+  "featured": true,
   "features": [
     "Diseño responsive",
     "Optimización SEO",

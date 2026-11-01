@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { services as servicios } from '../../data/services';
+import { services as servicios } from '../../data/services/ts/services';
 import Price from '../../components/price.astro';
 
 const planes = servicios.map((servicio, index) => ({
@@ -11,7 +11,7 @@ const planes = servicios.map((servicio, index) => ({
   features: servicio.features,
   subServices: servicio.subServices,
   href: `/servicios/${servicio.slug}`,
-  featured: index === 1,
+  featured: servicio.featured ?? false,
 }));
 ---
 <BaseLayout page="servicios">

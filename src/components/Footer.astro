@@ -68,6 +68,45 @@ const doodles = [
   "𝄞",
   "𝄢",
 ];
+
+const quotes = [
+  {
+    text: "La música es siempre un refugio seguro en un mundo incierto.",
+    author: "Charlie Parker",
+  },
+  {
+    text: "Sin música, la vida sería un error.",
+    author: "Friedrich Nietzsche",
+  },
+  {
+    text: "La música constituye una revelación más alta que ninguna filosofía.",
+    author: "Ludwig van Beethoven",
+  },
+  {
+    text: "La música expresa aquello que no puede decirse con palabras pero no puede permanecer en silencio.",
+    author: "",
+  },
+  {
+    text: "La música puede cambiar el mundo porque puede cambiar a las personas.",
+    author: "Bono",
+  },
+  {
+    text: "La música es un viaje emocional que nos conecta con nuestros sentimientos más profundos.",
+    author: "Charlie Parker",
+  },
+  {
+    text: "El arte de tocar el saxofón es como contar una historia sin palabras.",
+    author: "Charlie Parker",
+  },
+  {
+    text: "La música es el lenguaje del alma, es lo que nos hace sentir más vivos.",
+    author: "Charlie Parker",
+  },
+  {
+    text: "La música es capaz de sanar heridas y elevar el espíritu como nada más en el mundo.",
+    author: "Charlie Parker",
+  },
+];
 ---
 
 <footer class="dcf" data-footer>
@@ -75,7 +114,15 @@ const doodles = [
     <div class="dcf-brand">
       <Image src={firma} alt={`Firma de ${brand}`} width={240} format="webp" loading="lazy" />
     </div>
-    {blurb && <p class="dcf-blurb">{blurb}</p>}
+    <div
+      class="dcf-quote"
+      data-quote-rotator
+      data-quotes={JSON.stringify(quotes)}
+      aria-live="polite"
+    >
+      <blockquote>{quotes[0].text}</blockquote>
+      {quotes[0].author && <cite>— {quotes[0].author}</cite>}
+    </div>
     {
       columns.length > 0 && (
         <nav class="dcf-cols" aria-label="Footer">

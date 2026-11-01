@@ -3,6 +3,7 @@
   "title": "Diseño de marca",
   "description": "Servicio de diseño de marca",
   "price": 800,
+  "featured": false,
   "features": [
     "Diseño de logotipo",
     "Manual de identidad corporativa",

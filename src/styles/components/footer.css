@@ -65,13 +65,26 @@
     border-radius: 50%;
     font-size: 24px;
   }
-  .dcf-blurb {
+  .dcf-quote {
     grid-column: 1;
     max-width: 34ch;
-    font:
-      15px/1.55 Georgia,
-      serif;
-    opacity: 0.7;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .dcf-quote.is-changing {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .dcf-quote blockquote {
+    margin: 0;
+    font: 500 20px/1.35 Georgia, serif;
+  }
+  .dcf-quote cite {
+    display: block;
+    margin-top: 12px;
+    color: var(--accent);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
   }
   .dcf-cols {
     grid-column: 2;
@@ -287,7 +300,7 @@
     .dcf-top {
       grid-template-columns: 1fr;
     }
-    .dcf-blurb,
+    .dcf-quote,
     .dcf-cols {
       grid-column: 1;
       grid-row: auto;

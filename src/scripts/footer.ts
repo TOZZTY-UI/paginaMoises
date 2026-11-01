@@ -1,6 +1,49 @@
 document.querySelectorAll<HTMLElement>("[data-footer]").forEach((footer) => {
   const bubble = footer.querySelector<HTMLElement>(".dcf-bubble");
   const wordmark = footer.querySelector<HTMLElement>(".dcf-wordmark");
+  const quoteRotator = footer.querySelector<HTMLElement>("[data-quote-rotator]");
+
+  if (quoteRotator) {
+    const quoteText = quoteRotator.querySelector<HTMLElement>("blockquote");
+    const quoteAuthor = quoteRotator.querySelector<HTMLElement>("cite");
+
+    try {
+      const quotes = JSON.parse(quoteRotator.dataset.quotes || "[]") as Array<{
+        text: string;
+        author?: string;
+      }>;
+      let quoteIndex = 0;
+
+      if (quotes.length > 1 && quoteText) {
+        window.setInterval(() => {
+          quoteRotator.classList.add("is-changing");
+
+          window.setTimeout(() => {
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+            const quote = quotes[quoteIndex];
+            quoteText.textContent = quote.text;
+
+            if (quote.author) {
+              if (quoteAuthor) {
+                quoteAuthor.textContent = `— ${quote.author}`;
+              } else {
+                const author = document.createElement("cite");
+                author.textContent = `— ${quote.author}`;
+                quoteRotator.append(author);
+              }
+            } else if (quoteAuthor) {
+              quoteAuthor.remove();
+            }
+
+            quoteRotator.classList.remove("is-changing");
+          }, 350);
+        }, 6500);
+      }
+    } catch {
+      // Mantener la primera cita visible si el contenido no se puede leer.
+    }
+  }
+
   if (wordmark && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(([entry]) => {
       wordmark.classList.toggle("is-visible", entry.isIntersecting);

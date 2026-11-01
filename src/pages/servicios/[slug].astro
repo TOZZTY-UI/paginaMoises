@@ -1,17 +1,102 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { services } from "../../data/services";
+import { services } from "../../data/services/ts/services";
+import { serviceDetails, type ServiceDetail } from "../../data/services/ts/details";
+import ButtonCTA from '../../components/ButtonCTA.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  service: (typeof services)[number];
+  detail: ServiceDetail;
+};
+
+const fallbackDetail: ServiceDetail = {
+  intro: 'Una propuesta pensada para ayudarte a llevar tu proyecto al siguiente nivel.',
+  objective: 'Entender tus necesidades y construir una solución clara, útil y personalizada.',
+  deliverables: [],
+  process: [],
+  idealFor: [],
+  ctaLabel: 'Hablar sobre mi proyecto',
+  ctaHref: '/contacto',
+};
+
 export function getStaticPaths() {
   return services.map((service) => ({
     params: { slug: service.slug },
-    props: { title: service.title, description: service.description },
+    props: {
+      title: service.title,
+      description: service.description,
+      service,
+      detail: serviceDetails[service.slug] ?? fallbackDetail,
+    },
   }));
 }
-const { title, description } = Astro.props;
+
+const { title, description, service, detail } = Astro.props as Props;
 ---
 
 <BaseLayout title={`${title} | SaxEventos`} description={description}
-  ><main class="section">
-    <div class="container"><a href="/servicios">← Todos los servicios</a></div>
-  </main></BaseLayout
 >
+  <article class="service-detail">
+    <a class="service-detail__back" href="/servicios">← Todos los servicios</a>
+
+    <div class="service-detail__hero">
+      <div class="service-detail__copy">
+        <p class="service-detail__eyebrow">{service.title}</p>
+        <h1>{service.title}</h1>
+        <p class="service-detail__lead">{detail.intro}</p>
+        <ButtonCTA href={detail.ctaHref} name={detail.ctaLabel} className="service-detail__cta" />
+      </div>
+
+      <aside class="service-detail__summary" aria-label={`Resumen de ${service.title}`}>
+        <p class="service-detail__summary-label">Desde</p>
+        <strong>{service.price ? `$ ${service.price}` : 'Consultar'}</strong>
+        <span>por proyecto</span>
+        <p>{service.description}</p>
+      </aside>
+    </div>
+
+    <section class="service-detail__body" aria-labelledby="service-objective-title">
+      <div>
+        <p class="service-detail__eyebrow">El objetivo</p>
+        <h2 id="service-objective-title">Una solución pensada para tu proyecto.</h2>
+      </div>
+      <div class="service-detail__content">
+        <p>{detail.objective}</p>
+        {detail.idealFor.length > 0 && (
+          <>
+            <h3>Ideal para</h3>
+            <ul class="service-detail__highlights">
+              {detail.idealFor.map((item) => <li>{item}</li>)}
+            </ul>
+          </>
+        )}
+      </div>
+    </section>
+
+    <div class="service-detail__columns">
+      <section aria-labelledby="service-deliverables-title">
+        <p class="service-detail__eyebrow">Qué incluye</p>
+        <h2 id="service-deliverables-title">Lo que recibirás.</h2>
+        <ul class="service-detail__highlights">
+          {detail.deliverables.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
+      <section aria-labelledby="service-process-title">
+        <p class="service-detail__eyebrow">Cómo trabajaremos</p>
+        <h2 id="service-process-title">Un proceso claro.</h2>
+        <ol class="service-detail__process">
+          {detail.process.map((step) => <li>{step}</li>)}
+        </ol>
+      </section>
+    </div>
+
+    <section class="service-detail__final-cta" aria-label="Solicitar información">
+      <p class="service-detail__eyebrow">¿Hablamos de tu proyecto?</p>
+      <h2>Da el siguiente paso.</h2>
+      <ButtonCTA href={detail.ctaHref} name={detail.ctaLabel} className="service-detail__cta" />
+    </section>
+  </article>
+</BaseLayout>

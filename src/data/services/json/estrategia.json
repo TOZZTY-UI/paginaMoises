@@ -3,6 +3,7 @@
   "title": "Estrategia digital",
   "description": "Servicio de estrategia digital",
   "price": 500,
+  "featured": false,
   "features": [
     "Análisis de mercado",
     "Definición de objetivos",

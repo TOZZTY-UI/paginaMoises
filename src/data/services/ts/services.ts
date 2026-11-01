@@ -1,7 +1,7 @@
-import estrategia from './services/estrategia.json';
-import diseno from './services/diseno.json';
-import desarrollo from './services/desarrollo.json';
-import experienciaSignature from './services/experiencia-signature.json';
+import estrategia from '../json/estrategia.json';
+import diseno from '../json/diseno.json';
+import desarrollo from '../json/desarrollo.json';
+import experienciaSignature from '../json/experiencia-signature.json';
 
 export type ServiceSubService = {
   slug: string;
@@ -18,6 +18,7 @@ export type Service = {
   description: string;
   price: number;
   features: string[];
+  featured?: boolean;
   subServices?: ServiceSubService[];
 };
 

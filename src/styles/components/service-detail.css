@@ -44,6 +44,45 @@
 
 .service-detail__cta { margin-top: 2rem; }
 
+.service-detail__summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 18rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--marfil) 22%, transparent);
+  background: color-mix(in srgb, var(--marfil) 6%, var(--negro));
+}
+
+.service-detail__summary-label {
+  margin: 0;
+  color: var(--dorado);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.service-detail__summary strong {
+  margin-top: .75rem;
+  color: var(--marfil);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+}
+
+.service-detail__summary span {
+  margin-top: .5rem;
+  color: var(--gris);
+  font-size: .85rem;
+}
+
+.service-detail__summary > p:last-child {
+  max-width: 24rem;
+  margin: 2rem 0 0;
+  color: var(--gris);
+}
+
 :global(.service-detail__cta) {
   color: var(--marfil);
   border-color: var(--marfil);
@@ -96,6 +135,49 @@
   color: var(--dorado);
 }
 
+.service-detail__content h3 {
+  margin: 2.5rem 0 0;
+  color: var(--marfil);
+  font-size: 1rem;
+}
+
+.service-detail__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 8vw, 8rem);
+  padding: clamp(3rem, 8vw, 7rem) 0;
+  border-top: 1px solid color-mix(in srgb, var(--marfil) 20%, transparent);
+}
+
+.service-detail__columns h2 { font-size: clamp(2rem, 4vw, 4rem); }
+
+.service-detail__process {
+  display: grid;
+  gap: .75rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  color: var(--marfil);
+  list-style: none;
+  counter-reset: process;
+}
+
+.service-detail__process li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: .75rem;
+  align-items: start;
+  padding: .85rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--marfil) 14%, transparent);
+  counter-increment: process;
+}
+
+.service-detail__process li::before {
+  content: counter(process, decimal-leading-zero);
+  color: var(--dorado);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
 .service-detail__image--wide {
   height: clamp(16rem, 42vw, 32rem);
 }
@@ -110,7 +192,8 @@
 
 @media (max-width: 760px) {
   .service-detail__hero,
-  .service-detail__body { grid-template-columns: 1fr; }
+  .service-detail__body,
+  .service-detail__columns { grid-template-columns: 1fr; }
   .service-detail__hero { padding-top: 3.5rem; }
   .service-detail__image--hero { order: -1; }
   .service-detail__image--hero img { min-height: 0; }
