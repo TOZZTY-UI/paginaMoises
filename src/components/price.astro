@@ -1,0 +1,241 @@
+---
+export type PricePlan = {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  href?: string;
+  featured?: boolean;
+};
+
+interface Props {
+  plans?: PricePlan[];
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Elige la experiencia para tu evento',
+  subtitle = 'Cada celebración merece una propuesta musical a su medida.',
+  plans = [
+    {
+      name: 'Esencial',
+      price: '399 €',
+      period: 'por evento',
+      features: ['Saxofón en directo', 'Hasta 1 hora de música', 'Repertorio seleccionado', 'Preparación personalizada'],
+      href: '/contacto',
+    },
+    {
+      name: 'Signature',
+      price: '699 €',
+      period: 'por evento',
+      features: ['Saxofón en directo', 'Hasta 2 horas de música', 'Repertorio a medida', 'Coordinación con el evento'],
+      href: '/contacto',
+      featured: true,
+    },
+    {
+      name: 'A medida',
+      price: 'Consultar',
+      period: 'propuesta personalizada',
+      features: ['Duración flexible', 'Formato especial', 'Selección musical completa', 'Atención prioritaria'],
+      href: '/contacto',
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="price" aria-labelledby="price-title">
+  <header class="price__heading">
+    <p class="price__eyebrow">Propuestas musicales</p>
+    <h2 id="price-title">{title}</h2>
+    <p class="price__subtitle">{subtitle}</p>
+  </header>
+
+  <div class="price__grid">
+    {plans.map((plan) => (
+      <article class:list={["price-card", { "price-card--featured": plan.featured }]}>
+        {plan.featured && <span class="price-card__badge">Más elegido</span>}
+        <h3>{plan.name}</h3>
+        <p class="price-card__amount">{plan.price}</p>
+        <p class="price-card__period">{plan.period ?? 'por evento'}</p>
+
+        <ul class="price-card__features">
+          {plan.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+
+        <a class="price-card__button" href={plan.href ?? '/contacto'}>Elegir propuesta</a>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .price {
+    --price-border: color-mix(in srgb, var(--gris) 42%, transparent);
+    padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 5vw, 4rem);
+    background: var(--negro);
+    color: var(--marfil);
+  }
+
+  .price__heading {
+    max-width: 45rem;
+    margin: 0 auto clamp(2.5rem, 6vw, 4.5rem);
+    text-align: center;
+  }
+
+  .price__eyebrow {
+    margin-bottom: .9rem;
+    color: var(--dorado);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .price__heading h2 {
+    font-size: clamp(2.2rem, 5vw, 4.6rem);
+  }
+
+  .price__subtitle {
+    max-width: 34rem;
+    margin: 1.25rem auto 0;
+    color: var(--gris);
+  }
+
+  .price__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    max-width: 72rem;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .price-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 29rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--price-border);
+    background: color-mix(in srgb, var(--marfil) 7%, var(--negro));
+    color: var(--marfil);
+    transition: transform .25s ease, border-color .25s ease, background-color .25s ease;
+  }
+
+  .price-card:hover {
+    transform: translateY(-.35rem);
+    border-color: var(--dorado);
+    background: color-mix(in srgb, var(--burdeos) 24%, var(--negro));
+  }
+
+  .price-card--featured {
+    border-color: var(--dorado);
+    background: var(--marfil);
+    color: var(--negro);
+  }
+
+  .price-card--featured:hover {
+    background: var(--marfil);
+  }
+
+  .price-card__badge {
+    position: absolute;
+    top: 0;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    padding: .35rem .7rem;
+    background: var(--dorado);
+    color: var(--negro);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .price-card h3 {
+    font-size: 1.35rem;
+    letter-spacing: -.02em;
+  }
+
+  .price-card__amount {
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -.06em;
+    line-height: 1;
+  }
+
+  .price-card__period {
+    margin-top: .7rem;
+    color: color-mix(in srgb, currentColor 62%, transparent);
+    font-size: .82rem;
+  }
+
+  .price-card__features {
+    display: grid;
+    gap: 0;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .price-card__features li {
+    padding: .75rem 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+    font-size: .9rem;
+  }
+
+  .price-card__features li::before {
+    content: '✓';
+    margin-right: .6rem;
+    color: var(--dorado);
+    font-weight: 700;
+  }
+
+  .price-card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    margin-top: auto;
+    padding: .75rem 1rem;
+    border: 1px solid var(--dorado);
+    background: var(--dorado);
+    color: var(--negro);
+    font-size: .86rem;
+    font-weight: 700;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  .price-card__button:hover {
+    background: var(--burdeos);
+    color: var(--marfil);
+  }
+
+  .price-card--featured .price-card__button {
+    background: var(--negro);
+    color: var(--marfil);
+  }
+
+  .price-card--featured .price-card__button:hover {
+    background: var(--burdeos);
+  }
+
+  @media (max-width: 760px) {
+    .price__grid {
+      grid-template-columns: 1fr;
+      max-width: 28rem;
+    }
+
+    .price-card {
+      min-height: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .price-card { transition: none; }
+    .price-card:hover { transform: none; }
+  }
+</style>
