@@ -149,7 +149,6 @@
       if (!container || !cards.length) return;
       section.dataset.scrollInitialized = 'true';
 
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
@@ -201,7 +200,6 @@
         delete section.dataset.scrollInitialized;
       };
       document.addEventListener('astro:before-swap', cleanup, { once: true });
-      reducedMotion.addEventListener('change', () => ScrollTrigger.refresh());
     }
 
     document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
@@ -308,6 +306,7 @@
       margin: 0;
       backface-visibility: hidden;
       overflow: hidden;
+      will-change: transform, opacity;
     }
 
     .testimonial-card::before {

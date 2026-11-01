@@ -46,18 +46,25 @@ import { testimonials } from '../data/testimonials';
     const context = gsap.context(() => {
       gsap.set(sections, { autoAlpha: 0, y: 34 });
 
-      sections.forEach((section) => {
-        gsap.to(section, {
+      ScrollTrigger.batch(sections, {
+        start: 'top 86%',
+        interval: 0.08,
+        batchMax: 3,
+        onEnter: (batch) => gsap.to(batch, {
           autoAlpha: 1,
           y: 0,
           duration: .8,
           ease: 'power3.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 86%',
-            toggleActions: 'play none none reverse',
-          },
-        });
+          overwrite: 'auto',
+          stagger: .08,
+        }),
+        onLeaveBack: (batch) => gsap.to(batch, {
+          autoAlpha: 0,
+          y: 34,
+          duration: .45,
+          ease: 'power2.in',
+          overwrite: 'auto',
+        }),
       });
     });
 
