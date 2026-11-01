@@ -1,0 +1,11 @@
+{
+  "slug": "estrategia",
+  "title": "Estrategia digital",
+  "description": "Servicio de estrategia digital",
+  "price": 500,
+  "features": [
+    "Análisis de mercado",
+    "Definición de objetivos",
+    "Planificación de campañas"
+  ]
+}

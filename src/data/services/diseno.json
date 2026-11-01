@@ -1,0 +1,11 @@
+{
+  "slug": "diseno",
+  "title": "Diseño de marca",
+  "description": "Servicio de diseño de marca",
+  "price": 800,
+  "features": [
+    "Diseño de logotipo",
+    "Manual de identidad corporativa",
+    "Diseño de papelería"
+  ]
+}

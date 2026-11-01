@@ -1,9 +1,17 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { services } from '../../data/services';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { services } from "../../data/services";
 export function getStaticPaths() {
-  return services.map((service) => ({ params: { slug: service.slug }, props: { title: service.title, description: service.description } }));
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { title: service.title, description: service.description },
+  }));
 }
 const { title, description } = Astro.props;
 ---
-<BaseLayout title={`${title} | SaxEventos`} description={description}><main class="section"><div class="container"><a href="/servicios">← Todos los servicios</a><p class="eyebrow" style="margin-top: 4rem">Servicio</p><h1>{title}</h1><p class="text-muted">Una solución pensada para impulsar tu proyecto.</p><a class="button" href="/contacto">Solicitar información</a></div></main></BaseLayout>
+
+<BaseLayout title={`${title} | SaxEventos`} description={description}
+  ><main class="section">
+    <div class="container"><a href="/servicios">← Todos los servicios</a></div>
+  </main></BaseLayout
+>

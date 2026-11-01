@@ -9,10 +9,38 @@ const { title, description, image = '/logo.webp' } = Astro.props;
 const site = Astro.site ?? new URL('https://saxeventos.cl');
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.href}#business`,
+      name: 'SaxEventos',
+      url: site.href,
+      logo: imageUrl,
+      image: imageUrl,
+      description,
+      telephone: '+56 9 4925 1898',
+      email: 'saxoeventos@outlook.com',
+      areaServed: { '@type': 'Country', name: 'Chile' },
+      founder: { '@type': 'Person', name: 'Moisés Larenas' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.href}#website`,
+      name: 'SaxEventos',
+      url: site.href,
+      inLanguage: 'es-CL',
+      publisher: { '@id': `${site.href}#business` },
+    },
+  ],
+};
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href={canonical} />
 
 <meta property="og:type" content="website" />
@@ -27,3 +55,5 @@ const imageUrl = new URL(image, site).href;
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

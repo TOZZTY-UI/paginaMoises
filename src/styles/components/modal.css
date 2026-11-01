@@ -1,0 +1,73 @@
+:global(html.modal-open),
+:global(body.modal-open) {
+  overflow: hidden;
+}
+
+.service-modal {
+  position: fixed;
+  inset: 0;
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--marfil);
+  overflow: visible;
+}
+
+.service-modal::backdrop {
+  background: color-mix(in srgb, var(--negro) 78%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.service-modal__panel {
+  position: relative;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: clamp(1.75rem, 5vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--dorado) 48%, transparent);
+  background: var(--negro);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 35%);
+  animation: modal-enter .28s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.service-modal.is-closing .service-modal__panel {
+  animation: modal-exit .22s ease both;
+}
+
+.service-modal.is-closing::backdrop {
+  animation: modal-backdrop-exit .22s ease both;
+}
+
+.service-modal__close {
+  position: absolute;
+  top: .85rem;
+  right: .85rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--marfil) 28%, transparent);
+  background: transparent;
+  color: var(--marfil);
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.service-modal__close:hover { border-color: var(--dorado); color: var(--dorado); }
+.service-modal__eyebrow { color: var(--dorado); font-size: .7rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.service-modal h2 { max-width: 25rem; margin-top: .75rem; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+.service-modal__intro { margin-top: 1rem; color: var(--gris); }
+.service-modal__options { display: grid; gap: .75rem; margin-top: 2rem; }
+.service-modal__option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; padding: 1rem 1.1rem; border: 1px solid color-mix(in srgb, var(--marfil) 20%, transparent); color: var(--marfil); transition: border-color .2s ease, background-color .2s ease, transform .2s ease; }
+.service-modal__option:hover { transform: translateX(.2rem); border-color: var(--dorado); background: color-mix(in srgb, var(--burdeos) 30%, var(--negro)); }
+.service-modal__option strong, .service-modal__option small { display: block; }
+.service-modal__option small { margin-top: .35rem; color: var(--gris); font-size: .82rem; line-height: 1.45; }
+.service-modal__arrow { color: var(--dorado); font-size: 1.35rem; }
+
+@keyframes modal-enter { from { opacity: 0; transform: translateY(.75rem) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes modal-exit { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(.5rem) scale(.98); } }
+@keyframes modal-backdrop-exit { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .service-modal__panel, .service-modal__option, .service-modal::backdrop { animation: none; transition: none; } }

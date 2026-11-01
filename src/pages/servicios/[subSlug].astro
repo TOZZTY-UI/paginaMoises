@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ButtonCTA from '../../components/ButtonCTA.astro';
+import { services, type ServiceSubService } from '../../data/services';
+
+type Props = {
+  service: (typeof services)[number];
+  subService: ServiceSubService;
+};
+
+export function getStaticPaths() {
+  return services.flatMap((service) =>
+    (service.subServices ?? []).map((subService) => ({
+      params: {
+        subSlug: subService.slug,
+      },
+      props: { service, subService },
+    })),
+  );
+}
+
+const { service, subService } = Astro.props as Props;
+---
+
+<BaseLayout
+  title={`${subService.name} | ${service.title}`}
+  description={subService.description}
+  image={subService.image}
+>
+  <article class="service-detail">
+    <a class="service-detail__back" href="/servicios">← Todos los servicios</a>
+
+    <div class="service-detail__hero">
+      <div class="service-detail__copy">
+        <p class="service-detail__eyebrow">{service.title}</p>
+        <h1>{subService.name}</h1>
+        <p class="service-detail__lead">{subService.description}</p>
+        <ButtonCTA href={subService.paymentHref} name="Reservar esta experiencia ↗" className="service-detail__cta" />
+      </div>
+
+      <figure class="service-detail__image service-detail__image--hero">
+        <img src={subService.image} alt={`Ejemplo de ${subService.name}`} width="1400" height="1000" />
+      </figure>
+    </div>
+
+    <section class="service-detail__body" aria-labelledby="service-details-title">
+      <div>
+        <p class="service-detail__eyebrow">Una propuesta a tu medida</p>
+        <h2 id="service-details-title">Música que acompaña cada momento.</h2>
+      </div>
+
+      <div class="service-detail__content">
+        <p>
+          Esta experiencia está pensada para crear una atmósfera especial en tu celebración,
+          con una presentación cuidada y un repertorio que se adapta al ritmo de tus invitados.
+        </p>
+        <ul class="service-detail__highlights">
+          {subService.highlights.map((highlight) => <li>{highlight}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <figure class="service-detail__image service-detail__image--wide">
+      <img src={subService.image} alt="Ambiente de una presentación musical" width="1400" height="700" loading="lazy" />
+    </figure>
+
+    <section class="service-detail__final-cta" aria-label="Reservar servicio">
+      <p class="service-detail__eyebrow">¿Te imaginas esta experiencia en tu evento?</p>
+      <h2>Da el siguiente paso.</h2>
+      <ButtonCTA href={subService.paymentHref} name="Ir al botón de pago ↗" className="service-detail__cta" />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  @import '../../styles/components/service-detail.css';
+</style>

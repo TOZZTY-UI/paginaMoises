@@ -1,4 +1,10 @@
 ---
+import ButtonCTA from './ButtonCTA.astro';
+import Modal from './Modal.astro';
+import type { ServiceSubService } from '../data/services';
+
+export type SubService = ServiceSubService;
+
 export type PricePlan = {
   name: string;
   price: string;
@@ -6,6 +12,8 @@ export type PricePlan = {
   features: string[];
   href?: string;
   featured?: boolean;
+  subServices?: SubService[];
+  slug?: string;
 };
 
 interface Props {
@@ -27,11 +35,30 @@ const {
     },
     {
       name: 'Signature',
+      slug: 'experiencia-signature',
       price: '699 €',
       period: 'por evento',
       features: ['Saxofón en directo', 'Hasta 2 horas de música', 'Repertorio a medida', 'Coordinación con el evento'],
       href: '/contacto',
       featured: true,
+      subServices: [
+        {
+          slug: 'con-musicalizacion',
+          name: 'Signature con musicalización',
+          description: 'Saxofón en directo acompañado de musicalización durante el evento.',
+          image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85',
+          highlights: ['Saxofón en directo', 'Musicalización durante el evento', 'Repertorio adaptable al ambiente'],
+          paymentHref: 'https://example.com/pago/signature-con-musicalizacion',
+        },
+        {
+          slug: 'sin-musicalizacion',
+          name: 'Signature sin musicalización',
+          description: 'Saxofón en directo como protagonista principal del evento.',
+          image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=85',
+          highlights: ['Saxofón como protagonista', 'Presentación elegante y cercana', 'Selección musical personalizada'],
+          paymentHref: 'https://example.com/pago/signature-sin-musicalizacion',
+        },
+      ],
     },
     {
       name: 'A medida',
@@ -52,7 +79,10 @@ const {
   </header>
 
   <div class="price__grid">
-    {plans.map((plan) => (
+    {plans.map((plan, index) => {
+      const modalId = `price-options-${index}`;
+
+      return (
       <article class:list={["price-card", { "price-card--featured": plan.featured }]}>
         {plan.featured && <span class="price-card__badge">Más elegido</span>}
         <h3>{plan.name}</h3>
@@ -63,9 +93,19 @@ const {
           {plan.features.map((feature) => <li>{feature}</li>)}
         </ul>
 
-        <a class="price-card__button" href={plan.href ?? '/contacto'}>Elegir propuesta</a>
+        <ButtonCTA
+          href={plan.href ?? '/contacto'}
+          name="Elegir propuesta"
+          modalTarget={plan.subServices?.length ? modalId : undefined}
+          className="price-card__cta"
+        />
+
+        {plan.subServices?.length ? (
+          <Modal id={modalId} title={`Elige tu versión de ${plan.name}`} options={plan.subServices} />
+        ) : null}
       </article>
-    ))}
+      );
+    })}
   </div>
 </section>
 
@@ -207,6 +247,55 @@ const {
     font-size: .86rem;
     font-weight: 700;
     transition: background-color .2s ease, color .2s ease;
+  }
+
+  :global(.price-card .price-card__cta) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  :global(.price-card:not(.price-card--featured) .price-card__cta) {
+    color: var(--burdeos);
+    border-color: var(--marfil);
+    background-color: var(--marfil);
+  }
+
+  :global(.price-card:not(.price-card--featured) .price-card__cta::before) {
+    background-color: var(--burdeos);
+  }
+
+  :global(.price-card:not(.price-card--featured) .price-card__cta::after) {
+    background-color: var(--negro);
+  }
+
+  :global(.price-card:not(.price-card--featured) .price-card__cta:hover) {
+    color: var(--marfil);
+  }
+
+  :global(.price-card:not(.price-card--featured) .price-card__cta:hover::before) {
+    background-color: var(--marfil);
+  }
+
+  :global(.price-card--featured .price-card__cta) {
+    color: var(--negro);
+    border-color: var(--negro);
+    background-color: transparent;
+  }
+
+  :global(.price-card--featured .price-card__cta::before) {
+    background-color: var(--negro);
+  }
+
+  :global(.price-card--featured .price-card__cta::after) {
+    background-color: var(--negro);
+  }
+
+  :global(.price-card--featured .price-card__cta:hover) {
+    color: var(--marfil);
+  }
+
+  :global(.price-card--featured .price-card__cta:hover::before) {
+    background-color: var(--marfil);
   }
 
   .price-card__button:hover {

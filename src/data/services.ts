@@ -1,5 +1,29 @@
-export const services = [
-  { slug: 'estrategia', title: 'Estrategia digital', description: 'Servicio de estrategia digital', price: 500 , features: ['Análisis de mercado', 'Definición de objetivos', 'Planificación de campañas']},
-  { slug: 'diseno', title: 'Diseño de marca', description: 'Servicio de diseño de marca', price: 800 , features: ['Diseño de logotipo', 'Manual de identidad corporativa', 'Diseño de papelería'] },
-  { slug: 'desarrollo', title: 'Desarrollo web', description: 'Servicio de desarrollo web', price: 1000, features: ['Diseño responsive', 'Optimización SEO', 'Integración con redes sociales'] },
+import estrategia from './services/estrategia.json';
+import diseno from './services/diseno.json';
+import desarrollo from './services/desarrollo.json';
+import experienciaSignature from './services/experiencia-signature.json';
+
+export type ServiceSubService = {
+  slug: string;
+  name: string;
+  description: string;
+  image: string;
+  highlights: string[];
+  paymentHref: string;
+};
+
+export type Service = {
+  slug: string;
+  title: string;
+  description: string;
+  price: number;
+  features: string[];
+  subServices?: ServiceSubService[];
+};
+
+export const services: Service[] = [
+  estrategia,
+  diseno,
+  desarrollo,
+  experienciaSignature,
 ];

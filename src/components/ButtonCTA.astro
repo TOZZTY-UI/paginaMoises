@@ -1,7 +1,19 @@
 ---
-const { href, name } = Astro.props;
+interface Props {
+  href: string;
+  name: string;
+  modalTarget?: string;
+  className?: string;
+}
+
+const { href, name, modalTarget, className } = Astro.props as Props;
 ---
-<a class="btn-white" href={href}>
+<a
+  class:list={["btn-white", className]}
+  href={modalTarget ? `#${modalTarget}` : href}
+  data-modal-trigger={modalTarget}
+  aria-haspopup={modalTarget ? 'dialog' : undefined}
+>
   {name}
 </a>
 

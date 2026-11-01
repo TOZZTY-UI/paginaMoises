@@ -4,10 +4,12 @@ import { services as servicios } from '../../data/services';
 import Price from '../../components/price.astro';
 
 const planes = servicios.map((servicio, index) => ({
+  slug: servicio.slug,
   name: servicio.title,
-  price: `${servicio.price} €`,
+  price: `$ ${servicio.price}`,
   period: 'por proyecto',
   features: servicio.features,
+  subServices: servicio.subServices,
   href: `/servicios/${servicio.slug}`,
   featured: index === 1,
 }));

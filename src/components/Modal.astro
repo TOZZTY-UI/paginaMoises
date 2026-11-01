@@ -1,0 +1,41 @@
+---
+import type { SubService } from './price.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  options: SubService[];
+}
+
+const { id, title, options } = Astro.props as Props;
+---
+
+<dialog class="service-modal" id={id} aria-labelledby={`${id}-title`}>
+  <div class="service-modal__panel">
+    <button class="service-modal__close" type="button" data-modal-close aria-label="Cerrar ventana">
+      <span aria-hidden="true">×</span>
+    </button>
+
+    <p class="service-modal__eyebrow">Personaliza tu experiencia</p>
+    <h2 id={`${id}-title`}>{title}</h2>
+    <p class="service-modal__intro">Selecciona la alternativa que mejor se adapta a tu evento.</p>
+
+    <div class="service-modal__options">
+      {options.map((option) => (
+        <a class="service-modal__option" href={`/servicios/${option.slug}`}>
+          <span>
+            <strong>{option.name}</strong>
+            <small>{option.description}</small>
+          </span>
+          <span class="service-modal__arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</dialog>
+
+<script src="../scripts/modal.ts"></script>
+
+<style>
+  @import '../styles/components/modal.css';
+</style>

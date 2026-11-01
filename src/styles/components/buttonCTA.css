@@ -11,6 +11,8 @@
   z-index: 1;
   position: relative;
   background-color: transparent;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .btn-white::before {

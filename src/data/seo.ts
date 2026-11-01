@@ -24,10 +24,6 @@ export const seo = {
     title: 'Preguntas frecuentes | SaxEventos',
     description: 'Encuentra respuestas a preguntas frecuentes sobre SaxEventos.',
   },
-  privacidad: {
-    title: 'Política de privacidad | SaxEventos',
-    description: 'Información sobre la política de privacidad de SaxEventos.',
-  },
   terminos: {
     title: 'Términos y condiciones | SaxEventos',
     description: 'Consulta los términos y condiciones de SaxEventos.',

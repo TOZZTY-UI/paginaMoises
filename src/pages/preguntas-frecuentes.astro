@@ -16,4 +16,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </details>
         </div>
     </main>
+    <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [{
+            '@type': 'Question',
+            name: '¿Cómo comenzamos?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Escríbenos y coordinaremos una primera conversación.'
+            }
+        }]
+    })} />
 </BaseLayout>
