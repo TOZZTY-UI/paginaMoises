@@ -1,6 +1,6 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
-import Hero from '../sections/Hero.astro';
+import QuienSoy from '../sections/QuienSoy.astro';
 import Intro from '../sections/Intro.astro';
 import MuestraServicios from '../sections/MuestraServicios.astro';
 import ContactCTA from '../sections/ContactCTA.astro';
@@ -15,7 +15,7 @@ import { testimonials } from '../data/testimonials';
 
 <LandingLayout page="home">
   <main>
-    <Hero />
+    <QuienSoy />
     <Intro />
     <MuestraServicios />
     <TestimonialsStack testimonials={testimonials} title="Historias que se escuchan y se recuerdan" subtitle="La experiencia de nuestros clientes" variant="dark" />

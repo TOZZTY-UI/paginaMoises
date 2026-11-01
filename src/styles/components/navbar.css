@@ -48,7 +48,7 @@
     border: 0;
     border-radius: 50%;
     background: var(--color-primary);
-    color: #090909;
+    color: var(--negro);
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -95,7 +95,7 @@
   }
 
   .nav-link.active {
-    color: #090909;
+    color: var(--negro);
     background: var(--color-primary);
   }
 

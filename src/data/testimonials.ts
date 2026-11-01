@@ -9,7 +9,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     comment: 'Aquí debes colocar el testimonio real del cliente.',
     date: 'Octubre 2026',
-  },
+  },  
   {
     id: 'cliente-2',
     name: 'Otro cliente',
@@ -26,4 +26,38 @@ export const testimonials: Testimonial[] = [
     comment: 'Aquí debes colocar una tercera opinión real.',
     date: 'Diciembre 2026',
   },
+  {
+    id: 'cliente-4',
+    name: 'Cuarto cliente',
+    role: 'Celebración privada',
+    rating: 5,
+    comment: 'Aquí debes colocar una cuarta opinión real.',
+    date: 'Diciembre 2026',
+  },
+  {
+    id: 'cliente-5',
+    name: 'Quinto cliente',
+    role: 'Celebración privada',
+    rating: 5,
+    comment: 'Aquí debes colocar una quinta opinión real.',
+    date: 'Diciembre 2026',
+  },
+  {
+    id: 'cliente-6',
+    name: 'Sexto cliente',
+    role: 'Celebración privada',
+    rating: 5,
+    comment: 'Aquí debes colocar una sexta opinión real.',
+    date: 'Diciembre 2026',
+  },
+  {
+    id: 'cliente-7',
+    name: 'Séptimo cliente',
+    role: 'Celebración privada',
+    rating: 5,
+    comment: 'Aquí debes colocar una séptima opinión real.',
+    date: 'Diciembre 2026',
+  },
+
+
 ];

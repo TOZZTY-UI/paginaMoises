@@ -1,15 +1,20 @@
 :root {
-  /* Identidad SaxoEventos — Noir Jazz */
-  --color-background: #090909;
-  --color-surface: #102c2a;
-  --color-card: #191b1a;
-  --color-primary: #e7b64b;
-  --color-primary-hover: #f3ce77;
-  --color-secondary: #781016;
-  --color-secondary-hover: #a51b24;
-  --color-text: #f6e4b3;
-  --color-text-muted: #c6bca9;
-  --color-border: #46322a;
+  /* Identidad SaxoEventos — negro, burdeos, marfil y dorado */
+  --negro: #151313;
+  --burdeos: #76243A;
+  --marfil: #F5F0E8;
+  --dorado: #C9A45C;
+  --gris: #B7AEA8;
+  --color-background: var(--negro);
+  --color-surface: var(--burdeos);
+  --color-card: #241b1d;
+  --color-primary: var(--dorado);
+  --color-primary-hover: #dec181;
+  --color-secondary: var(--burdeos);
+  --color-secondary-hover: #96304d;
+  --color-text: var(--marfil);
+  --color-text-muted: var(--gris);
+  --color-border: #8d5a66;
   --color-bg: var(--color-background);
   --color-ink: var(--color-text);
   --color-muted: var(--color-text-muted);

@@ -9,6 +9,7 @@
     rating: number;
     comment: string;
     date?: string;
+    image?: string;
   }
 
   interface Props {
@@ -33,7 +34,7 @@
 
   // La primera tarjeta del arreglo queda al frente y es la primera en salir
   // durante el desplazamiento.
-  const cards = testimonials.map((item, index) => ({
+  const cards = testimonials.filter((item): item is Testimonial => Boolean(item)).map((item, index) => ({
     ...item,
     rating: Math.max(0, Math.min(5, item.rating)),
     index,
@@ -47,7 +48,7 @@
     style={`--card-count:${Math.max(cards.length, 1)}`}
   >
     <div class="section-heading">
-      <span class="eyebrow">SAXOEVENTOS · EXPERIENCIAS</span>
+      <span class="eyebrow">SAXEVENTOS · EXPERIENCIAS</span>
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>
@@ -96,10 +97,10 @@
 
               <div class="card-footer">
                 <div class="client">
-                  {review.avatar ? (
+                  {review.image ?? review.avatar ? (
                     <img
-                      src={review.avatar}
-                      alt=""
+                      src={review.image ?? review.avatar}
+                      alt={`Foto de ${review.name}`}
                       width="52"
                       height="52"
                       loading="lazy"
@@ -183,7 +184,10 @@
             y: () => -Math.max(window.innerHeight * 1.1, 650),
             rotation: 0,
             autoAlpha: 0,
-            duration: 1,
+            // Cada transición ocupa exactamente su tramo del scroll.
+            // Antes duraba 1 unidad completa aunque empezara escalonada;
+            // eso dejaba un tramo negro después de la última tarjeta.
+            duration: 1 / steps,
             onStart: () => { card.style.pointerEvents = 'none'; },
             onReverseComplete: () => { card.style.pointerEvents = 'auto'; },
           }, index / steps);
@@ -208,12 +212,12 @@
 
   <style>
     .testimonials-section {
-      --background: #090909;
-      --surface: #191b1a;
-      --text: #f6e4b3;
-      --muted: #c6bca9;
-      --accent: #e7b64b;
-      --border: #46322a;
+      --background: var(--negro);
+      --surface: #241b1d;
+      --text: var(--marfil);
+      --muted: var(--gris);
+      --accent: var(--dorado);
+      --border: #8d5a66;
 
       background: var(--background);
       color: var(--text);
@@ -224,12 +228,12 @@
     }
 
     .testimonials-section.light {
-      --background: #faf8f4;
-      --surface: #ffffff;
-      --text: #211c19;
-      --muted: #736d65;
-      --accent: #956521;
-      --border: #e0d9cd;
+      --background: var(--marfil);
+      --surface: #fffaf2;
+      --text: var(--negro);
+      --muted: #645b58;
+      --accent: var(--burdeos);
+      --border: #cdb8ae;
     }
 
     .section-heading {
@@ -297,7 +301,8 @@
       gap: 20px;
       border: 1px solid var(--border);
       border-radius: 28px;
-      background: var(--surface);
+      background-color: var(--surface);
+      opacity: 1;
       color: var(--text);
       box-shadow: 0 20px 55px #00000030;
       margin: 0;
@@ -449,7 +454,7 @@
     .is-animated .scroll-container {
       /* Cada tarjeta avanza después de aproximadamente el 45% de la
          pantalla, evitando que haya demasiado espacio entre transiciones. */
-      height: calc(var(--card-count) * 45svh + 55svh  );
+      height: max(100svh, calc(var(--card-count) * 42svh + 28svh));
     }
 
     .is-animated .sticky-stage {

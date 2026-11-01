@@ -4,11 +4,11 @@
   text-decoration: none;
   position: relative;
   padding: 12px 35px;
-  background: var(--color-primary, #e7b64b);
+  background: var(--color-primary);
   font-size: 17px;
   font-weight: 500;
-  color: #090909;
-  border: 3px solid var(--color-primary, #e7b64b);
+  color: var(--negro);
+  border: 3px solid var(--color-primary);
   border-radius: 8px;
   box-shadow: 0 0 0 rgba(143, 255, 168, .25);
   transition: background-color .3s ease, color .3s ease, box-shadow .3s ease;
@@ -83,7 +83,7 @@
 
 .button:hover {
   background: transparent;
-  color: var(--color-primary, #e7b64b);
+  color: var(--color-primary);
   box-shadow: 0 0 25px rgba(143, 255, 168, .25);
 }
 
