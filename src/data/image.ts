@@ -22,4 +22,18 @@ export const images = {
     YO: [
         image('YO/IMG-20260926-WA0063.jpg.jpeg', 'yo'), image('YO/file_0000000008ac820ea0a0757b58cffc18.png', 'yo'), image('YO/file_000000001a70820ea1065f0bc7e02e3e.png', 'yo')
     ]
+, logros: [
+        image('YO/logros/badge-2014.jpg', 'logros'),
+        image('YO/logros/badge-2015.jpg', 'logros'),
+        image('YO/logros/badge-2016.jpg', 'logros'),
+        image('YO/logros/badge-2017.jpg', 'logros'),
+        image('YO/logros/badge-2018.jpg', 'logros'),
+        image('YO/logros/badge-2019.jpg', 'logros'),
+        image('YO/logros/badge-2020.jpg', 'logros'),
+        image('YO/logros/badge-2021.jpg', 'logros'),
+        image('YO/logros/badge-2022.jpg', 'logros'),
+        image('YO/logros/badge-2023.jpg', 'logros'),
+        image('YO/logros/badge-2024.jpg', 'logros'),
+        image('YO/logros/badge-2025.jpg', 'logros')
+]
 };

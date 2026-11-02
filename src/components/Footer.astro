@@ -17,7 +17,6 @@ interface Action extends Link {
 interface Props {
   wordmark?: string;
   brand?: string;
-  blurb?: string;
   columns?: Column[];
   actions?: Action[];
   copyright?: string;
@@ -27,7 +26,6 @@ interface Props {
 const {
   wordmark = "SAXEVENTOS",
   brand = "saxeventos",
-  blurb = "Música para acompañar tus momentos especiales.",
   columns = [
     {
       title: "Explora",
