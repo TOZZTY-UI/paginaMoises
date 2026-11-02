@@ -40,12 +40,6 @@ const {
         ...navigation.filter((link) => link.id === 'terminos'),
       ],
     },
-    {
-      title: "Contacto",
-      links: [
-        ...navigation.filter((link) => link.id === 'contacto'),
-      ],
-    },
   ],
   copyright = "©" + new Date().getFullYear() + " saxeventos.",
   backToTop = true,
@@ -84,7 +78,7 @@ const quotes = [
   },
   {
     text: "La música expresa aquello que no puede decirse con palabras pero no puede permanecer en silencio.",
-    author: "",
+    author: "Ludwig van Beethoven",
   },
   {
     text: "La música puede cambiar el mundo porque puede cambiar a las personas.",
@@ -142,6 +136,22 @@ const quotes = [
               </ul>
             </div>
           ))}
+          {
+            socialLinks.length > 0 && (
+              <div class="dcf-social-column">
+                <h3>Redes sociales</h3>
+                <ul aria-label="Redes sociales">
+                  {socialLinks.map((link) => (
+                    <li>
+                      <a href={link.url} aria-label={link.name} title={link.name}>
+                        <span class="social-icon" set:html={link.icon} aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
         </nav>
       )
     }
@@ -175,7 +185,7 @@ const quotes = [
     <p>{copyright}</p>
     {
       socialLinks.length > 0 && (
-        <ul aria-label="Social media">
+        <ul class="dcf-bar__social" aria-label="Social media">
           {socialLinks.map((link) => (
             <li>
               <a href={link.url} aria-label={link.name} title={link.name}>

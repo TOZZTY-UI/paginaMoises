@@ -105,6 +105,9 @@
     margin-bottom: 7px;
     font-size: 14px;
   }
+  .dcf-social-column {
+    display: none;
+  }
   .dcf-world {
     padding-top: clamp(80px, 12vw, 160px);
   }
@@ -266,6 +269,25 @@
     width: 100%;
     height: 100%;
   }
+  .dcf-social-column ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .dcf-social-column li {
+    margin: 0;
+  }
+  .dcf-social-column a {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+  }
+  .dcf-social-column .social-icon {
+    width: 24px;
+    height: 24px;
+  }
   .dcf-totop {
     padding: 6px 12px;
     border: 1px solid;
@@ -308,6 +330,14 @@
     .dcf-cols {
       grid-template-columns: repeat(2, 1fr);
       margin-top: 14px;
+    }
+    .dcf-social-column {
+      display: block;
+      margin-top: 0;
+      grid-column: 2;
+    }
+    .dcf-bar__social {
+      display: none !important;
     }
     .dcf-bar p {
       width: 100%;

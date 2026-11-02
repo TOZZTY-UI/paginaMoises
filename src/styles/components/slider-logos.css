@@ -98,6 +98,10 @@
   .logo-slider__header { grid-template-columns: 1fr; gap: 1.5rem; }
   .logo-slider__header p { max-width: 32rem; }
   .logo-slider__header p { justify-self: start; }
+  .logo-slider img {
+    filter: none;
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
