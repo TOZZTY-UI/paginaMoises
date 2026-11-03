@@ -1,0 +1,33 @@
+{
+  "slug": "cumpleanos",
+  "title": "Cumpleaños",
+  "description": "Haz de tu cumpleaños una experiencia inolvidable con una presentación cercana, dinámica y llena de música en vivo.",
+  "price": "119.990",
+  "period": "Por evento",
+  "features": [
+    "1 hora de saxofón en vivo",
+    "Repertorio musical versátil",
+    "Presentación cercana y dinámica",
+    "Interacción directa con tus invitados",
+    "Momentos especiales llenos de alegría"
+  ],
+  "featured": false,
+  "detail": {
+    "intro": "Disfruta de una experiencia musical única para celebrar tu cumpleaños con alegría, elegancia y emoción.",
+    "objectiveEyebrow": "Una celebración especial",
+    "objectiveTitle": "Música en vivo para compartir y disfrutar.",
+    "objective": "Crear momentos inolvidables con una presentación de saxofón cercana y dinámica, donde la música se convierte en parte de la celebración y conecta con todos tus invitados.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una experiencia llena de energía.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Coordinamos tu celebración.",
+    "deliverables": ["1 hora de saxofón en vivo", "Repertorio musical versátil", "Presentación cercana y dinámica", "Interacción directa con tus invitados", "Momentos especiales llenos de alegría y emoción"],
+    "process": ["Consulta de disponibilidad para tu fecha", "Conversación para conocer tu celebración", "Selección del repertorio musical", "Presentación en vivo durante el evento"],
+    "idealFor": ["Cumpleaños familiares", "Celebraciones de adultos", "Fiestas sorpresa", "Personas que quieren una experiencia musical única"],
+    "finalEyebrow": "Consulta disponibilidad para tu fecha",
+    "finalTitle": "Celebra con música en vivo.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

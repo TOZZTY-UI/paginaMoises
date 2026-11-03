@@ -1,31 +1,224 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqs = [
+    {
+        question: "¿Para qué tipo de eventos puedo contratar SaxoEventos?",
+        answer: "Realizamos presentaciones para matrimonios, ceremonias, cócteles, cenas, cumpleaños, eventos corporativos y homenajes funerarios.",
+    },
+    {
+        question: "¿Cuánto dura la presentación?",
+        answer: "La duración depende del servicio elegido. Algunas experiencias incluyen una hora de saxofón en vivo y otras acompañan distintos momentos del evento.",
+    },
+    {
+        question: "¿Puedo elegir las canciones?",
+        answer: "Sí. Coordinamos previamente el repertorio y puedes proponer canciones especiales para la ceremonia, el cumpleaños o la celebración.",
+    },
+    {
+        question: "¿Con cuánto tiempo debo reservar?",
+        answer: "Recomendamos consultar y reservar con anticipación, especialmente para matrimonios y fechas de alta demanda. La reserva depende de la disponibilidad de la fecha.",
+    },
+    {
+        question: "¿El saxofonista puede interactuar con los invitados?",
+        answer: "Sí. En las experiencias de cóctel, cena y cumpleaños la presentación puede ser cercana, dinámica e interactiva, recorriendo distintos espacios del evento.",
+    },
+    {
+        question: "¿Cómo solicito disponibilidad y cotización?",
+        answer: "Escríbenos indicando la fecha, la ciudad, el tipo de evento y el servicio que te interesa. Te responderemos con la disponibilidad y los detalles para reservar.",
+    },
+];
 ---
 
-<BaseLayout page="faq"
-    >
+<BaseLayout page="faq">
     <main class="section">
         <div class="container">
-            <p class="eyebrow">FAQ</p><h1>Preguntas frecuentes.</h1><details
-                class="card"
-                style="padding: 1.5rem; margin-top: 2rem"
-            >
-                <summary>¿Cómo comenzamos?</summary><p class="text-muted">
-                    Escríbenos y coordinaremos una primera conversación.
-                </p>
-            </details>
+            <p class="eyebrow">FAQ</p>
+            <h1>Preguntas frecuentes.</h1>
+
+            <div class="faq-list">
+                {faqs.map((faq) => (
+                    <details class="card faq-item">
+                        <summary>{faq.question}</summary>
+                        <div class="faq-answer">
+                            <p class="text-muted">{faq.answer}</p>
+                        </div>
+                    </details>
+                ))}
+            </div>
         </div>
     </main>
     <script type="application/ld+json" set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: [{
+        mainEntity: faqs.map((faq) => ({
             '@type': 'Question',
-            name: '¿Cómo comenzamos?',
+            name: faq.question,
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Escríbenos y coordinaremos una primera conversación.'
+                text: faq.answer,
             }
-        }]
+        }))
     })} />
 </BaseLayout>
+
+<script>
+    const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const duration = 360;
+
+    faqItems.forEach((item) => {
+        const summary = item.querySelector('summary');
+        const answer = item.querySelector<HTMLElement>('.faq-answer');
+
+        if (!summary || !answer) return;
+
+        summary.addEventListener('click', (event) => {
+            if (reducedMotion.matches) return;
+            if (item.dataset.animating === 'true') {
+                event.preventDefault();
+                return;
+            }
+
+            event.preventDefault();
+            item.dataset.animating = 'true';
+
+            if (item.open) {
+                answer.style.height = `${answer.offsetHeight}px`;
+                item.classList.remove('is-open');
+                item.classList.add('is-closing');
+
+                requestAnimationFrame(() => {
+                    answer.style.height = '0px';
+                });
+
+                window.setTimeout(() => {
+                    item.open = false;
+                    item.classList.remove('is-closing');
+                    answer.style.height = '';
+                    item.dataset.animating = 'false';
+                }, duration);
+                return;
+            }
+
+            item.open = true;
+            item.classList.add('is-open');
+            answer.style.height = '0px';
+
+            requestAnimationFrame(() => {
+                answer.style.height = `${answer.scrollHeight}px`;
+            });
+
+            window.setTimeout(() => {
+                answer.style.height = 'auto';
+                item.dataset.animating = 'false';
+            }, duration);
+        });
+    });
+</script>
+
+<style>
+    .faq-list {
+        display: grid;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .faq-item {
+        padding: 1.25rem 1.5rem;
+        opacity: 0;
+        transform: translateY(1rem);
+        animation: faq-item-enter 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+    }
+
+    .faq-item:nth-child(2) { animation-delay: 50ms; }
+    .faq-item:nth-child(3) { animation-delay: 100ms; }
+    .faq-item:nth-child(4) { animation-delay: 150ms; }
+    .faq-item:nth-child(5) { animation-delay: 200ms; }
+    .faq-item:nth-child(6) { animation-delay: 250ms; }
+
+    .faq-item:hover {
+        transform: translateY(-2px);
+    }
+
+    .faq-item:focus-within {
+        border-color: var(--dorado, #c9a227);
+    }
+
+    .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: 700;
+        list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        flex: 0 0 auto;
+        margin-left: 1rem;
+        color: var(--dorado, #c9a227);
+        content: '+';
+        font-size: 1.35rem;
+        font-weight: 400;
+        line-height: 1;
+        transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item[open] summary::after {
+        transform: rotate(45deg);
+    }
+
+    .faq-item p {
+        margin: 1rem 0 0;
+    }
+
+    .faq-answer {
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-0.35rem);
+        transition:
+            height 360ms cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 260ms ease,
+            transform 360ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.is-open .faq-answer {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .faq-item.is-closing .faq-answer {
+        opacity: 0;
+        transform: translateY(-0.35rem);
+    }
+
+    @keyframes faq-item-enter {
+        from {
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .faq-item,
+        .faq-item p,
+        .faq-answer {
+            animation: none;
+            opacity: 1;
+            transform: none;
+            transition: none;
+            height: auto;
+            overflow: visible;
+        }
+    }
+</style>

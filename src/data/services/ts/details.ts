@@ -37,7 +37,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ctaHref: '/contacto',
   },
 
-  diseno: {
+  Entrada_Y_Salida_Novios: {
     intro: 'Una identidad visual con personalidad para que tu marca se reconozca, se recuerde y se sienta coherente.',
     objective: 'Construir una imagen de marca que traduzca la esencia de tu proyecto en decisiones visuales claras y consistentes.',
     deliverables: [
@@ -85,7 +85,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     ctaHref: '/contacto',
   },
 
-  'experiencia-signature': {
+  Amenizacion: {
     intro: 'Una experiencia musical cuidada para acompañar tu celebración y convertir cada momento en un recuerdo.',
     objective: 'Diseñar una propuesta musical a la medida del ambiente, el ritmo y la personalidad de tu evento.',
     deliverables: [

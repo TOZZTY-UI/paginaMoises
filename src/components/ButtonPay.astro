@@ -1,0 +1,13 @@
+---
+interface Props {
+  href: string;
+  name?: string;
+}
+
+const { href, name = 'Pagar servicio ↗' } = Astro.props as Props;
+---
+<!-- From Uiverse.io by neerajbaniwal -->
+<a href={href} class="btn-shine">{name}</a>
+<style>
+  @import "../styles/components/buttonPay.css";
+</style>

@@ -1,0 +1,35 @@
+{
+      "slug": "entrada-salida-novios",
+      "title": "Entrada y salida de novios",
+      "description": "Haz de tu ceremonia civil o religiosa un momento inolvidable con la emoción del saxofón en vivo. Acompañamos la entrada del novio, la entrada de la novia, los pajes o intercambio de argollas y la salida de los recién casados. Cada melodía puede ser elegida por ustedes, creando una ceremonia única y personalizada.",
+      "price": "99.990",
+      "period": "Por ceremonia",
+      "image": "/images/entrada-salida-novios.webp",
+      "features": [
+        "Entrada del novio y de la novia",
+        "Pajes o intercambio de argollas",
+        "Salida de los recién casados",
+        "Canciones a elección de los novios",
+        "Ceremonias civiles y religiosas"
+      ],
+        "featured": true,
+      "paymentHref": ".",
+      "detail": {
+        "intro": "Una ceremonia acompañada por melodías elegidas especialmente para ustedes.",
+        "objectiveEyebrow": "La ceremonia",
+        "objectiveTitle": "Un momento único para recordar.",
+        "objective": "Acompañar cada entrada y salida con una interpretación musical emotiva, elegante y personalizada.",
+        "idealForTitle": "Ideal para",
+        "deliverablesEyebrow": "Qué incluye",
+        "deliverablesTitle": "Una ceremonia a medida.",
+        "processEyebrow": "Cómo trabajaremos",
+        "processTitle": "Coordinación sin complicaciones.",
+        "deliverables": ["Entrada del novio", "Entrada de la novia", "Pajes o intercambio de argollas", "Salida de los recién casados", "Canciones a elección de los novios"],
+        "process": ["Selección de las canciones", "Coordinación de los momentos de la ceremonia", "Preparación del repertorio", "Presentación en vivo"],
+        "idealFor": ["Ceremonias civiles", "Ceremonias religiosas", "Parejas que quieren personalizar su celebración"],
+        "finalEyebrow": "¿Hablamos de tu ceremonia?",
+        "finalTitle": "Haz que cada entrada tenga su propia música.",
+        "ctaLabel": "Consultar disponibilidad",
+        "ctaHref": "/contacto"
+      }
+    }

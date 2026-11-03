@@ -4,10 +4,11 @@ import type { SubService } from './price.astro';
 interface Props {
   id: string;
   title: string;
+  parentSlug: string;
   options: SubService[];
 }
 
-const { id, title, options } = Astro.props as Props;
+const { id, title, parentSlug, options } = Astro.props as Props;
 ---
 
 <dialog class="service-modal" id={id} aria-labelledby={`${id}-title`}>
@@ -22,7 +23,7 @@ const { id, title, options } = Astro.props as Props;
 
     <div class="service-modal__options">
       {options.map((option) => (
-        <a class="service-modal__option" href={`/servicios/${option.slug}`}>
+        <a class="service-modal__option" href={`/servicios/${parentSlug}/${option.slug}`}>
           <span>
             <strong>{option.name}</strong>
             <small>{option.description}</small>

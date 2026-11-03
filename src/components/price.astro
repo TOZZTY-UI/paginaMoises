@@ -101,7 +101,12 @@ const {
         />
 
         {plan.subServices?.length ? (
-          <Modal id={modalId} title={`Elige tu versión de ${plan.name}`} options={plan.subServices} />
+          <Modal
+            id={modalId}
+            title={`Elige tu versión de ${plan.name}`}
+            parentSlug={plan.slug ?? ''}
+            options={plan.subServices}
+          />
         ) : null}
       </article>
       );

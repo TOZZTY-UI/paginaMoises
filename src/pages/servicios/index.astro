@@ -3,11 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { services as servicios } from '../../data/services/ts/services';
 import Price from '../../components/price.astro';
 
-const planes = servicios.map((servicio, index) => ({
+const planes = servicios.map((servicio) => ({
   slug: servicio.slug,
   name: servicio.title,
-  price: `$ ${servicio.price}`,
-  period: 'por proyecto',
+  price: servicio.price ? `$ ${servicio.price}` : 'Consultar',
+  period: servicio.period ?? 'Por proyecto',
   features: servicio.features,
   subServices: servicio.subServices,
   href: `/servicios/${servicio.slug}`,

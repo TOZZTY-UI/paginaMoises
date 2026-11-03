@@ -1,0 +1,59 @@
+
+{
+  "slug": "servicios-musicales",
+  "title": "Experiencias Musicales en Vivo",
+  "description": "Transformamos cada celebración en una experiencia inolvidable con la elegancia y emoción del saxofón en vivo. Musicalización personalizada para ceremonias, cócteles y cenas, creando momentos únicos que tus invitados recordarán.",
+  "period": "Por Evento",
+  "features": [
+    "Saxofón profesional en vivo",
+    "Repertorio musical personalizado",
+    "Coordinación de momentos especiales",
+    "Ambientación musical elegante",
+    "Presentación profesional"
+  ],
+  "subServices": [
+    {
+      "slug": "amenizacion-coctel",
+      "name": "Amenización de cóctel",
+      "description": "Recibe a tus invitados con una experiencia musical elegante y cercana. Nuestro saxofonista profesional acompaña el cóctel con melodías especialmente seleccionadas, creando un ambiente agradable, romántico y entretenido, con interacción musical que transforma cada instante en un recuerdo especial.",
+      "image": "/images/amenizacion-coctel.webp",
+      "highlights": [
+        "Saxofón profesional en vivo",
+        "Recepción musical de invitados",
+        "Interacción con los asistentes",
+        "Repertorio romántico, pop y lounge",
+        "Ambientación musical personalizada"
+      ],
+      "paymentHref": "."
+    },
+    {
+      "slug": "amenizacion-cena",
+      "name": "Amenización de cena",
+      "description": "Disfruta de una cena acompañada por la sofisticación del saxofón en vivo. Una presentación musical cuidadosamente diseñada para complementar la celebración, creando una atmósfera cálida, romántica y distinguida sin interrumpir la conversación de los invitados.",
+      "image": "/images/amenizacion-cena.webp",
+      "highlights": [
+        "Saxofón profesional en vivo",
+        "Ambientación elegante durante la cena",
+        "Volumen adaptado al entorno",
+        "Selección musical personalizada",
+        "Repertorio romántico, jazz y clásicos"
+      ],
+      "paymentHref": "."
+    },
+    {
+      "slug": "amenizacion-coctel-y-cena",
+      "name": "Amenización de cóctel y cena",
+      "description": "Una experiencia musical completa que acompaña tu celebración desde la recepción hasta la cena. Comenzamos con melodías alegres y elegantes durante el cóctel, interactuando con los invitados, para luego dar paso a una ambientación más íntima y sofisticada durante la cena. Cada momento cuenta con una selección musical cuidadosamente adaptada.",
+      "image": "/images/amenizacion-coctel-cena.webp",
+      "highlights": [
+        "Musicalización de cóctel y cena",
+        "Saxofón profesional en vivo",
+        "Recepción e interacción con invitados",
+        "Repertorio adaptado a cada momento",
+        "Ambientación romántica y elegante",
+        "Coordinación musical del evento"
+      ],
+      "paymentHref": "."
+    }
+  ]
+}

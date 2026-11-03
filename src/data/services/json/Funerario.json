@@ -1,0 +1,61 @@
+{
+  "slug": "funerario",
+  "title": "Servicio Funerario",
+  "description": "Acompañamos a tus seres queridos en un momento de despedida con la solemnidad y el respeto que merecen. Nuestro saxofonista profesional interpreta melodías elegidas especialmente para la ocasión, creando un ambiente de paz y consuelo durante la ceremonia funeraria. Cada interpretación es cuidadosamente seleccionada para honrar la memoria del ser querido y brindar un espacio de reflexión y homenaje.",
+  "period": "Por Evento",
+  "features": [],
+  "subServices": [
+    {
+      "slug": "mascota",
+      "name": "Servicio Funerario para Mascotas",
+      "description": ".",
+      "image": ".",
+      "highlights": [],
+      "paymentHref": ".",
+      "detail": {
+        "sectionEyebrow": ".",
+        "sectionTitle": ".",
+        "sectionDescription": ".",
+        "finalEyebrow": ".",
+        "finalTitle": ".",
+        "ctaLabel": ".",
+        "imageAlt": "."
+      }
+    },
+    {
+      "slug": "seres-queridos",
+      "name": "Servicio Funerario para Seres Queridos",
+      "description": ".",
+      "image": ".",
+      "highlights": [],
+      "paymentHref": ".",
+      "detail": {
+        "sectionEyebrow": ".",
+        "sectionTitle": ".",
+        "sectionDescription": ".",
+        "finalEyebrow": ".",
+        "finalTitle": ".",
+        "ctaLabel": ".",
+        "imageAlt": "."
+      }
+    }
+  ],
+  "detail": {
+    "intro": "Una interpretación musical respetuosa para acompañar una despedida y honrar la memoria de quien ya no está.",
+    "objectiveEyebrow": "Un homenaje musical",
+    "objectiveTitle": "Música para acompañar un momento importante.",
+    "objective": "Crear un espacio de paz, reflexión y consuelo mediante melodías interpretadas con solemnidad y respeto.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una presentación respetuosa.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Coordinamos cada detalle con cuidado.",
+    "deliverables": ["Saxofón profesional en vivo", "Melodías elegidas para la ocasión", "Coordinación con la ceremonia", "Interpretación solemne y respetuosa"],
+    "process": ["Conversación para conocer la ceremonia", "Selección de las melodías", "Coordinación del horario y lugar", "Presentación musical en vivo"],
+    "idealFor": ["Ceremonias funerarias", "Homenajes de despedida", "Familias que desean recordar con música"],
+    "finalEyebrow": "¿Necesitas coordinar este homenaje?",
+    "finalTitle": "Estamos disponibles para acompañarte.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

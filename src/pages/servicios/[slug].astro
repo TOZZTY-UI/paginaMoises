@@ -1,24 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { services } from "../../data/services/ts/services";
-import { serviceDetails, type ServiceDetail } from "../../data/services/ts/details";
 import ButtonCTA from '../../components/ButtonCTA.astro';
 
 type Props = {
   title: string;
   description: string;
   service: (typeof services)[number];
-  detail: ServiceDetail;
-};
-
-const fallbackDetail: ServiceDetail = {
-  intro: 'Una propuesta pensada para ayudarte a llevar tu proyecto al siguiente nivel.',
-  objective: 'Entender tus necesidades y construir una solución clara, útil y personalizada.',
-  deliverables: [],
-  process: [],
-  idealFor: [],
-  ctaLabel: 'Hablar sobre mi proyecto',
-  ctaHref: '/contacto',
 };
 
 export function getStaticPaths() {
@@ -28,12 +16,29 @@ export function getStaticPaths() {
       title: service.title,
       description: service.description,
       service,
-      detail: serviceDetails[service.slug] ?? fallbackDetail,
     },
   }));
 }
 
-const { title, description, service, detail } = Astro.props as Props;
+const { title, description, service } = Astro.props as Props;
+const detail = service.detail ?? {
+  intro: service.description,
+  objectiveEyebrow: 'Sobre este servicio',
+  objectiveTitle: service.title,
+  objective: service.description,
+  idealForTitle: 'Ideal para',
+  deliverablesEyebrow: 'Qué incluye',
+  deliverablesTitle: 'Una propuesta a tu medida.',
+  processEyebrow: 'Cómo trabajaremos',
+  processTitle: 'Coordinamos cada detalle.',
+  deliverables: service.features,
+  process: [],
+  idealFor: [],
+  finalEyebrow: 'Consulta disponibilidad',
+  finalTitle: 'Da el siguiente paso.',
+  ctaLabel: 'Consultar disponibilidad',
+  ctaHref: '/contacto',
+};
 ---
 
 <BaseLayout title={`${title} | SaxEventos`} description={description}
@@ -52,21 +57,21 @@ const { title, description, service, detail } = Astro.props as Props;
       <aside class="service-detail__summary" aria-label={`Resumen de ${service.title}`}>
         <p class="service-detail__summary-label">Desde</p>
         <strong>{service.price ? `$ ${service.price}` : 'Consultar'}</strong>
-        <span>por proyecto</span>
+        <span>{service.period ?? 'Por proyecto'}</span>
         <p>{service.description}</p>
       </aside>
     </div>
 
     <section class="service-detail__body" aria-labelledby="service-objective-title">
       <div>
-        <p class="service-detail__eyebrow">El objetivo</p>
-        <h2 id="service-objective-title">Una solución pensada para tu proyecto.</h2>
+        <p class="service-detail__eyebrow">{detail.objectiveEyebrow}</p>
+        <h2 id="service-objective-title">{detail.objectiveTitle}</h2>
       </div>
       <div class="service-detail__content">
         <p>{detail.objective}</p>
         {detail.idealFor.length > 0 && (
           <>
-            <h3>Ideal para</h3>
+            <h3>{detail.idealForTitle}</h3>
             <ul class="service-detail__highlights">
               {detail.idealFor.map((item) => <li>{item}</li>)}
             </ul>
@@ -77,16 +82,16 @@ const { title, description, service, detail } = Astro.props as Props;
 
     <div class="service-detail__columns">
       <section aria-labelledby="service-deliverables-title">
-        <p class="service-detail__eyebrow">Qué incluye</p>
-        <h2 id="service-deliverables-title">Lo que recibirás.</h2>
+        <p class="service-detail__eyebrow">{detail.deliverablesEyebrow}</p>
+        <h2 id="service-deliverables-title">{detail.deliverablesTitle}</h2>
         <ul class="service-detail__highlights">
           {detail.deliverables.map((item) => <li>{item}</li>)}
         </ul>
       </section>
 
       <section aria-labelledby="service-process-title">
-        <p class="service-detail__eyebrow">Cómo trabajaremos</p>
-        <h2 id="service-process-title">Un proceso claro.</h2>
+        <p class="service-detail__eyebrow">{detail.processEyebrow}</p>
+        <h2 id="service-process-title">{detail.processTitle}</h2>
         <ol class="service-detail__process">
           {detail.process.map((step) => <li>{step}</li>)}
         </ol>
@@ -94,8 +99,8 @@ const { title, description, service, detail } = Astro.props as Props;
     </div>
 
     <section class="service-detail__final-cta" aria-label="Solicitar información">
-      <p class="service-detail__eyebrow">¿Hablamos de tu proyecto?</p>
-      <h2>Da el siguiente paso.</h2>
+      <p class="service-detail__eyebrow">{detail.finalEyebrow}</p>
+      <h2>{detail.finalTitle}</h2>
       <ButtonCTA href={detail.ctaHref} name={detail.ctaLabel} className="service-detail__cta" />
     </section>
   </article>
