@@ -11,6 +11,11 @@ import SliderLogos from '../components/SliderLogos.astro';
   </div>
 
   <div class="companies-logos" aria-label="Empresas y organizaciones que han confiado en Moisés">
+    <div class="companies-proof">
+      <h3>Empresas que han confiado en mi trabajo</h3>
+      <p>He tenido la oportunidad de acompañar celebraciones y eventos de organizaciones que buscan una experiencia musical cercana, profesional y memorable.</p>
+    </div>
+
     <SliderLogos
       logos={[
         { src: 'https://www.metro.cl/images/logo.png', alt: 'Metro S.A.' },
@@ -53,7 +58,7 @@ import SliderLogos from '../components/SliderLogos.astro';
     margin: 0;
     color: var(--color-text);
     font-size: clamp(2.7rem, 6vw, 6rem);
-    letter-spacing: -.07em;
+    letter-spacing: -.035em;
   }
 
   .companies-copy .intro-text {
@@ -67,6 +72,28 @@ import SliderLogos from '../components/SliderLogos.astro';
     border-block: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   }
 
+  .companies-proof {
+    display: grid;
+    grid-template-columns: minmax(12rem, .8fr) minmax(0, 1.2fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 2.5rem;
+  }
+
+  .companies-proof h3 {
+    max-width: 18ch;
+    margin: 0;
+    color: var(--color-text);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+  }
+
+  .companies-proof p {
+    max-width: 34rem;
+    margin: 0;
+  }
+
   @media (max-width: 760px) {
     .companies-heading {
       grid-template-columns: 1fr;
@@ -75,6 +102,12 @@ import SliderLogos from '../components/SliderLogos.astro';
 
     .companies-heading .section-index {
       margin-top: 0;
+    }
+
+    .companies-proof {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
   }
 </style>

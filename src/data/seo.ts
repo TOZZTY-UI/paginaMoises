@@ -5,31 +5,31 @@ export const seo = {
     description: 'Música de saxofón en vivo para matrimonios, celebraciones y eventos en Chile.',
   },
   servicios: {
-    title: 'Servicios | SaxEventos',
-    description: 'Conoce los servicios disponibles de SaxEventos.',
+    title: 'Servicios de saxofón para eventos | SaxEventos',
+    description: 'Descubre experiencias de saxofón en vivo para matrimonios, celebraciones y eventos de empresa en Chile.',
   },
   sobreMi: {
     title: 'Sobre mí | SaxEventos',
-    description: 'Conoce más sobre Moisés y SaxEventos.',
+    description: 'Conoce a Moisés Larenas, saxofonista para matrimonios, celebraciones y eventos en Chile.',
   },
   contacto: {
     title: 'Contacto | SaxEventos',
-    description: 'Contacta con SaxEventos para consultar por música en vivo para tu evento.',
+    description: 'Contacta a SaxEventos y cotiza música de saxofón en vivo para tu matrimonio, celebración o evento en Chile.',
   },
   galeria: {
     title: 'Galería | SaxEventos',
-    description: 'Explora fotografías de presentaciones y eventos de SaxEventos.',
+    description: 'Mira fotografías de presentaciones de saxofón en vivo en matrimonios, celebraciones y eventos de SaxEventos.',
   },
   faq: {
     title: 'Preguntas frecuentes | SaxEventos',
-    description: 'Encuentra respuestas a preguntas frecuentes sobre SaxEventos.',
+    description: 'Resuelve tus dudas sobre reservas, repertorio y presentaciones de saxofón en vivo con SaxEventos.',
   },
   terminos: {
     title: 'Términos y condiciones | SaxEventos',
     description: 'Consulta los términos y condiciones de SaxEventos.',
   },  repertorio: {
     title: 'Repertorio Musical | SaxEventos',
-    description: 'Explora nuestro repertorio musical para eventos.',
+    description: 'Explora el repertorio musical de SaxEventos para ambientar matrimonios, celebraciones y eventos en Chile.',
   }
 } as const;
 

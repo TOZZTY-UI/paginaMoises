@@ -9,12 +9,13 @@ import { seo, type SEOPage } from '../data/seo';
 type Props = {
   showFooter?: boolean;
   image?: string;
+  noIndex?: boolean;
 } & (
   | { page: SEOPage; title?: string; description?: string }
   | { page?: never; title: string; description: string }
 );
 
-const { page, title, description, image, showFooter = true } = Astro.props;
+const { page, title, description, image, noIndex = false, showFooter = true } = Astro.props;
 const seoData = page ? seo[page] : undefined;
 const pageTitle = title ?? seoData?.title ?? '';
 const pageDescription = description ?? seoData?.description ?? '';
@@ -25,8 +26,8 @@ const pageDescription = description ?? seoData?.description ?? '';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/webp" href="/logo.webp" />
-    <SEO title={pageTitle} description={pageDescription} image={image} />
+    <link rel="icon" type="image/webp" href="/icons/logo.webp" />
+    <SEO title={pageTitle} description={pageDescription} image={image} noIndex={noIndex} />
     <slot name="head" />
   </head>
   <body>

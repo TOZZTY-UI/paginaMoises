@@ -30,7 +30,8 @@
   --color-accent: var(--color-primary);
   --color-accent-strong: var(--color-primary-hover);
   --font-body: 'DM Sans', Arial, sans-serif;
-  --font-display: 'Space Grotesk', Arial, sans-serif;
+  --font-display: 'Libre Baskerville', Georgia, serif;
+  --font-accent: 'Poiret One', sans-serif;
   --container: 1180px;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;

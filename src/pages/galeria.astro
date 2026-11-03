@@ -17,7 +17,7 @@ const categoryAlt: Record<string, string> = {
 };
 const galleryImages = Object.entries(images).flatMap(([category, items]) => items.flatMap((item) => {
   const src = imageFiles[item.src.replace(/^src\//, '../')]?.default;
-  return src ? [{ ...item, src, alt: categoryAlt[category] }] : [];
+  return src ? [{ ...item, src, alt: `${categoryAlt[category]} de SaxEventos` }] : [];
 }));
 const cards = galleryImages.map((item, index) => {
   const angle = index * 137.5 * Math.PI / 180;

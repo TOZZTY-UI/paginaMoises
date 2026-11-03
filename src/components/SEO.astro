@@ -3,12 +3,15 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  noIndex?: boolean;
 }
 
-const { title, description, image = '/logo.webp' } = Astro.props;
+const { title, description, image = '/icons/logo.webp', noIndex = false } = Astro.props;
 const site = Astro.site ?? new URL('https://saxeventos.cl');
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
+const logoUrl = new URL('/icons/logo.webp', site).href;
+const robots = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -18,7 +21,7 @@ const structuredData = {
       '@id': `${site.href}#business`,
       name: 'SaxEventos',
       url: site.href,
-      logo: imageUrl,
+       logo: logoUrl,
       image: imageUrl,
       description,
       telephone: '+56 9 4925 1898',
@@ -34,14 +37,27 @@ const structuredData = {
       inLanguage: 'es-CL',
       publisher: { '@id': `${site.href}#business` },
     },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: 'es-CL',
+      isPartOf: { '@id': `${site.href}#website` },
+    },
   ],
 };
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="robots" content={robots} />
+<meta name="author" content="Moisés Larenas" />
+<meta name="theme-color" content="#171313" />
 <link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="es-CL" href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_CL" />
@@ -50,10 +66,12 @@ const structuredData = {
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={`SaxEventos — ${title}`} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={`SaxEventos — ${title}`} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

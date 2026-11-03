@@ -2,7 +2,7 @@
 import heroImage from '../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e.png';
 ---
 
-<section class="hero" aria-labelledby="hero-title">
+<section class="hero" aria-labelledby="hero-title" style={`--hero-background: url('${heroImage.src}')`}>
   <div class="hero__content">
     <a class="hero__brand" href="/" aria-label="Saxeventos, inicio">
       <img src="/icons/logo.webp" alt="" width="44" height="44" />
@@ -77,7 +77,7 @@ import heroImage from '../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e
   .hero__message { max-width: 38rem; margin-block: auto; padding-block: clamp(4rem, 8vw, 8rem); }
   .hero__eyebrow { margin-bottom: 1.5rem; color: var(--dorado); font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; animation: hero-content-in .65s .25s cubic-bezier(.4, 0, .2, 1) both; }
   .hero h1 { max-width: 9ch; color: var(--marfil); font-size: clamp(3.8rem, 7.5vw, 7.6rem); line-height: .91; letter-spacing: -.085em; animation: hero-content-in .7s .32s cubic-bezier(.4, 0, .2, 1) both; }
-  .hero h1 em { color: var(--dorado); font-family: Georgia, serif; font-weight: 400; letter-spacing: -.08em; }
+  .hero h1 em { color: var(--dorado); font-family: var(--font-accent); font-weight: 400; letter-spacing: 0; }
   .hero__rule { display: block; width: 5rem; height: 3px; margin-block: 2rem 1.6rem; background: var(--dorado); animation: hero-rule-in .55s .43s cubic-bezier(.4, 0, .2, 1) both; }
   .hero__intro { max-width: 31rem; color: var(--gris); font-size: 1.05rem; line-height: 1.6; animation: hero-content-in .6s .48s cubic-bezier(.4, 0, .2, 1) both; }
   .hero__cta { display: inline-flex; align-items: center; gap: .65rem; margin-top: 2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--dorado); color: var(--marfil); font-weight: 700; animation: hero-content-in .6s .56s cubic-bezier(.4, 0, .2, 1) both; }
@@ -96,6 +96,7 @@ import heroImage from '../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e
   @keyframes hero-rule-in { from { opacity: 0; transform: scaleX(0); transform-origin: left; } to { opacity: 1; transform: scaleX(1); transform-origin: left; } }
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero::before { position: absolute; inset: 0; z-index: 0; content: ''; background-image: linear-gradient(color-mix(in srgb, var(--negro) 88%, transparent), color-mix(in srgb, var(--negro) 88%, transparent)), var(--hero-background); background-position: 61% 25%; background-size: cover; opacity: .5; pointer-events: none; }
     .hero__content { min-height: 100svh; padding-bottom: 3.5rem; }
     .hero__message { padding-block: 3rem 2rem; }
     .hero h1 { font-size: clamp(3.35rem, 14vw, 5.2rem); }
@@ -107,8 +108,7 @@ import heroImage from '../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e
     .hero__scroll-cue i::after { position: absolute; top: .25rem; left: .43rem; width: .32rem; height: .32rem; border-right: 2px solid var(--dorado); border-bottom: 2px solid var(--dorado); content: ''; transform: rotate(45deg); }
     .hero__scroll-cue:hover { color: var(--dorado); }
     .hero__scroll-cue i { animation: scroll-cue-bounce 1.6s ease-in-out infinite; }
-    .hero__visual { position: relative; inset: auto; z-index: auto; min-height: 32rem; clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%); animation: hero-image-reveal-mobile .75s cubic-bezier(.4, 0, .2, 1) both; }
-    .hero__visual img { object-position: 62% 30%; }
+    .hero__visual { display: none; }
   }
   @keyframes hero-image-reveal-mobile { from { opacity: 0; transform: translateY(7%); clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%); } to { opacity: 1; transform: translateY(0); clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%); } }
   @keyframes scroll-cue-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }

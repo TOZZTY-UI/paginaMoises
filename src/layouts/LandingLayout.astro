@@ -9,9 +9,10 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  noIndex?: boolean;
 }
 
-const { page, title, description, image } = Astro.props;
+const { page, title, description, image, noIndex = false } = Astro.props;
 const seoData = seo[page];
 ---
 
@@ -21,8 +22,8 @@ const seoData = seo[page];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/webp" href="/logo.webp" />
-    <SEO title={title ?? seoData.title} description={description ?? seoData.description} image={image} />
+    <link rel="icon" type="image/webp" href="/icons/logo.webp" />
+    <SEO title={title ?? seoData.title} description={description ?? seoData.description} image={image} noIndex={noIndex} />
     <slot name="head" />
   </head>
   <body>
