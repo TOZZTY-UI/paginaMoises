@@ -1,8 +1,14 @@
-import estrategia from '../json/estrategia.json';
-import Entrada_Y_Salida_Novios from '../json/Entrada_Y_Salida_Novios.json';
 import Amenizacion from '../json/Amenizacion.json';
 import Cumpleanos from '../json/Cumpleanos.json';
 import Funerario from '../json/Funerario.json';
+import Celebraciones_Privadas from '../json/Celebraciones_Privadas.json';
+import Conmemoraciones from '../json/Conmemoraciones.json';
+import Eventos_Empresariales from '../json/Eventos_Empresariales.json';
+import Hoteles from '../json/Hoteles.json';
+import Supermercados from '../json/Supermercados.json';
+import Bautizos_Y_Presentaciones from '../json/Bautizos_Y_Presentaciones.json';
+import Bodas from '../json/Bodas.json';
+import Espectaculos_Visuales from '../json/Espectaculos_Visuales.json';
 
 
 export type ServiceDetail = {
@@ -57,9 +63,15 @@ export type Service = {
 };
 
 export const services: Service[] = [
-  estrategia,
-  Entrada_Y_Salida_Novios,
   Amenizacion,
+  Bodas,
+  Funerario,
   Cumpleanos,
-  Funerario
+  Celebraciones_Privadas,
+  Conmemoraciones,
+  Eventos_Empresariales,
+  Hoteles,
+  Supermercados,
+  Bautizos_Y_Presentaciones,
+  Espectaculos_Visuales
 ];

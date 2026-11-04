@@ -1,0 +1,25 @@
+{
+  "slug": "hoteles",
+  "title": "Hoteles",
+  "description": "Saxofón en vivo para recepciones, restaurantes y experiencias de hospitalidad.",
+  "period": "Por evento",
+  "features": ["Música ambiental", "Jazz, bossa nova y clásicos", "Programación según el espacio"],
+  "detail": {
+    "intro": "Ambientes memorables para recibir y acompañar a tus huéspedes.",
+    "objectiveEyebrow": "Experiencias de hospitalidad",
+    "objectiveTitle": "Música que transforma cada espacio.",
+    "objective": "Diseñamos una ambientación musical elegante que complementa la experiencia de tus huéspedes sin interrumpirla.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una atmósfera cuidada.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Adaptamos la música a tu espacio.",
+    "deliverables": ["Música ambiental", "Jazz, bossa nova y clásicos", "Programación según el espacio"],
+    "process": ["Conocer el espacio y la experiencia buscada", "Definir horarios y formato", "Seleccionar el repertorio", "Presentación musical"],
+    "idealFor": ["Recepciones", "Restaurantes", "Eventos de hotel", "Experiencias para huéspedes"],
+    "finalEyebrow": "¿Quieres elevar la experiencia de tus huéspedes?",
+    "finalTitle": "Creamos ambientes que se recuerdan.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "slug": "espectaculos-visuales",
+  "title": "Espectáculos visuales",
+  "description": "Experiencias de música, luces y efectos especiales para sorprender a tus invitados y transformar tu celebración.",
+  "period": "Por evento",
+  "features": [
+    "Puestas en escena llamativas",
+    "Música y efectos visuales",
+    "Coordinación técnica previa",
+    "Experiencias adaptadas al evento"
+  ],
+  "subServices": [
+    {
+      "slug": "saxofon-led",
+      "name": "Saxofón LED",
+      "description": "Una experiencia musical en vivo con saxofón iluminado mediante tecnología LED. Ideal para sorprender a tus invitados con una puesta en escena moderna.",
+      "image": "/icons/logo.webp",
+      "highlights": ["Saxofón en vivo", "Iluminación LED en el instrumento", "Repertorio adaptado al evento"],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Una experiencia visual",
+        "sectionTitle": "El saxofón como parte del espectáculo.",
+        "sectionDescription": "Combinamos la interpretación en vivo con iluminación LED para crear un momento llamativo y memorable.",
+        "finalEyebrow": "¿Quieres sorprender a tus invitados?",
+        "finalTitle": "Llevemos una experiencia luminosa a tu evento.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofón iluminado con tecnología LED"
+      }
+    },
+    {
+      "slug": "saxofon-chispa-fria",
+      "name": "Saxofón con chispa fría",
+      "description": "Un show de saxofón acompañado de un impactante efecto visual de chispa fría para momentos especiales.",
+      "image": "/icons/logo.webp",
+      "highlights": ["Saxofón en vivo", "Efecto de chispa fría", "Coordinación técnica previa"],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Un momento espectacular",
+        "sectionTitle": "Música en vivo con un cierre impactante.",
+        "sectionDescription": "Integramos el saxofón en vivo con un efecto de chispa fría, coordinado de forma segura para sorprender a tus invitados.",
+        "finalEyebrow": "¿Tienes un momento especial en mente?",
+        "finalTitle": "Hagámoslo inolvidable.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofonista durante un espectáculo con chispa fría"
+      }
+    },
+    {
+      "slug": "saxofon-led-chispa-fria",
+      "name": "Saxofón LED + chispa fría",
+      "description": "Una combinación premium de música en directo, luces LED y efectos de chispa fría.",
+      "image": "/icons/logo.webp",
+      "highlights": ["Saxofón en vivo", "Saxofón iluminado con LED", "Efecto de chispa fría"],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Una experiencia premium",
+        "sectionTitle": "Tres elementos para un momento extraordinario.",
+        "sectionDescription": "Unimos la energía del saxofón en vivo, la iluminación LED y la chispa fría en una presentación diseñada para sorprender.",
+        "finalEyebrow": "¿Buscas una experiencia que todos recuerden?",
+        "finalTitle": "Llevemos el espectáculo a tu celebración.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofón LED acompañado de chispa fría"
+      }
+    },
+    {
+      "slug": "bailarina-zancolet-led",
+      "name": "Bailarina Zancolet LED",
+      "description": "Espectáculo visual con bailarina Zancolet LED para aportar altura, movimiento y luces a tu celebración.",
+      "image": "/icons/logo.webp",
+      "highlights": ["Bailarina Zancolet LED", "Puesta en escena luminosa", "Coordinación con el evento"],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Un espectáculo visual",
+        "sectionTitle": "Movimiento y luces para transformar el espacio.",
+        "sectionDescription": "La bailarina Zancolet LED convierte la llegada o el momento central de tu evento en una experiencia visual inolvidable.",
+        "finalEyebrow": "¿Quieres darle otra dimensión a tu evento?",
+        "finalTitle": "Creamos una entrada que nadie olvida.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Bailarina Zancolet con vestuario LED"
+      }
+    }
+  ]
+}

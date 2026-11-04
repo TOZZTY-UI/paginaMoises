@@ -1,0 +1,25 @@
+{
+  "slug": "celebraciones-privadas",
+  "title": "Celebraciones privadas",
+  "description": "Acompañamiento musical para aniversarios, cenas y reuniones privadas.",
+  "period": "Por evento",
+  "features": ["Saxofón en vivo", "Repertorio según el ambiente", "Coordinación con anfitriones"],
+  "detail": {
+    "intro": "Momentos únicos y cercanos acompañados por música en vivo.",
+    "objectiveEyebrow": "Una celebración especial",
+    "objectiveTitle": "Música para compartir momentos únicos.",
+    "objective": "Creamos una ambientación musical cercana y elegante, adaptada al tono de tu celebración.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una experiencia personalizada.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Coordinamos cada detalle.",
+    "deliverables": ["Saxofón en vivo", "Repertorio según el ambiente", "Coordinación con anfitriones"],
+    "process": ["Conversación sobre la celebración", "Selección del repertorio", "Coordinación del horario y lugar", "Presentación musical"],
+    "idealFor": ["Aniversarios", "Cenas especiales", "Reuniones privadas"],
+    "finalEyebrow": "¿Tienes una celebración en mente?",
+    "finalTitle": "Hagamos de tu encuentro un momento memorable.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

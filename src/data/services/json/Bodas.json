@@ -1,0 +1,102 @@
+{
+  "slug": "bodas",
+  "title": "Bodas",
+  "description": "Experiencias musicales personalizadas para acompañar ceremonias, aniversarios y celebraciones de amor.",
+  "period": "Por evento",
+  "featured": true,
+  "features": [
+    "Saxofón en vivo",
+    "Repertorio personalizado",
+    "Acompañamiento de momentos especiales",
+    "Coordinación con la pareja y el evento"
+  ],
+  "subServices": [
+    {
+      "slug": "bodas-cristianas",
+      "name": "Bodas cristianas",
+      "description": "Saxofón en vivo para momentos de la ceremonia, respetando el programa y las preferencias de la pareja.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Entrada y salida",
+        "Momentos especiales",
+        "Repertorio acordado con los novios"
+      ],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "La ceremonia",
+        "sectionTitle": "Un acompañamiento musical significativo.",
+        "sectionDescription": "Interpretamos las melodías elegidas por la pareja, respetando el programa y el carácter de la ceremonia cristiana.",
+        "finalEyebrow": "¿Hablamos de tu ceremonia?",
+        "finalTitle": "Haz que cada momento tenga su propia música.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Acompañamiento musical para una boda cristiana"
+      }
+    },
+    {
+      "slug": "bodas-de-oro",
+      "name": "Bodas de oro",
+      "description": "Melodías emotivas para conmemorar cincuenta años de matrimonio.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Canciones significativas",
+        "Homenaje a la pareja",
+        "Ambientación de la celebración"
+      ],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Cincuenta años juntos",
+        "sectionTitle": "Un homenaje a una historia de amor.",
+        "sectionDescription": "Creamos un acompañamiento musical emotivo para celebrar los recuerdos y la trayectoria de la pareja.",
+        "finalEyebrow": "¿Quieres celebrar esta historia?",
+        "finalTitle": "Hagamos música con sus recuerdos.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Celebración de bodas de oro"
+      }
+    },
+    {
+      "slug": "bodas-de-plata",
+      "name": "Bodas de plata",
+      "description": "Música romántica para una celebración llena de recuerdos.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Repertorio personalizado",
+        "Momentos de homenaje",
+        "Saxofón en vivo"
+      ],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Veinticinco años juntos",
+        "sectionTitle": "Una celebración para recordar.",
+        "sectionDescription": "Acompañamos este aniversario con un repertorio romántico y personalizado para honrar la historia de la pareja.",
+        "finalEyebrow": "¿Quieres celebrar sus veinticinco años?",
+        "finalTitle": "Acompañemos este aniversario con música.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Celebración de bodas de plata"
+      }
+    },
+    {
+      "slug": "entrada-salida-novios",
+      "name": "Entrada y salida de novios",
+      "description": "Haz de tu ceremonia civil o religiosa un momento inolvidable con la emoción del saxofón en vivo. Acompañamos la entrada del novio, la entrada de la novia, los pajes o intercambio de argollas y la salida de los recién casados. Cada melodía puede ser elegida por ustedes, creando una ceremonia única y personalizada.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Entrada del novio y de la novia",
+        "Pajes o intercambio de argollas",
+        "Salida de los recién casados",
+        "Canciones a elección de los novios",
+        "Ceremonias civiles y religiosas"
+      ],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "La ceremonia",
+        "sectionTitle": "Un momento único para recordar.",
+        "sectionDescription": "Acompañamos cada entrada y salida con una interpretación musical emotiva, elegante y personalizada.",
+        "finalEyebrow": "¿Hablamos de tu ceremonia?",
+        "finalTitle": "Haz que cada entrada tenga su propia música.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofón en la entrada y salida de una ceremonia"
+      }
+    }
+
+  ]
+}

@@ -16,5 +16,9 @@ export default defineConfig({
     },
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/pago/'),
+    }),
+  ],
 });

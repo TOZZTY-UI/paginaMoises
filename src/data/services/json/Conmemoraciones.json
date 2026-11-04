@@ -1,0 +1,25 @@
+{
+  "slug": "conmemoraciones",
+  "title": "Conmemoraciones",
+  "description": "Música para homenajes, aniversarios y celebraciones significativas.",
+  "period": "Por evento",
+  "features": ["Selección musical especial", "Acompañamiento de momentos clave", "Presentación respetuosa y personalizada"],
+  "detail": {
+    "intro": "Recuerdos que emocionan a través de una interpretación musical significativa.",
+    "objectiveEyebrow": "Un homenaje especial",
+    "objectiveTitle": "Música para recordar y celebrar.",
+    "objective": "Acompañamos tus momentos de homenaje con melodías elegidas especialmente para la ocasión.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Un homenaje hecho a medida.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Cuidamos el significado de cada momento.",
+    "deliverables": ["Selección musical especial", "Acompañamiento de momentos clave", "Presentación respetuosa y personalizada"],
+    "process": ["Conversación para conocer el homenaje", "Selección de las melodías", "Coordinación de los momentos", "Interpretación en vivo"],
+    "idealFor": ["Homenajes", "Aniversarios", "Celebraciones significativas"],
+    "finalEyebrow": "¿Quieres rendir un homenaje?",
+    "finalTitle": "Acompañamos tu recuerdo con música.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

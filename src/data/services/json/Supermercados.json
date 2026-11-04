@@ -1,0 +1,25 @@
+{
+  "slug": "supermercados",
+  "title": "Supermercados",
+  "description": "Activaciones musicales para conectar con los clientes y enriquecer su visita.",
+  "period": "Por evento",
+  "features": ["Musicalización en vivo", "Repertorio familiar y versátil", "Coordinación con la sucursal"],
+  "detail": {
+    "intro": "Una experiencia de compra diferente, cercana y memorable.",
+    "objectiveEyebrow": "Una experiencia diferente",
+    "objectiveTitle": "Música en vivo para conectar con tus clientes.",
+    "objective": "Acompañamos activaciones y fechas especiales con un repertorio versátil que enriquece la visita al local.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una activación que conecta.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Coordinamos la experiencia con tu sucursal.",
+    "deliverables": ["Musicalización en vivo", "Repertorio familiar y versátil", "Coordinación con la sucursal"],
+    "process": ["Conocer la activación", "Definir horarios y ubicación", "Seleccionar el repertorio", "Presentación musical"],
+    "idealFor": ["Activaciones comerciales", "Fechas especiales", "Inauguraciones de sucursales"],
+    "finalEyebrow": "¿Quieres sorprender a tus clientes?",
+    "finalTitle": "Llevemos música a tu próxima activación.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

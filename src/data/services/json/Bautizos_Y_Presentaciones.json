@@ -1,0 +1,25 @@
+{
+  "slug": "bautizos-y-presentaciones",
+  "title": "Bautizos y presentaciones",
+  "description": "Acompañamiento musical delicado para ceremonias y encuentros familiares.",
+  "period": "Por evento",
+  "features": ["Música para la ceremonia", "Recepción familiar", "Canciones a elección"],
+  "detail": {
+    "intro": "Música para celebrar en familia los primeros momentos importantes.",
+    "objectiveEyebrow": "Una celebración familiar",
+    "objectiveTitle": "Melodías para acompañar un día especial.",
+    "objective": "Aportamos una interpretación delicada y emotiva para ceremonias, recepciones y presentaciones familiares.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una celebración cercana.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Preparamos cada momento con cuidado.",
+    "deliverables": ["Música para la ceremonia", "Recepción familiar", "Canciones a elección"],
+    "process": ["Conocer la ceremonia", "Elegir las canciones", "Coordinar los momentos", "Presentación en vivo"],
+    "idealFor": ["Bautizos", "Presentaciones familiares", "Ceremonias religiosas"],
+    "finalEyebrow": "¿Estás preparando una celebración familiar?",
+    "finalTitle": "Acompañémosla con música.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}

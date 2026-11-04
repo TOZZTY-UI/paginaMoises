@@ -1,0 +1,25 @@
+{
+  "slug": "eventos-empresariales",
+  "title": "Eventos empresariales",
+  "description": "Música en vivo para recepciones, inauguraciones, lanzamientos y cenas corporativas.",
+  "period": "Por evento",
+  "features": ["Recepciones y cócteles", "Repertorio adaptable", "Coordinación con producción"],
+  "detail": {
+    "intro": "Una experiencia musical que distingue tu marca y conecta con tus invitados.",
+    "objectiveEyebrow": "Una experiencia que distingue",
+    "objectiveTitle": "Música en vivo para eventos corporativos.",
+    "objective": "Aportamos una presencia musical profesional y adaptable a la identidad, ritmo y objetivos de tu evento.",
+    "idealForTitle": "Ideal para",
+    "deliverablesEyebrow": "Qué incluye",
+    "deliverablesTitle": "Una propuesta profesional.",
+    "processEyebrow": "Cómo trabajaremos",
+    "processTitle": "Nos coordinamos con tu equipo.",
+    "deliverables": ["Recepciones y cócteles", "Repertorio adaptable", "Coordinación con producción"],
+    "process": ["Revisión del programa", "Definición del repertorio", "Coordinación técnica y logística", "Presentación en vivo"],
+    "idealFor": ["Inauguraciones", "Lanzamientos", "Cenas corporativas", "Eventos de empresa"],
+    "finalEyebrow": "¿Estás organizando un evento?",
+    "finalTitle": "Hagamos que tu evento se diferencie.",
+    "ctaLabel": "Consultar disponibilidad",
+    "ctaHref": "/contacto"
+  }
+}
