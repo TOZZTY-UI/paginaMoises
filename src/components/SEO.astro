@@ -12,6 +12,7 @@ const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
 const logoUrl = new URL('/icons/logo.webp', site).href;
 const robots = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const imageType = imageUrl.endsWith('.png') ? 'image/png' : imageUrl.endsWith('.jpg') || imageUrl.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -21,11 +22,20 @@ const structuredData = {
       '@id': `${site.href}#business`,
       name: 'SaxEventos',
       url: site.href,
-       logo: logoUrl,
-      image: imageUrl,
-      description,
-      telephone: '+56 9 4925 1898',
-      email: 'saxoeventos@outlook.com',
+      logo: logoUrl,
+       image: imageUrl,
+       description,
+       telephone: '+56 9 4925 1898',
+       email: 'saxoeventos@outlook.com',
+      priceRange: '$$',
+      serviceType: 'Música de saxofón en vivo para eventos',
+      knowsLanguage: 'es-CL',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+56 9 4925 1898',
+        contactType: 'customer service',
+        availableLanguage: 'Spanish',
+      },
       areaServed: { '@type': 'Country', name: 'Chile' },
       founder: { '@type': 'Person', name: 'Moisés Larenas' },
     },
@@ -67,11 +77,13 @@ const structuredData = {
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:alt" content={`SaxEventos — ${title}`} />
+<meta property="og:image:type" content={imageType} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:image:alt" content={`SaxEventos — ${title}`} />
+<meta name="twitter:url" content={canonical} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

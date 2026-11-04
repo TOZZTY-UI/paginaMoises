@@ -86,6 +86,17 @@ const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
   </article>
 </BaseLayout>
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: subService.name,
+  description: subService.description,
+  serviceType: 'Música de saxofón en vivo para eventos',
+  provider: { '@id': 'https://saxeventos.cl/#business' },
+  areaServed: { '@type': 'Country', name: 'Chile' },
+  url: new URL(Astro.url.pathname, Astro.site ?? 'https://saxeventos.cl').href,
+})} />
+
 <style>
   @import '../../../styles/components/service-detail.css';
 </style>
