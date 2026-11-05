@@ -1,4 +1,5 @@
-// Metadatos de las páginas.
+// Metadatos SEO de las páginas principales del sitio.
+// Se reutilizan para construir títulos y descripciones consistentes.
 export const seo = {
   home: {
     title: 'Saxofonista para matrimonios y eventos en todo Chile | SaxEventos',

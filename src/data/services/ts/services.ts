@@ -1,3 +1,7 @@
+// Catálogo de servicios disponibles en el sitio.
+// El contenido de cada servicio se mantiene en un archivo JSON independiente
+// y aquí se importan, tipan y agrupan todos los servicios.
+
 import Amenizacion from '../json/Amenizacion.json';
 import Cumpleanos from '../json/Cumpleanos.json';
 import Funerario from '../json/Funerario.json';
@@ -12,6 +16,7 @@ import Espectaculos_Visuales from '../json/Espectaculos_Visuales.json';
 
 
 export type ServiceDetail = {
+  // Contenido de la página general de un servicio.
   intro: string;
   objectiveEyebrow: string;
   objectiveTitle: string;
@@ -31,6 +36,7 @@ export type ServiceDetail = {
 };
 
 export type SubServiceDetail = {
+  // Contenido adicional de la página de un subservicio.
   sectionEyebrow: string;
   sectionTitle: string;
   sectionDescription: string;
@@ -41,6 +47,7 @@ export type SubServiceDetail = {
 };
 
 export type ServiceSubService = {
+  // Servicio específico asociado a una categoría principal.
   slug: string;
   name: string;
   description: string;
@@ -51,6 +58,7 @@ export type ServiceSubService = {
 };
 
 export type Service = {
+  // Estructura común de las categorías principales de servicios.
   slug: string;
   title: string;
   description: string;
@@ -63,6 +71,7 @@ export type Service = {
 };
 
 export const services: Service[] = [
+  // El orden de esta lista determina cómo aparecen los servicios en el sitio.
   Amenizacion,
   Bodas,
   Funerario,

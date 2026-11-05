@@ -1,4 +1,5 @@
-// Datos de navegación del sitio.
+// Catálogo de canciones que se muestran en el selector de repertorio.
+// Las canciones están agrupadas según el ambiente musical del evento.
 export const repertoire = [
   { artist: "bad bunny", link: "https://www.youtube.com/watch?v=Cr8K88UcO0s", album: "X 100PRE", song: "Tití Me Preguntó", imagen: "https://i.scdn.co/image/ab67616d00001e02519266cd05491a5b5bc22d1e" },];
 

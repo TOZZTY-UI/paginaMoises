@@ -1,3 +1,8 @@
+/* Datos de testimonios publicados en el sitio.
+Cada testimonio puede incluir identificador, nombre, rol, empresa,
+avatar, valoración, comentario, fecha e imagen.
+La información se organiza como una lista de objetos Testimonial.
+*/
 
 import type { Testimonial } from '../components/TestimonialsStack.astro';
 
