@@ -2,6 +2,7 @@
   "slug": "celebraciones-privadas",
   "title": "Celebraciones privadas",
   "description": "Acompañamiento musical para aniversarios, cenas y reuniones privadas.",
+  "price": "99.000",
   "period": "Por evento",
   "features": ["Saxofón en vivo", "Repertorio según el ambiente", "Coordinación con anfitriones"],
   "detail": {
@@ -20,6 +21,6 @@
     "finalEyebrow": "¿Tienes una celebración en mente?",
     "finalTitle": "Hagamos de tu encuentro un momento memorable.",
     "ctaLabel": "Consultar disponibilidad",
-    "ctaHref": "/contacto"
+    "ctaHref": "https://www.flow.cl/btn.php?token=eb6f47b21d2cfee8b8a9ec8951f656c5ecf8dd21"
   }
 }

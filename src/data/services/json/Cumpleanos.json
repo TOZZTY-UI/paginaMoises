@@ -2,7 +2,7 @@
   "slug": "cumpleanos",
   "title": "Cumpleaños",
   "description": "Haz de tu cumpleaños una experiencia inolvidable con una presentación cercana, dinámica y llena de música en vivo.",
-  "price": "119.990",
+  "price": "99.990",
   "period": "Por evento",
   "features": [
     "1 hora de saxofón en vivo",
@@ -28,6 +28,6 @@
     "finalEyebrow": "Consulta disponibilidad para tu fecha",
     "finalTitle": "Celebra con música en vivo.",
     "ctaLabel": "Consultar disponibilidad",
-    "ctaHref": "/contacto"
+    "ctaHref": "https://www.flow.cl/btn.php?token=a317a163a60b15f0ce1fe9870a595e8e0d321df6"
   }
 }

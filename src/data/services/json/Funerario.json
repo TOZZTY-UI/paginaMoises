@@ -3,49 +3,76 @@
   "title": "Servicio Funerario",
   "description": "Acompañamos a tus seres queridos en un momento de despedida con la solemnidad y el respeto que merecen. Nuestro saxofonista profesional interpreta melodías elegidas especialmente para la ocasión, creando un ambiente de paz y consuelo durante la ceremonia funeraria. Cada interpretación es cuidadosamente seleccionada para honrar la memoria del ser querido y brindar un espacio de reflexión y homenaje.",
   "period": "Por Evento",
-  "features": [],
+  "price": "44.990",
+  "features": [
+    "Saxofón en vivo para despedidas",
+    "Maestro de ceremonia",
+    "Repertorio elegido por la familia",
+    "Coordinación respetuosa de la ceremonia"
+  ],
   "subServices": [
     {
       "slug": "mascota",
       "name": "Servicio Funerario para Mascotas",
-      "description": ".",
-      "image": ".",
-      "highlights": [],
-      "paymentHref": ".",
+      "description": "Un acompañamiento musical respetuoso para despedir y honrar la memoria de una mascota querida.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Saxofón en vivo",
+        "Repertorio elegido por la familia",
+        "Acompañamiento respetuoso"
+      ],
+      "paymentHref": "/contacto",
       "detail": {
-        "sectionEyebrow": ".",
-        "sectionTitle": ".",
-        "sectionDescription": ".",
-        "finalEyebrow": ".",
-        "finalTitle": ".",
-        "ctaLabel": ".",
-        "imageAlt": "."
+        "sectionEyebrow": "Un homenaje para recordar",
+        "sectionTitle": "Una despedida llena de cariño.",
+        "sectionDescription": "Acompañamos a la familia con una interpretación musical elegida para honrar la historia compartida con su mascota.",
+        "finalEyebrow": "¿Necesitas coordinar esta despedida?",
+        "finalTitle": "Estamos disponibles para acompañarte.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Homenaje musical para una mascota"
       }
     },
     {
       "slug": "seres-queridos",
       "name": "Servicio Funerario para Seres Queridos",
-      "description": ".",
-      "image": ".",
-      "highlights": [],
-      "paymentHref": ".",
+      "description": "Música en vivo para acompañar una ceremonia de despedida con respeto, solemnidad y cercanía.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Saxofón en vivo",
+        "Melodías elegidas para la ocasión",
+        "Coordinación con la familia"
+      ],
+      "paymentHref": "/contacto",
       "detail": {
-        "sectionEyebrow": ".",
-        "sectionTitle": ".",
-        "sectionDescription": ".",
-        "finalEyebrow": ".",
-        "finalTitle": ".",
-        "ctaLabel": ".",
-        "imageAlt": "."
+        "sectionEyebrow": "Un homenaje musical",
+        "sectionTitle": "Melodías para acompañar la despedida.",
+        "sectionDescription": "Interpretamos las melodías escogidas por la familia para crear un espacio de paz y homenaje.",
+        "finalEyebrow": "¿Necesitas coordinar este homenaje?",
+        "finalTitle": "Estamos disponibles para acompañarte.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofonista interpretando en una ceremonia de despedida"
       }
+    },
+    {
+      "slug": "maestro-de-ceremonia-despedida-mascotas",
+      "name": "Maestro de ceremonia: despedida de mascotas",
+      "price": "44.990",
+      "description": "Conducción respetuosa y cercana para despedir a una mascota querida.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Conducción de la ceremonia",
+        "Coordinación de momentos y homenajes",
+        "Acompañamiento respetuoso para la familia"
+      ],
+      "paymentHref": "https://www.flow.cl/btn.php?token=acc8b9ce9943d12d524a3dc1c23146456dbba1f6"
     },
     {
       "slug": "maestro-de-ceremonias",
       "name": "Maestro de ceremonia",
       "subtitle": "Una despedida guiada con respeto",
       "description": "Conducción respetuosa de la ceremonia de despedida, coordinada con la familia.",
-      "price": 65000,
-      "image": ".",
+      "price": "65.000",
+      "image": "/icons/logo.webp",
       "highlights": [
         "Conducción de la ceremonia",
         "Coordinación de momentos y homenajes",
@@ -67,14 +94,14 @@
       "name": "Musicalización en vivo",
       "subtitle": "Un homenaje a través de la música",
       "description": "Interpretaciones de saxofón en vivo para acompañar los momentos de despedida.",
-      "price": 65000,
-      "image": ".",
+      "price": "59.990",
+      "image": "/icons/logo.webp",
       "highlights": [
         "Saxofón en vivo",
         "Repertorio acordado con la familia",
         "Acompañamiento musical del homenaje"
       ],
-      "paymentHref": "/contacto",
+      "paymentHref": "https://www.flow.cl/btn.php?token=vbb3bc0de5bbeedc1fd3954ea87cd49784fd5636",
       "detail": {
         "sectionEyebrow": "Un homenaje a través de la música",
         "sectionTitle": "Melodías para acompañar la despedida",
@@ -87,17 +114,17 @@
     },
     {
       "slug": "ceremonia-y-musicalizacion",
-      "name": "Ceremonia y musicalización",
+      "name": "Pack Completo: Musicalización + Maestro de ceremonia",
       "subtitle": "Servicio integral de despedida",
       "description": "Maestro de ceremonia y musicalización en vivo en un mismo servicio.",
-      "price": 120000,
-      "image": ".",
+      "price": "84.990",
+      "image": "/icons/logo.webp",
       "highlights": [
         "Maestro de ceremonia",
         "Saxofón en vivo",
         "Coordinación de ambos servicios"
       ],
-      "paymentHref": "/contacto",
+      "paymentHref": "https://www.flow.cl/btn.php?token=mac7a6ff87a8969d3b04e5128cf32b6ec3f92ccb",
       "detail": {
         "sectionEyebrow": "Servicio integral de despedida",
         "sectionTitle": "Conducción y música en un mismo homenaje",

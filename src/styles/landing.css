@@ -61,7 +61,7 @@
 .landing-intro h2, .section-heading h2, .landing-cta h2 { margin: 0; color: var(--color-text); font-size: clamp(2.7rem, 6vw, 6rem); letter-spacing: -.07em; }
 h2 em { color: var(--color-primary); font-family: var(--font-accent); font-weight: 400; letter-spacing: 0; }
 .intro-text { max-width: 30rem; margin-top: 2rem; color: var(--color-text-muted); font-size: 1.05rem; }
-.landing-services { display: grid; grid-template-columns: .85fr 1.3fr; gap: clamp(3rem, 9vw, 9rem); min-height: 100svh; align-content: center; background: var(--color-surface); }
+.landing-services { display: grid; grid-template-columns: .85fr 1.3fr; gap: clamp(3rem, 9vw, 9rem); width: 100%; max-width: none; min-height: 100svh; align-content: center; background: var(--color-surface); }
 .service-list { border-top: 1px solid var(--color-border); }
 .service-item { display: grid; grid-template-columns: 3rem 1fr 2rem; gap: 1rem; align-items: center; padding: 1.6rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); transition: padding .25s ease, color .25s ease; }
 .service-item:hover { padding-inline: .8rem; color: var(--color-primary); }

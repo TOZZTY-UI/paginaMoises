@@ -15,6 +15,7 @@
     {
       "slug": "amenizacion-coctel",
       "name": "Amenización de cóctel",
+      "price": "134.990",
       "description": "Recibe a tus invitados con una experiencia musical elegante y cercana. Nuestro saxofonista profesional acompaña el cóctel con melodías especialmente seleccionadas, creando un ambiente agradable, romántico y entretenido, con interacción musical que transforma cada instante en un recuerdo especial.",
       "image": "/images/amenizacion-coctel.webp",
       "highlights": [
@@ -24,11 +25,12 @@
         "Repertorio romántico, pop y lounge",
         "Ambientación musical personalizada"
       ],
-      "paymentHref": "."
+      "paymentHref": "https://www.flow.cl/btn.php?token=xea825f69457ec9f32d9ea801ed716323151441a"
     },
     {
       "slug": "amenizacion-cena",
       "name": "Amenización de cena",
+      "price": "134.990",
       "description": "Disfruta de una cena acompañada por la sofisticación del saxofón en vivo. Una presentación musical cuidadosamente diseñada para complementar la celebración, creando una atmósfera cálida, romántica y distinguida sin interrumpir la conversación de los invitados.",
       "image": "/images/amenizacion-cena.webp",
       "highlights": [
@@ -38,11 +40,12 @@
         "Selección musical personalizada",
         "Repertorio romántico, jazz y clásicos"
       ],
-      "paymentHref": "."
+      "paymentHref": "https://www.flow.cl/btn.php?token=q3a9464833765fa5f4f432f0d6e0c235a59b5cf8"
     },
     {
       "slug": "amenizacion-coctel-y-cena",
       "name": "Amenización de cóctel y cena",
+      "price": "197.400",
       "description": "Una experiencia musical completa que acompaña tu celebración desde la recepción hasta la cena. Comenzamos con melodías alegres y elegantes durante el cóctel, interactuando con los invitados, para luego dar paso a una ambientación más íntima y sofisticada durante la cena. Cada momento cuenta con una selección musical cuidadosamente adaptada.",
       "image": "/images/amenizacion-coctel-cena.webp",
       "highlights": [
@@ -53,7 +56,7 @@
         "Ambientación romántica y elegante",
         "Coordinación musical del evento"
       ],
-      "paymentHref": "."
+      "paymentHref": "https://www.flow.cl/btn.php?token=z350a1365d7b3fc6817f84c0b5b2cc82b5eee143"
     }
   ]
 }

@@ -17,7 +17,7 @@ export type PricePlan = {
 };
 
 interface Props {
-  plans?: PricePlan[];
+  plans: PricePlan[];
   title?: string;
   subtitle?: string;
 }
@@ -25,49 +25,7 @@ interface Props {
 const {
   title = 'Elige la experiencia para tu evento',
   subtitle = 'Cada celebración merece una propuesta musical a su medida.',
-  plans = [
-    {
-      name: 'Esencial',
-      price: '399 €',
-      period: 'por evento',
-      features: ['Saxofón en directo', 'Hasta 1 hora de música', 'Repertorio seleccionado', 'Preparación personalizada'],
-      href: '/contacto',
-    },
-    {
-      name: 'Signature',
-      slug: 'experiencia-signature',
-      price: '699 €',
-      period: 'por evento',
-      features: ['Saxofón en directo', 'Hasta 2 horas de música', 'Repertorio a medida', 'Coordinación con el evento'],
-      href: '/contacto',
-      featured: true,
-      subServices: [
-        {
-          slug: 'con-musicalizacion',
-          name: 'Signature con musicalización',
-          description: 'Saxofón en directo acompañado de musicalización durante el evento.',
-          image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1400&q=85',
-          highlights: ['Saxofón en directo', 'Musicalización durante el evento', 'Repertorio adaptable al ambiente'],
-          paymentHref: 'https://example.com/pago/signature-con-musicalizacion',
-        },
-        {
-          slug: 'sin-musicalizacion',
-          name: 'Signature sin musicalización',
-          description: 'Saxofón en directo como protagonista principal del evento.',
-          image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=85',
-          highlights: ['Saxofón como protagonista', 'Presentación elegante y cercana', 'Selección musical personalizada'],
-          paymentHref: 'https://example.com/pago/signature-sin-musicalizacion',
-        },
-      ],
-    },
-    {
-      name: 'A medida',
-      price: 'Consultar',
-      period: 'propuesta personalizada',
-      features: ['Duración flexible', 'Formato especial', 'Selección musical completa', 'Atención prioritaria'],
-      href: '/contacto',
-    },
-  ],
+  plans,
 } = Astro.props;
 ---
 

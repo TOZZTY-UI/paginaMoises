@@ -12,6 +12,44 @@
   ],
   "subServices": [
     {
+      "slug": "entrada-salida-novios",
+      "name": "Entrada y salida de novios",
+      "price": "103.990",
+      "description": "Haz de tu ceremonia civil o religiosa un momento inolvidable con la emoción del saxofón en vivo. Acompañamos la entrada del novio, la entrada de la novia, los pajes o intercambio de argollas y la salida de los recién casados. Cada melodía puede ser elegida por ustedes, creando una ceremonia única y personalizada.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Entrada del novio y de la novia",
+        "Pajes o intercambio de argollas",
+        "Salida de los recién casados",
+        "Canciones a elección de los novios",
+        "Ceremonias civiles y religiosas"
+      ],
+      "paymentHref": "https://www.flow.cl/btn.php?token=ocba07bdb86e525220c1ccb1f46f8148ac781f7e",
+      "detail": {
+        "sectionEyebrow": "La ceremonia",
+        "sectionTitle": "Un momento único para recordar.",
+        "sectionDescription": "Acompañamos cada entrada y salida con una interpretación musical emotiva, elegante y personalizada.",
+        "finalEyebrow": "¿Hablamos de tu ceremonia?",
+        "finalTitle": "Haz que cada entrada tenga su propia música.",
+        "ctaLabel": "Consultar disponibilidad",
+        "imageAlt": "Saxofón en la entrada y salida de una ceremonia"
+      }
+    },
+    {
+      "slug": "pack-completo-servicios-matrimoniales",
+      "name": "Pack Completo Servicios Matrimoniales",
+      "price": "310.990",
+      "description": "Una experiencia musical completa para acompañar los momentos más importantes de tu matrimonio.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "Saxofón en vivo",
+        "Repertorio personalizado",
+        "Acompañamiento de momentos especiales",
+        "Coordinación previa del evento"
+      ],
+      "paymentHref": "https://www.flow.cl/btn.php?token=rb1ba2e5351283543d6a3fbbfe3a7cd8b171ea0c"
+    },
+    {
       "slug": "bodas-cristianas",
       "name": "Bodas cristianas",
       "description": "Saxofón en vivo para momentos de la ceremonia, respetando el programa y las preferencias de la pareja.",
@@ -72,29 +110,6 @@
         "finalTitle": "Acompañemos este aniversario con música.",
         "ctaLabel": "Consultar disponibilidad",
         "imageAlt": "Celebración de bodas de plata"
-      }
-    },
-    {
-      "slug": "entrada-salida-novios",
-      "name": "Entrada y salida de novios",
-      "description": "Haz de tu ceremonia civil o religiosa un momento inolvidable con la emoción del saxofón en vivo. Acompañamos la entrada del novio, la entrada de la novia, los pajes o intercambio de argollas y la salida de los recién casados. Cada melodía puede ser elegida por ustedes, creando una ceremonia única y personalizada.",
-      "image": "/icons/logo.webp",
-      "highlights": [
-        "Entrada del novio y de la novia",
-        "Pajes o intercambio de argollas",
-        "Salida de los recién casados",
-        "Canciones a elección de los novios",
-        "Ceremonias civiles y religiosas"
-      ],
-      "paymentHref": "/contacto",
-      "detail": {
-        "sectionEyebrow": "La ceremonia",
-        "sectionTitle": "Un momento único para recordar.",
-        "sectionDescription": "Acompañamos cada entrada y salida con una interpretación musical emotiva, elegante y personalizada.",
-        "finalEyebrow": "¿Hablamos de tu ceremonia?",
-        "finalTitle": "Haz que cada entrada tenga su propia música.",
-        "ctaLabel": "Consultar disponibilidad",
-        "imageAlt": "Saxofón en la entrada y salida de una ceremonia"
       }
     }
 
