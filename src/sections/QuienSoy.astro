@@ -24,63 +24,8 @@ import portrait from '../assets/images/YO/file_0000000008ac820ea0a0757b58cffc1.j
   </div>
 </section>
 
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const initWhoSection = (section: HTMLElement) => {
-    if (section.dataset.initialized) return;
-    section.dataset.initialized = 'true';
-
-    const portrait = section.querySelector<HTMLElement>('[data-who-visual]');
-    const copy = section.querySelector<HTMLElement>('[data-who-copy]');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!portrait || !copy || reducedMotion.matches) return;
-
-    const context = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 72%',
-          once: true,
-        },
-        defaults: { ease: 'power3.out' },
-      })
-        .fromTo(portrait, { x: 90, opacity: 0 }, { x: 0, opacity: 1, duration: .8 })
-        .fromTo(copy, { x: 70, opacity: 0 }, { x: 0, opacity: 1, duration: .7 }, '-=.35');
-    }, section);
-
-    document.addEventListener('astro:before-swap', () => context.revert(), { once: true });
-  };
-
-  document.querySelectorAll<HTMLElement>('[data-who-section]').forEach(initWhoSection);
-  document.addEventListener('astro:page-load', () => {
-    document.querySelectorAll<HTMLElement>('[data-who-section]').forEach(initWhoSection);
-  });
-</script>
+<script src="../scripts/sections/quien-soy.ts"></script>
 
 <style>
-  .who-section { position: relative; overflow: clip; background: var(--burdeos); color: var(--marfil); }
-  .who-section__layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); align-items: center; gap: clamp(2rem, 8vw, 8rem); max-width: 1280px; min-height: 100svh; margin: 0 auto; padding: clamp(5rem, 11vw, 10rem) clamp(1.25rem, 5vw, 4rem); }
-  .who-section__visual { position: relative; align-self: stretch; display: grid; place-items: center; min-height: 620px; }
-  .who-section__visual img { position: relative; z-index: 1; width: min(76%, 34rem); height: min(85svh, 44rem); object-fit: cover; object-position: center 35%; filter: saturate(.8) contrast(1.08); will-change: transform, opacity; }
-  .who-section__copy { max-width: 35rem; will-change: transform, opacity; }
-  .who-section__kicker { margin: 0 0 1.25rem; color: var(--dorado); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-  .who-section h2 { color: var(--marfil); font-size: clamp(2.7rem, 5.6vw, 6rem); line-height: .96; letter-spacing: -.075em; }
-  .who-section__copy > p:not(.who-section__kicker) { max-width: 31rem; margin-top: 1.75rem; color: var(--gris); font-size: 1.05rem; line-height: 1.65; }
-  .who-section__link { display: inline-flex; gap: .6rem; margin-top: 2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--dorado); color: var(--marfil); font-weight: 700; }
-  .who-section__link span { color: var(--dorado); transition: transform .2s ease; }
-  .who-section__link:hover span { transform: translate(3px, -3px); }
-
-  @media (max-width: 760px) {
-    .who-section__layout { grid-template-columns: 1fr; gap: 2rem; min-height: auto; }
-    .who-section__visual { min-height: 480px; }
-    .who-section__visual img { width: min(88%, 27rem); height: 31rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .who-section__visual img, .who-section__copy { opacity: 1 !important; transform: none !important; }
-  }
+  @import '../styles/sections/quien-soy.css';
 </style>

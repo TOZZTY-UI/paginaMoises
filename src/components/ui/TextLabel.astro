@@ -1,0 +1,14 @@
+---
+import '../../styles/components/ui/TextLabel.css';
+
+const { label, for: htmlFor } = Astro.props;
+---
+
+<div class="email-input-container">
+  <input type="email" id={htmlFor} required />
+  <label for={htmlFor}>{label}</label>
+  <div class="email-input-border">
+    <span class="email-input-border-left"></span>
+    <span class="email-input-border-right"></span>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import InteractiveHoverButton from '../../components/ui/InteractiveHoverButton.astro';
 ---
 
 <BaseLayout
@@ -16,7 +17,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         contactarnos para revisar otra alternativa de pago.
       </p>
       <div class="payment-status__actions">
-        <a class="button" href="/contacto">Intentar nuevamente</a>
+        <InteractiveHoverButton href="/contacto" text="Intentar nuevamente" />
         <a class="payment-status__back" href="/">Volver al inicio</a>
       </div>
     </div>

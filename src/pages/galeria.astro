@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
+import InteractiveHoverButton from '../components/ui/InteractiveHoverButton.astro';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { images } from '../data/image';
@@ -71,7 +71,7 @@ const cards = galleryImages.map((item, index) => {
   <div class="gallery-end" data-gallery-end inert aria-hidden="true">
     <h2>¿Quieres aparecer en la galería?</h2>
     <p>Conoce nuestros servicios para tu próximo evento.</p>
-    <Button href="/servicios" name="Ver servicios" />
+     <InteractiveHoverButton href="/servicios" text="Ver servicios" />
   </div>
 </section>
 </BaseLayout>

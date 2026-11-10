@@ -18,7 +18,8 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/pago/'),
+      // Las confirmaciones de pago y la página 404 no son contenido indexable.
+      filter: (page) => !page.includes('/pago/') && !page.endsWith('/404/'),
     }),
   ],
 });

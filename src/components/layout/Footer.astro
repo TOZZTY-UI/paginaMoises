@@ -1,8 +1,8 @@
 ---
-import { socialLinks } from "../data/socialLinks";
-import { navigation, footerLinks } from "../data/navigation";
+import { socialLinks } from "../../data/socialLinks";
+import { navigation, footerLinks } from "../../data/navigation";
 import { Image } from "astro:assets";
-import firma from "../assets/images/Firma.png";
+import firma from "../../assets/images/Firma.png";
 interface Link {
   label: string;
   href?: string;
@@ -204,8 +204,8 @@ const quotes = [
   </div>
 </footer>
 
-<script src="../scripts/footer.ts"></script>
+<script src="../../scripts/components/layout/footer.ts"></script>
 
 <style>
-  @import "../styles/components/footer.css";
+  @import "../../styles/components/layout/footer.css";
 </style>

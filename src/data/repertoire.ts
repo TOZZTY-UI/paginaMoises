@@ -74,6 +74,7 @@ Bailables: [
 ],
 
 Bossa_Nova: [
+  {artist:"Luis Miguel",link:"https://music.apple.com/us/album/te-necesito/42234821?i=42234832",album:"33",song:"Te Necesito", image:"https://is1-ssl.mzstatic.com/image/thumb/Music/y2005/m01/d28/h19/s06.dtbcdbek.jpg/600x600bb.jpg"},
   {artist:"Luis Miguel",link:"https://music.apple.com/cl/album/cuando-calienta-el-sol/671129332?i=671129680",album:"Soy Como Quiero Ser",song:"Cuando Calienta El Sol",image:"https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/d9/58/af/d958afe4-2f9c-cf24-4070-37fc970061ce/825646432202.jpg/600x600bb.jpg"},
   {artist:"Luis Miguel",link:"https://music.apple.com/cl/album/suave/100986900?i=100986783",album:"Aries",song:"Suave",image:"https://is1-ssl.mzstatic.com/image/thumb/Music/8b/1f/1d/mzi.iofcclws.jpg/600x600bb.jpg"},
   {artist:"Eric Benét ft. Faith Evans",link:"https://music.apple.com/cl/album/georgy-porgy-feat-faith-evans/342313154?i=342313206",album:"A Day In the Life",song:"Georgy Porgy (feat. Faith Evans)",image:"https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2d/f4/0f/2df40f4d-4cb8-1dfb-e302-c22ff681ea8f/mzi.lpemlfnl.jpg/600x600bb.jpg"},

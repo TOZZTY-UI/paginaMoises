@@ -1,5 +1,5 @@
 ---
-import type { SubService } from './price.astro';
+import type { SubService } from '../content/Price.astro';
 
 interface Props {
   id: string;
@@ -35,8 +35,8 @@ const { id, title, parentSlug, options } = Astro.props as Props;
   </div>
 </dialog>
 
-<script src="../scripts/modal.ts"></script>
+<script src="../../scripts/components/ui/modal.ts"></script>
 
 <style>
-  @import '../styles/components/modal.css';
+  @import '../../styles/components/ui/modal.css';
 </style>

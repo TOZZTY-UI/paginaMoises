@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { services } from "../../data/services/ts/services";
-import ButtonCTA from '../../components/ButtonCTA.astro';
+import InteractiveHoverButton from '../../components/ui/InteractiveHoverButton.astro';
 
 type Props = {
   title: string;
@@ -51,7 +51,7 @@ const detail = service.detail ?? {
         <p class="service-detail__eyebrow">{service.title}</p>
         <h1>{service.title}</h1>
         <p class="service-detail__lead">{detail.intro}</p>
-        <ButtonCTA href={detail.ctaHref} name={detail.ctaLabel} className="service-detail__cta" />
+        <InteractiveHoverButton href={detail.ctaHref} text={detail.ctaLabel} className="service-detail__cta" />
       </div>
 
       <aside class="service-detail__summary" aria-label={`Resumen de ${service.title}`}>
@@ -101,7 +101,7 @@ const detail = service.detail ?? {
     <section class="service-detail__final-cta" aria-label="Solicitar información">
       <p class="service-detail__eyebrow">{detail.finalEyebrow}</p>
       <h2>{detail.finalTitle}</h2>
-      <ButtonCTA href={detail.ctaHref} name={detail.ctaLabel} className="service-detail__cta" />
+      <InteractiveHoverButton href={detail.ctaHref} text={detail.ctaLabel} className="service-detail__cta" />
     </section>
   </article>
 </BaseLayout>

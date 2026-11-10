@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import InteractiveHoverButton from '../../components/ui/InteractiveHoverButton.astro';
 ---
 
 <BaseLayout
@@ -16,12 +17,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         Nuestro equipo revisará los datos y te contactará.
       </p>
       <div class="payment-status__actions">
-        <a
-          class="button"
+        <InteractiveHoverButton
           href="https://wa.me/56949251898?text=Hola%2C%20quiero%20enviar%20mi%20voucher%20de%20pago%20para%20confirmar%20mi%20reserva.%20Adjunto%20el%20comprobante."
+          text="Enviar voucher por WhatsApp"
           target="_blank"
           rel="noopener noreferrer"
-        >Enviar voucher por WhatsApp</a>
+        />
         <a class="payment-status__back" href="/">Volver al inicio</a>
       </div>
       <small>WhatsApp te permitirá adjuntar la captura o el archivo del comprobante antes de enviarlo.</small>

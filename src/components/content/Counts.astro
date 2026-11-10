@@ -1,0 +1,32 @@
+---
+// Reemplaza estos valores por tus cifras reales.
+const stats = [
+    { value: 500, suffix: '+', label: 'Canciones interpretadas' },
+    { value: 150, suffix: '+', label: 'Eventos realizados' },
+    { value: 10000, suffix: '+', label: 'Personas felices' },
+];
+---
+
+<section class="counts-section" aria-labelledby="counts-title">
+    <div class="counts-section__heading">
+        <p class="counts-section__eyebrow">La experiencia en números</p>
+        <h2 id="counts-title">Una trayectoria hecha de momentos.</h2>
+    </div>
+
+    <div class="counts" data-counts aria-label="Resumen de experiencia profesional">
+        {stats.map((stat) => (
+            <article class="counts__item">
+                <p class="counts__number" data-count-target={stat.value}>
+                    <span data-count-value>0</span><span class="counts__suffix">{stat.suffix}</span>
+                </p>
+                <p class="counts__label">{stat.label}</p>
+            </article>
+        ))}
+    </div>
+</section>
+
+<script src="../../scripts/components/content/counts.ts"></script>
+
+<style>
+  @import '../../styles/components/content/counts.css';
+</style>

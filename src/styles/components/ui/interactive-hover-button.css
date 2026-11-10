@@ -1,0 +1,29 @@
+.interactive-hover-button {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  min-width: 9rem;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: .75rem 1.25rem;
+  border: 1px solid var(--color-border, currentColor);
+  border-radius: 999px;
+  background: var(--color-card, transparent);
+  color: var(--color-text, currentColor);
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  isolation: isolate;
+  transition: color .3s ease, border-color .3s ease;
+}
+.interactive-hover-button__label,
+.interactive-hover-button__hover-label { position: relative; z-index: 2; transition: transform .3s ease, opacity .3s ease; }
+.interactive-hover-button__hover-label { position: absolute; display: inline-flex; align-items: center; gap: .5rem; transform: translateX(3rem); opacity: 0; color: var(--color-bg, #171313); }
+.interactive-hover-button__fill { position: absolute; top: 40%; left: 20%; z-index: 1; width: .5rem; height: .5rem; border-radius: 999px; background: var(--color-accent, #c9a227); transition: all .3s ease; }
+.interactive-hover-button:hover, .interactive-hover-button:focus-visible { border-color: var(--color-accent, #c9a227); color: var(--color-bg, #171313); }
+.interactive-hover-button:hover .interactive-hover-button__label, .interactive-hover-button:focus-visible .interactive-hover-button__label { transform: translateX(3rem); opacity: 0; }
+.interactive-hover-button:hover .interactive-hover-button__hover-label, .interactive-hover-button:focus-visible .interactive-hover-button__hover-label { transform: translateX(0); opacity: 1; }
+.interactive-hover-button:hover .interactive-hover-button__fill, .interactive-hover-button:focus-visible .interactive-hover-button__fill { top: 0; left: 0; width: 100%; height: 100%; border-radius: inherit; transform: scale(1.8); }
+@media (prefers-reduced-motion: reduce) { .interactive-hover-button, .interactive-hover-button * { transition: none; } }

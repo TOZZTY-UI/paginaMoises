@@ -1,8 +1,8 @@
 ---
-import { sidebarColors } from '../data/sidebar';
-import { sidebarLinks } from '../data/navigation';
+import { sidebarColors } from '../../data/sidebar';
+import { sidebarLinks } from '../../data/navigation';
 import { Image } from 'astro:assets';
-import firma from '../assets/images/Firma.png';
+import firma from '../../assets/images/Firma.png';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const icons: Record<string, string> = {
@@ -49,7 +49,7 @@ const icons: Record<string, string> = {
 </div>
 
 <style>
-  @import "../styles/components/animated-sidebar.css";
+  @import "../../styles/components/ux/animated-sidebar.css";
 </style>
 
-<script src="../scripts/animated-sidebar.ts"></script>
+<script src="../../scripts/components/ux/animated-sidebar.ts"></script>

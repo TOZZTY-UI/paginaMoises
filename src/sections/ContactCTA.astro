@@ -1,12 +1,12 @@
 ---
-import ButtonCTA from '../components/ButtonCTA.astro';
+import InteractiveHoverButton from '../components/ui/InteractiveHoverButton.astro';
 ---
 <section class="landing-cta" aria-labelledby="cta-title">
       <p class="section-index">Tu fecha, tu historia</p>
       <h2 id="cta-title">Hagamos que<br /><em>suene inolvidable.</em></h2>
-      <ButtonCTA href="/sobre-mi" name="Ven a conocerme ↗" />
+      <InteractiveHoverButton href="/sobre-mi" text="Ven a conocerme" />
 </section>
 
 <style>
-  @import '../styles/landing-cta.css';
+  @import '../styles/sections/contact-cta.css';
 </style>

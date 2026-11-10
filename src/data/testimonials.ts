@@ -4,7 +4,7 @@ avatar, valoración, comentario, fecha e imagen.
 La información se organiza como una lista de objetos Testimonial.
 */
 
-import type { Testimonial } from '../components/TestimonialsStack.astro';
+import type { Testimonial } from '../components/content/TestimonialsStack.astro';
 
 export const testimonials: Testimonial[] = [
   {

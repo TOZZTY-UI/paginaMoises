@@ -1,6 +1,6 @@
 
 ---
-import { repertoire2 as repertoire } from '../data/repertoire';
+import { repertoire2 as repertoire } from '../../data/repertoire';
 
 type Song = {
   song: string;
@@ -164,8 +164,8 @@ const genres = Object.entries(collection).map(
   ))}
 </section>
 
-<script src="../scripts/music-disc-selector.ts"></script>
+<script src="../../scripts/components/ux/music-disc-selector.ts"></script>
 
 <style>
-  @import "../styles/components/music-disc-selector.css";
+  @import "../../styles/components/ux/music-disc-selector.css";
 </style>

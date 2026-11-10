@@ -1,0 +1,144 @@
+
+  ---
+  export interface Testimonial {
+    id: string;
+    name: string;
+    role?: string;
+    company?: string;
+    avatar?: string;
+    rating: number;
+    comment: string;
+    date?: string;
+    image?: string;
+  }
+
+  interface Props {
+    testimonials: Testimonial[];
+    title?: string;
+    subtitle?: string;
+    variant?: 'dark' | 'light';
+    incrementY?: number;
+    incrementZ?: number;
+    incrementRotation?: number;
+  }
+
+  const {
+    testimonials,
+    title = 'Lo que dicen nuestros clientes',
+    subtitle = 'Experiencias que dejan huella',
+    variant = 'dark',
+    incrementY = 12,
+    incrementZ = 12,
+    incrementRotation = 5,
+  } = Astro.props;
+
+  // La primera tarjeta del arreglo queda al frente y es la primera en salir
+  // durante el desplazamiento.
+  const cards = testimonials.filter((item): item is Testimonial => Boolean(item)).map((item, index) => ({
+    ...item,
+    rating: Math.max(0, Math.min(5, item.rating)),
+    index,
+  }));
+  ---
+
+  <section
+    class:list={['testimonials-section', variant]}
+    data-testimonials
+    data-scroll-reveal-manual
+    aria-label="Testimonios de clientes"
+    style={`--card-count:${Math.max(cards.length, 1)}`}
+  >
+    <div class="section-heading">
+      <span class="eyebrow">SAXEVENTOS · EXPERIENCIAS</span>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+
+    <div class="scroll-container" data-scroll-container>
+      <div class="sticky-stage" data-sticky-stage>
+        <div class="cards-container">
+          {cards.map((review, index) => (
+            <article
+              class="testimonial-card"
+              data-card
+              data-index={index}
+              style={`
+                --index:${index};
+                --stack-y:${index * incrementY}px;
+                --stack-z:${index * incrementZ}px;
+                --rotation:${(index % 2 === 0 ? -1 : 1) * incrementRotation}deg;
+                --rating:${review.rating * 20}%;
+                --z-order:${index === 0 ? cards.length + 1 : cards.length - index};
+              `}
+            >
+              <div class="card-top">
+                <span class="quote-icon" aria-hidden="true">“</span>
+                <span class="review-number">
+                  {String(index + 1).padStart(2, '0')}
+                  /
+                  {String(cards.length).padStart(2, '0')}
+                </span>
+              </div>
+
+              <div
+                class="rating"
+                role="img"
+                aria-label={`${review.rating} de 5 estrellas`}
+              >
+                <span class="stars-base" aria-hidden="true">
+                  ★★★★★
+                  <span class="stars-filled">★★★★★</span>
+                </span>
+                <span class="rating-value">{review.rating.toFixed(1)}</span>
+              </div>
+
+              <blockquote class="review-text">
+                {review.comment}
+              </blockquote>
+
+              <div class="card-footer">
+                <div class="client">
+                  {review.image ?? review.avatar ? (
+                    <img
+                      src={review.image ?? review.avatar}
+                      alt={`Foto de ${review.name}`}
+                      width="52"
+                      height="52"
+                      loading="lazy"
+                      decoding="async"
+                      class="avatar"
+                    />
+                  ) : (
+                    <span class="avatar-placeholder" aria-hidden="true">
+                      {review.name.slice(0, 1).toUpperCase()}
+                    </span>
+                  )}
+
+                  <div class="client-info">
+                    <strong>{review.name}</strong>
+                    {review.role && <span>{review.role}</span>}
+                    {review.company && <small>{review.company}</small>}
+                  </div>
+                </div>
+
+                {review.date && (
+                  <time class="review-date">{review.date}</time>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+          <span>DESLIZA PARA EXPLORAR</span>
+          <span>↓</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../../scripts/components/content/testimonials-stack.ts"></script>
+
+  <style>
+  @import '../../styles/components/content/testimonials-stack.css';
+</style>

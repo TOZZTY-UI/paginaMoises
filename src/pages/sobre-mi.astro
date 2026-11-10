@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { images } from "../data/image";
 import portrait from "../assets/images/YO/file_0000000008ac820ea0a0757b58cffc18.png";
-import Counts from "../components/counts.astro";
+import Counts from "../components/content/Counts.astro";
 
 const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
     '../assets/images/YO/logros/*.{jpg,jpeg,png,webp,avif}',

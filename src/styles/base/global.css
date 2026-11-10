@@ -3,6 +3,7 @@
 @import "tailwindcss";
 @import './variables.css';
 @import './utilities.css';
+@import '../components/ui/interactive-hover-button.css';
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 1rem; color-scheme: dark; }

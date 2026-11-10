@@ -28,7 +28,7 @@
     color: var(--dorado);
   }
 
-  .landing-cta :global(.btn-white) {
+  .landing-cta .interactive-hover-button {
     min-width: 280px;
     min-height: 50px;
     justify-content: center;
@@ -39,14 +39,15 @@
     letter-spacing: .02em;
   }
 
-  .landing-cta :global(.btn-white)::before {
+  .landing-cta .interactive-hover-button__fill {
     background: var(--burdeos);
   }
 
-  .landing-cta :global(.btn-white)::after {
-    background: var(--marfil);
+  .landing-cta .interactive-hover-button__hover-label {
+    color: var(--marfil);
   }
 
-  .landing-cta :global(.btn-white):hover {
-    color: var(--burdeos);
+  .landing-cta .interactive-hover-button:hover,
+  .landing-cta .interactive-hover-button:focus-visible {
+    color: var(--marfil);
   }

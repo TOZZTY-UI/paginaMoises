@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import ButtonPay from '../../../components/ButtonPay.astro';
+import ButtonPay from '../../../components/ux/ButtonPay.astro';
 import { services, type ServiceSubService } from '../../../data/services/ts/services';
 
 type Props = {
@@ -33,12 +33,18 @@ const detail = subService.detail ?? {
 const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
   ? subService.paymentHref
   : '/contacto';
+// Evita publicar URLs de imágenes que no existen en `public/`.
+// Cuando se incorporen fotografías específicas para estos servicios,
+// solo será necesario actualizar el campo `image` del catálogo.
+const imageUrl = subService.image.startsWith('/images/')
+  ? '/icons/logo.webp'
+  : subService.image;
 ---
 
 <BaseLayout
   title={`${subService.name} | ${service.title}`}
   description={subService.description}
-  image={subService.image}
+  image={imageUrl}
 >
   <article class="service-detail">
     <a class="service-detail__back" href={`/servicios/${service.slug}`}>
@@ -50,11 +56,19 @@ const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
         <p class="service-detail__eyebrow">{service.title}</p>
         <h1>{subService.name}</h1>
         <p class="service-detail__lead">{subService.description}</p>
-        <ButtonPay href={paymentHref} name="Pagar ↗" />
+        <ButtonPay href={paymentHref} name={`Pagar y reservar ${subService.name} ↗`} />
       </div>
 
       <figure class="service-detail__image service-detail__image--hero">
-        <img src={subService.image} alt={`Ejemplo de ${subService.name}`} width="1400" height="1000" />
+        <img
+          src={imageUrl}
+          alt={`Ejemplo de ${subService.name}`}
+          width="1400"
+          height="1000"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
       </figure>
     </div>
 
@@ -75,13 +89,13 @@ const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
     </section>
 
     <figure class="service-detail__image service-detail__image--wide">
-      <img src={subService.image} alt={detail.imageAlt} width="1400" height="700" loading="lazy" />
+      <img src={imageUrl} alt={detail.imageAlt} width="1400" height="700" loading="lazy" decoding="async" />
     </figure>
 
     <section class="service-detail__final-cta" aria-label="Reservar servicio">
       <p class="service-detail__eyebrow">{detail.finalEyebrow}</p>
       <h2>{detail.finalTitle}</h2>
-      <ButtonPay href={paymentHref} name="Pagar / reservar servicio ↗" />
+       <ButtonPay href={paymentHref} name={`Pagar y reservar ${subService.name} ↗`} />
     </section>
   </article>
 </BaseLayout>

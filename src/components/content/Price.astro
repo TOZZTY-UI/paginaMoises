@@ -1,0 +1,78 @@
+---
+import InteractiveHoverButton from '../ui/InteractiveHoverButton.astro';
+import Modal from '../ui/Modal.astro';
+import type { ServiceSubService } from '../../data/services/ts/services';
+
+export type SubService = ServiceSubService;
+
+export type PricePlan = {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  href?: string;
+  featured?: boolean;
+  subServices?: SubService[];
+  slug?: string;
+};
+
+interface Props {
+  plans: PricePlan[];
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Elige la experiencia para tu evento',
+  subtitle = 'Cada celebración merece una propuesta musical a su medida.',
+  plans,
+} = Astro.props;
+---
+
+<section class="price" aria-labelledby="price-title">
+  <header class="price__heading">
+    <p class="price__eyebrow">Propuestas musicales</p>
+    <h2 id="price-title">{title}</h2>
+    <p class="price__subtitle">{subtitle}</p>
+  </header>
+
+  <div class="price__grid">
+    {plans.map((plan, index) => {
+      const modalId = `price-options-${index}`;
+
+      return (
+      <article class:list={["price-card", { "price-card--featured": plan.featured }]}>
+        {plan.featured && <span class="price-card__badge">Más elegido</span>}
+        <h3>{plan.name}</h3>
+        <p class="price-card__amount">{plan.price}</p>
+        <p class="price-card__period">{plan.period ?? 'por evento'}</p>
+
+        <ul class="price-card__features">
+          {plan.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+
+        <InteractiveHoverButton
+          href={plan.href ?? '/contacto'}
+           text="Elegir propuesta"
+           data-modal-trigger={plan.subServices?.length ? modalId : undefined}
+           aria-haspopup={plan.subServices?.length ? 'dialog' : undefined}
+          className="price-card__cta"
+        />
+
+        {plan.subServices?.length ? (
+          <Modal
+            id={modalId}
+            title={`Elige tu versión de ${plan.name}`}
+            parentSlug={plan.slug ?? ''}
+            options={plan.subServices}
+          />
+        ) : null}
+      </article>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  @import '../../styles/components/content/price.css';
+</style>

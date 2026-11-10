@@ -29,11 +29,6 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
   const intro = root.querySelector<HTMLElement>('[data-intro]');
   const prompt = root.querySelector<HTMLElement>('[data-prompt]');
   const galleryEnd = root.querySelector<HTMLElement>('[data-gallery-end]');
-  const navbar = document.querySelector<HTMLElement>('.navbar-container');
-  if (navbar) {
-    navbar.classList.add('gallery-nav-hidden');
-    navbar.inert = true;
-  }
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let width = root.clientWidth;
   let height = root.clientHeight;
@@ -113,12 +108,6 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
     const introAlpha = progress < .12 ? map(progress, 0, .12, .25, 1) : progress > .85 ? map(progress, .85, 1, 1, 0) : 1;
     if (intro) { intro.style.transform = `scale(${titleScale})`; intro.style.opacity = `${introAlpha}`; }
     if (prompt) prompt.style.opacity = `${map(progress, 0, .12, 1, 0)}`;
-    if (navbar) {
-      const visible = progress >= .96;
-      if (!visible && !navbar.inert && navbar.contains(document.activeElement)) root.focus();
-      navbar.classList.toggle('gallery-nav-hidden', !visible);
-      navbar.inert = !visible;
-    }
     if (galleryEnd) {
       const visible = progress >= .96;
       galleryEnd.classList.toggle('is-visible', visible);
@@ -157,9 +146,5 @@ document.querySelectorAll<HTMLElement>('[data-perspective-tunnel]').forEach((roo
   document.addEventListener('astro:before-swap', () => {
     cancelAnimationFrame(raf);
     observer.disconnect();
-    if (navbar) {
-      navbar.classList.remove('gallery-nav-hidden');
-      navbar.inert = false;
-    }
   }, { once: true });
 });

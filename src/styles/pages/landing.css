@@ -1,6 +1,5 @@
 .portal-hero { position: relative; height: 220vh; background: var(--color-background); }
 .portal-stage { position: sticky; top: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr); grid-template-rows: 1fr; gap: clamp(2rem, 8vw, 9rem); align-items: center; max-width: 1280px; height: 100svh; min-height: 680px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1.25rem, 5vw, 4rem); overflow: hidden; isolation: isolate; }
-.portal-stage > .navbar-container { position: absolute; top: 0; left: 50%; z-index: 8; width: min(1100px, calc(100% - 32px)); transform: translateX(-50%); }
 .portal-field { position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 78% 50%, color-mix(in srgb, var(--burdeos) 70%, transparent), transparent 33%), radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--dorado) 28%, transparent), transparent 30%), var(--color-background); }
 .portal-field::after { position: absolute; inset: 0; content: ''; background: linear-gradient(115deg, transparent 40%, color-mix(in srgb, var(--burdeos) 80%, transparent)); }
 .portal-word { position: absolute; z-index: -1; top: 50%; left: 50%; color: var(--color-surface); font: 900 clamp(8rem, 28vw, 32rem)/.8 Arial Black, sans-serif; letter-spacing: -.13em; pointer-events: none; transform-origin: center; will-change: transform, opacity; }

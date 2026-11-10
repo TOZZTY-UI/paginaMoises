@@ -13,6 +13,7 @@
     {
       "slug": "saxofon-led",
       "name": "Saxofón LED",
+      "price": "199.990",
       "description": "Una experiencia musical en vivo con saxofón iluminado mediante tecnología LED. Ideal para sorprender a tus invitados con una puesta en escena moderna.",
       "image": "/icons/logo.webp",
       "highlights": ["Saxofón en vivo", "Iluminación LED en el instrumento", "Repertorio adaptado al evento"],
@@ -30,6 +31,7 @@
     {
       "slug": "saxofon-chispa-fria",
       "name": "Saxofón con chispa fría",
+      "price": "230.000",
       "description": "Un show de saxofón acompañado de un impactante efecto visual de chispa fría para momentos especiales.",
       "image": "/icons/logo.webp",
       "highlights": ["Saxofón en vivo", "Efecto de chispa fría", "Coordinación técnica previa"],
@@ -47,6 +49,7 @@
     {
       "slug": "saxofon-led-chispa-fria",
       "name": "Saxofón LED + chispa fría",
+      "price": "270.000",
       "description": "Una combinación premium de música en directo, luces LED y efectos de chispa fría.",
       "image": "/icons/logo.webp",
       "highlights": ["Saxofón en vivo", "Saxofón iluminado con LED", "Efecto de chispa fría"],
@@ -64,6 +67,7 @@
     {
       "slug": "bailarina-zancolet-led",
       "name": "Bailarina Zancolet LED",
+      "price": "479.990",
       "description": "Espectáculo visual con bailarina Zancolet LED para aportar altura, movimiento y luces a tu celebración.",
       "image": "/icons/logo.webp",
       "highlights": ["Bailarina Zancolet LED", "Puesta en escena luminosa", "Coordinación con el evento"],

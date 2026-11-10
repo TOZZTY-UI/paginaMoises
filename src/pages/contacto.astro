@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astro";
 ---
 
 <BaseLayout page="contacto"
@@ -11,14 +12,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 Estamos listos para escuchar tu próximo proyecto.
             </p>
             <div class="contact-links">
-                <a class="button" href="mailto:hola@moises.cl">hola@moises.cl</a>
-                <a
-                    class="button"
+                <InteractiveHoverButton href="mailto:hola@moises.cl" text="hola@moises.cl" />
+                <InteractiveHoverButton
                     href="https://wa.me/56949251898"
+                    text="+56 9 4925 1898"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >+56 9 4925 1898</a
-                >
+                />
             </div>
             <form class="contact-form" id="contact-form">
                 <div class="form-heading">
@@ -67,7 +67,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                     </label>
                 </div>
 
-                <button class="button" type="submit">Enviar consulta</button>
+                <InteractiveHoverButton type="submit" text="Enviar consulta" />
                 <p class="form-note">Al enviar, se abrirá WhatsApp con tu mensaje preparado.</p>
             </form>
         </div>
@@ -148,6 +148,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         border-top: 1px solid var(--color-border);
     }
 
+    .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+
+    .contact-links .interactive-hover-button,
+    .contact-form .interactive-hover-button {
+        border-color: var(--marfil);
+        background: var(--marfil);
+        color: var(--burdeos);
+    }
+
+    .contact-links .interactive-hover-button__fill,
+    .contact-form .interactive-hover-button__fill {
+        background: var(--burdeos);
+    }
+
+    .contact-links .interactive-hover-button__hover-label,
+    .contact-form .interactive-hover-button__hover-label {
+        color: var(--marfil);
+    }
+
+    .contact-links .interactive-hover-button:hover,
+    .contact-links .interactive-hover-button:focus-visible,
+    .contact-form .interactive-hover-button:hover,
+    .contact-form .interactive-hover-button:focus-visible {
+        border-color: var(--burdeos);
+        color: var(--marfil);
+    }
+
     .form-heading h2 {
         margin: 0.5rem 0 2rem;
         font-family: var(--font-display);
@@ -195,7 +227,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         grid-column: 1 / -1;
     }
 
-    .contact-form .button {
+    .contact-form .interactive-hover-button {
         margin-top: 1.5rem;
         cursor: pointer;
     }
