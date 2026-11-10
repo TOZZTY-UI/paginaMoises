@@ -6,10 +6,9 @@ import Price from '../../components/content/Price.astro';
 const planes = servicios.map((servicio) => ({
   slug: servicio.slug,
   name: servicio.title,
-  price: servicio.price ? `$ ${servicio.price}` : 'Consultar',
+  price: servicio.price && servicio.price !== 'Consultar' ? `$ ${servicio.price}` : 'Consultar',
   period: servicio.period ?? 'Por proyecto',
   features: servicio.features,
-  subServices: servicio.subServices,
   href: `/servicios/${servicio.slug}`,
   featured: servicio.featured ?? false,
 }));

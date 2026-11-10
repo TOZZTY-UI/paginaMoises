@@ -2,6 +2,8 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ButtonPay from '../../../components/ux/ButtonPay.astro';
 import { services, type ServiceSubService } from '../../../data/services/ts/services';
+import maestroMascotaImage from '../../../assets/images/funerario/IMG-20260716-WA0683.jpg';
+import packFunerarioImage from '../../../assets/images/funerario/20260109_162323.jpg';
 
 type Props = {
   service: (typeof services)[number];
@@ -33,12 +35,13 @@ const detail = subService.detail ?? {
 const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
   ? subService.paymentHref
   : '/contacto';
-// Evita publicar URLs de imágenes que no existen en `public/`.
-// Cuando se incorporen fotografías específicas para estos servicios,
-// solo será necesario actualizar el campo `image` del catálogo.
-const imageUrl = subService.image.startsWith('/images/')
-  ? '/icons/logo.webp'
-  : subService.image;
+// Las imágenes de `src/assets` deben importarse para que Astro las procese.
+const assetImages: Record<string, string> = {
+  '/assets/images/funerario/IMG-20260716-WA0683.jpg': maestroMascotaImage.src,
+  '/assets/images/funerario/20260109_162323.jpg': packFunerarioImage.src,
+};
+const imageUrl = assetImages[subService.image]
+  ?? (subService.image.startsWith('/images/') ? '/icons/logo.webp' : subService.image);
 ---
 
 <BaseLayout
@@ -46,7 +49,7 @@ const imageUrl = subService.image.startsWith('/images/')
   description={subService.description}
   image={imageUrl}
 >
-  <article class="service-detail">
+  <article class="service-detail service-detail--subservice">
     <a class="service-detail__back" href={`/servicios/${service.slug}`}>
       ← Volver a {service.title}
     </a>

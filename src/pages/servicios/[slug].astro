@@ -50,17 +50,44 @@ const detail = service.detail ?? {
       <div class="service-detail__copy">
         <p class="service-detail__eyebrow">{service.title}</p>
         <h1>{service.title}</h1>
-        <p class="service-detail__lead">{detail.intro}</p>
-        <InteractiveHoverButton href={detail.ctaHref} text={detail.ctaLabel} className="service-detail__cta" />
       </div>
 
-      <aside class="service-detail__summary" aria-label={`Resumen de ${service.title}`}>
-        <p class="service-detail__summary-label">Desde</p>
-        <strong>{service.price ? `$ ${service.price}` : 'Consultar'}</strong>
-        <span>{service.period ?? 'Por proyecto'}</span>
-        <p>{service.description}</p>
-      </aside>
+      {service.subServices?.length ? (
+        <div class="service-detail__hero-options">
+          <p class="service-detail__eyebrow">Opciones disponibles</p>
+          <h2 id="service-offers-title">Elige el servicio ideal para tu evento.</h2>
+          <p>Conoce cada alternativa y reserva la propuesta que mejor se adapta a tu celebración.</p>
+        </div>
+      ) : null}
     </div>
+
+    {service.subServices?.length ? (
+      <section class="service-detail__offers" aria-labelledby="service-offers-title">
+        <div class="service-detail__offers-grid">
+          {service.subServices.map((subService) => (
+            <article class="service-detail__offer">
+              <div class="service-detail__offer-copy">
+                <h3>{subService.name}</h3>
+                <p>{subService.description}</p>
+                <ul class="service-detail__offer-highlights">
+                  {subService.highlights.slice(0, 3).map((highlight) => <li>{highlight}</li>)}
+                </ul>
+              </div>
+
+              <footer class="service-detail__offer-footer">
+                <div>
+                  <strong>{subService.price ? `$ ${subService.price}` : subService.priceLabel ?? 'Consultar'}</strong>
+                  <span>Por evento</span>
+                </div>
+                <a class="service-detail__offer-link" href={`/servicios/${service.slug}/${subService.slug}`}>
+                  Ver detalles <span aria-hidden="true">↗</span>
+                </a>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </section>
+    ) : null}
 
     <section class="service-detail__body" aria-labelledby="service-objective-title">
       <div>
@@ -122,3 +149,7 @@ const detail = service.detail ?? {
     availability: 'https://schema.org/InStock',
   } } : {}),
 })} />
+
+<style>
+  @import '../../styles/pages/servicios/service-detail.css';
+</style>

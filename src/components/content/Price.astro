@@ -1,9 +1,5 @@
 ---
 import InteractiveHoverButton from '../ui/InteractiveHoverButton.astro';
-import Modal from '../ui/Modal.astro';
-import type { ServiceSubService } from '../../data/services/ts/services';
-
-export type SubService = ServiceSubService;
 
 export type PricePlan = {
   name: string;
@@ -12,8 +8,6 @@ export type PricePlan = {
   features: string[];
   href?: string;
   featured?: boolean;
-  subServices?: SubService[];
-  slug?: string;
 };
 
 interface Props {
@@ -37,10 +31,7 @@ const {
   </header>
 
   <div class="price__grid">
-    {plans.map((plan, index) => {
-      const modalId = `price-options-${index}`;
-
-      return (
+    {plans.map((plan) => (
       <article class:list={["price-card", { "price-card--featured": plan.featured }]}>
         {plan.featured && <span class="price-card__badge">Más elegido</span>}
         <h3>{plan.name}</h3>
@@ -53,23 +44,11 @@ const {
 
         <InteractiveHoverButton
           href={plan.href ?? '/contacto'}
-           text="Elegir propuesta"
-           data-modal-trigger={plan.subServices?.length ? modalId : undefined}
-           aria-haspopup={plan.subServices?.length ? 'dialog' : undefined}
+          text="Ver servicio"
           className="price-card__cta"
         />
-
-        {plan.subServices?.length ? (
-          <Modal
-            id={modalId}
-            title={`Elige tu versión de ${plan.name}`}
-            parentSlug={plan.slug ?? ''}
-            options={plan.subServices}
-          />
-        ) : null}
       </article>
-      );
-    })}
+    ))}
   </div>
 </section>
 

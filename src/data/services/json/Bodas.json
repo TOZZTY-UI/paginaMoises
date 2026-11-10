@@ -16,7 +16,7 @@
       "name": "Entrada y salida de novios",
         "price": "99.990",
         "description": "Presentación de saxofón en vivo para la ceremonia civil o religiosa. Incluye la entrada del novio, la entrada de la novia, la participación de pajes o la postura de argollas y la salida de ambos novios. Las canciones pueden elegirse del repertorio disponible y no tienen que ser necesariamente las clásicas.",
-      "image": "/icons/logo.webp",
+      "image": "https://i0.wp.com/elconsejodesilvia.com/wp-content/uploads/2017/09/xmariposas-de-arroz-1024x683-pagespeed-ic-fkcbb8j_ey.jpg",
       "highlights": [
           "Entrada del novio",
           "Entrada de la novia",
@@ -24,7 +24,7 @@
           "Salida de ambos novios",
           "Canciones a elección del repertorio"
       ],
-      "paymentHref": "https://www.flow.cl/btn.php?token=ocba07bdb86e525220c1ccb1f46f8148ac781f7e",
+      "paymentHref": "https://www.flow.cl/btn.php?token=x486b8cd0a14780f42b137e243df2966a22fcf75",
       "detail": {
         "sectionEyebrow": "La ceremonia",
         "sectionTitle": "Un momento único para recordar.",
@@ -40,26 +40,27 @@
       "name": "Pack Completo Servicios Matrimoniales",
       "price": "310.990",
       "description": "Una experiencia musical completa para acompañar los momentos más importantes de tu matrimonio.",
-      "image": "/icons/logo.webp",
+      "image": "https://bedazzling.es/blog/wp-content/uploads/2022/05/pexels-emma-bauso-2253870-1024x854.jpg",
       "highlights": [
         "Saxofón en vivo",
         "Repertorio personalizado",
         "Acompañamiento de momentos especiales",
         "Coordinación previa del evento"
       ],
-      "paymentHref": "https://www.flow.cl/btn.php?token=rb1ba2e5351283543d6a3fbbfe3a7cd8b171ea0c"
+      "paymentHref": "https://www.flow.cl/btn.php?token=s52ff24ac84782f09901f96b40645eb249e38142"
     },
     {
       "slug": "bodas-cristianas",
       "name": "Bodas cristianas",
+      "price": "149.990",
         "description": "Saxofón en vivo para acompañar los momentos de una boda cristiana, respetando el programa de la ceremonia y las preferencias de la pareja.",
-      "image": "/icons/logo.webp",
+      "image": "https://cdn0.bodas.com.mx/article-vendor/6285/3_2/960/jpg/img-4756_5_106285.webp",
       "highlights": [
           "Entrada y salida de los novios",
           "Acompañamiento de momentos especiales",
           "Repertorio acordado con la pareja"
       ],
-      "paymentHref": "/contacto",
+      "paymentHref": "https://www.flow.cl/btn.php?token=i456517cc82156d42cef7d9af77952f1149d5791",
       "detail": {
         "sectionEyebrow": "La ceremonia",
         "sectionTitle": "Un acompañamiento musical significativo.",
@@ -73,14 +74,15 @@
     {
       "slug": "bodas-de-oro",
       "name": "Bodas de oro",
+      "price": "149.990",
         "description": "Melodías emotivas para celebrar cincuenta años de matrimonio y honrar la historia compartida por la pareja.",
-      "image": "/icons/logo.webp",
+      "image": "https://diarioelnortino.cl/wp-content/uploads/2025/10/Bodas-de-Oro.jpeg",
       "highlights": [
           "Canciones significativas para la pareja",
           "Acompañamiento del homenaje",
           "Ambientación musical de la celebración"
       ],
-      "paymentHref": "/contacto",
+      "paymentHref": "https://www.flow.cl/btn.php?token=je6e68e3eff4b0528736d51d8ef3ef8f8f41c658",
       "detail": {
         "sectionEyebrow": "Cincuenta años juntos",
         "sectionTitle": "Un homenaje a una historia de amor.",
@@ -94,14 +96,15 @@
     {
       "slug": "bodas-de-plata",
       "name": "Bodas de plata",
+      "price": "149.990",
         "description": "Música romántica para celebrar veinticinco años de matrimonio y acompañar una jornada llena de recuerdos.",
-      "image": "/icons/logo.webp",
+      "image": "https://zafirobodas.com/wp-content/uploads/2024/09/Sin-titulo-21-scaled.jpg",
       "highlights": [
           "Repertorio personalizado",
           "Acompañamiento de momentos de homenaje",
           "Saxofón profesional en vivo"
       ],
-      "paymentHref": "/contacto",
+      "paymentHref": "https://www.flow.cl/btn.php?token=oe897075b4055ecf115826a4f52b20e3bff42e94",
       "detail": {
         "sectionEyebrow": "Veinticinco años juntos",
         "sectionTitle": "Una celebración para recordar.",

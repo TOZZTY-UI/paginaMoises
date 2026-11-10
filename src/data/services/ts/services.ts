@@ -50,6 +50,8 @@ export type ServiceSubService = {
   // Servicio específico asociado a una categoría principal.
   slug: string;
   name: string;
+  price?: number | string;
+  priceLabel?: string;
   description: string;
   image: string;
   highlights: string[];

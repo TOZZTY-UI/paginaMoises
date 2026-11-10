@@ -25,7 +25,7 @@
           "Repertorio amplio y variado",
           "Ambientación musical para el cóctel"
       ],
-      "paymentHref": "https://www.flow.cl/btn.php?token=xea825f69457ec9f32d9ea801ed716323151441a"
+      "paymentHref": "https://www.flow.cl/btn.php?token=mf81988207688077164ddb8ab3f8d818e9a2dd6f"
     },
     {
       "slug": "amenizacion-coctel-y-cena",
@@ -41,7 +41,32 @@
         "Recorrido por mesas y recinto",
         "Micrófono inalámbrico"
       ],
-      "paymentHref": "https://www.flow.cl/btn.php?token=z350a1365d7b3fc6817f84c0b5b2cc82b5eee143"
+      "paymentHref": "https://www.flow.cl/btn.php?token=wc783c0d81beaf84f7e4714c2e511859e69084ec"
+    },
+    {
+      "slug": "amenizacion-retail",
+      "name": "Amenización retail",
+      "priceLabel": "A convenir",
+      "description": "Transformamos supermercados, centros comerciales, tiendas, hoteles y otros espacios comerciales en experiencias memorables mediante intervenciones de saxofón en vivo programadas estratégicamente durante los horarios de mayor afluencia.",
+      "image": "/icons/logo.webp",
+      "highlights": [
+        "3 horas de servicio en el establecimiento",
+        "Salidas en vivo distribuidas durante la jornada",
+        "Intervenciones en horarios de mayor flujo",
+        "Repertorio adaptado al público y al espacio",
+        "Planificación flexible con la administración",
+        "Cobertura de supermercados, malls, tiendas y hoteles"
+      ],
+      "paymentHref": "/contacto",
+      "detail": {
+        "sectionEyebrow": "Experiencias musicales para retail",
+        "sectionTitle": "Una experiencia diferente para tus clientes.",
+        "sectionDescription": "Ofrecemos un servicio profesional de musicalización en vivo para acompañar los horarios de mayor afluencia, enriquecer la experiencia de compra y fortalecer la conexión entre las marcas y sus clientes. La propuesta contempla tres horas de servicio, con intervenciones musicales distribuidas durante la jornada y una programación coordinada según las necesidades de cada empresa.",
+        "finalEyebrow": "Solicita tu propuesta comercial",
+        "finalTitle": "Lleva música en vivo a tu establecimiento.",
+        "ctaLabel": "Solicitar cotización",
+        "imageAlt": "Experiencia musical de saxofón en un espacio comercial"
+      }
     }
   ]
 }
