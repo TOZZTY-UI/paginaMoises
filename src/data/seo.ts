@@ -2,8 +2,9 @@
 // Se reutilizan para construir títulos y descripciones consistentes.
 export const seo = {
   home: {
-    title: 'Saxofonista para matrimonios y eventos en Chile | SaxEventos',
-    description: 'Contrata saxofón en vivo para matrimonios, bodas, celebraciones y eventos en todo Chile. Repertorio personalizado y una experiencia musical memorable.',
+    title: 'Saxofonista para eventos en Chile | SaxEventos',
+    description:
+      'SaxEventos, también conocido como Saxo Eventos, ofrece saxofón en vivo para matrimonios, bodas, celebraciones, empresas y eventos en todo Chile. Repertorio personalizado y una experiencia musical memorable.',
   },
   servicios: {
     title: 'Servicios de saxofón en vivo para eventos | SaxEventos',

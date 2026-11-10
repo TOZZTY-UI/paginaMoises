@@ -6,55 +6,71 @@ interface Props {
   noIndex?: boolean;
 }
 
-const { title, description, image = '/icons/logo.webp', noIndex = false } = Astro.props;
-const site = Astro.site ?? new URL('https://saxeventos.cl');
+const {
+  title,
+  description,
+  image = "/icons/logo.webp",
+  noIndex = false,
+} = Astro.props;
+const site = Astro.site ?? new URL("https://saxeventos.cl");
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
-const logoUrl = new URL('/icons/logo.webp', site).href;
-const robots = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
-const imageType = imageUrl.endsWith('.png') ? 'image/png' : imageUrl.endsWith('.jpg') || imageUrl.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp';
+const logoUrl = new URL("/icons/logo.webp", site).href;
+const robots = noIndex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large";
+const imageType = imageUrl.endsWith(".png")
+  ? "image/png"
+  : imageUrl.endsWith(".jpg") || imageUrl.endsWith(".jpeg")
+    ? "image/jpeg"
+    : "image/webp";
 
 const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'ProfessionalService',
-      '@id': `${site.href}#business`,
-      name: 'SaxEventos',
+      "@type": "ProfessionalService",
+      "@id": `${site.href}#business`,
+      name: "SaxEventos",
       url: site.href,
       logo: logoUrl,
-       image: imageUrl,
-       description,
-       telephone: '+56 9 4925 1898',
-       email: 'saxoeventos@outlook.com',
-      priceRange: '$$',
-      serviceType: 'Música de saxofón en vivo para eventos',
-      knowsLanguage: 'es-CL',
+      image: imageUrl,
+      description,
+      telephone: "+56 9 4925 1898",
+      email: "saxoeventos@outlook.com",
+      priceRange: "$$",
+      serviceType: "Música de saxofón en vivo para eventos",
+      knowsLanguage: "es-CL",
       contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: '+56 9 4925 1898',
-        contactType: 'customer service',
-        availableLanguage: 'Spanish',
+        "@type": "ContactPoint",
+        telephone: "+56 9 4925 1898",
+        contactType: "customer service",
+        availableLanguage: "Spanish",
       },
-      areaServed: { '@type': 'Country', name: 'Chile' },
-      founder: { '@type': 'Person', name: 'Moisés Larenas' },
+      areaServed: { "@type": "Country", name: "Chile" },
+      founder: { "@type": "Person", name: "Moisés Larenas" },
     },
     {
-      '@type': 'WebSite',
-      '@id': `${site.href}#website`,
-      name: 'SaxEventos',
+      "@type": "WebSite",
+      "@id": `${site.href}#website`,
+      name: "SaxEventos",
+      alternateName: [
+        "Saxo Eventos",
+        "SaxoEventos",
+        "Saxofonista para eventos en Chile",
+      ],
       url: site.href,
-      inLanguage: 'es-CL',
-      publisher: { '@id': `${site.href}#business` },
+      inLanguage: "es-CL",
+      publisher: { "@id": `${site.href}#business` },
     },
     {
-      '@type': 'WebPage',
-      '@id': `${canonical}#webpage`,
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
       url: canonical,
       name: title,
       description,
-      inLanguage: 'es-CL',
-      isPartOf: { '@id': `${site.href}#website` },
+      inLanguage: "es-CL",
+      isPartOf: { "@id": `${site.href}#website` },
     },
   ],
 };
