@@ -12,6 +12,21 @@
     display: none !important;
   }
 
+  .album-view {
+    overflow: visible;
+  }
+
+  .album-view.is-entering .view-header {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+
+  .album-view.is-open .view-header {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .32s ease, transform .42s cubic-bezier(.2, 0, 0, 1);
+  }
+
   .intro {
     text-align: center;
     margin-bottom: 42px;
@@ -71,27 +86,32 @@
     display: block;
     position: relative;
     aspect-ratio: 1;
+    perspective: 900px;
+    isolation: isolate;
     padding: 5px 5px 5px 15px;
     border-radius: 5px;
-    overflow: hidden;
-    background: linear-gradient(
-      125deg,
-      var(--marfil),
-      var(--gris) 8%,
-      var(--marfil) 15%,
-      var(--negro) 100%
-    );
+    background: var(--negro);
     box-shadow:
       5px 8px 22px var(--negro-70),
       inset 0 0 0 1px var(--marfil-60);
     transition:
-      transform .35s ease,
-      box-shadow .35s ease;
+      transform .35s cubic-bezier(.2, 0, 0, 1),
+      box-shadow .35s cubic-bezier(.2, 0, 0, 1);
   }
 
   .album-button:hover .jewel-case {
     transform: translateY(-7px) rotate(-2deg);
     box-shadow: 9px 18px 32px var(--negro-90);
+  }
+
+  .album-button.is-opening .jewel-case {
+    transform: translateY(-4px) rotate(1deg);
+    box-shadow: 12px 22px 36px var(--negro-90);
+  }
+
+  .album-button.is-active .jewel-case {
+    transform: translateY(-4px) rotate(1deg);
+    box-shadow: 12px 22px 36px var(--negro-90);
   }
 
   .case-spine {
@@ -107,10 +127,30 @@
     );
   }
 
-  .case-cover {
-    width: 100%;
-    height: 100%;
+  .case-tray,
+  .case-lid {
+    position: absolute;
+    inset: 5px;
     padding: clamp(8px, 2vw, 18px);
+    border-radius: 2px;
+  }
+
+  .case-tray {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--gris);
+    box-shadow: inset 0 0 0 3px var(--negro-70);
+    transform: translateY(7px) scale(.94);
+    transition: transform .55s cubic-bezier(.2, 0, 0, 1);
+  }
+
+  .case-lid {
+    z-index: 3;
+    transform-origin: right center;
     background:
       radial-gradient(
         circle at 80% 20%,
@@ -128,6 +168,27 @@
     justify-content: space-between;
     text-align: center;
     overflow: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform .55s cubic-bezier(.2, 0, 0, 1), box-shadow .55s ease;
+  }
+
+  .album-button.is-opening .case-lid {
+    transform: rotateY(78deg) translateX(6px);
+    box-shadow: 0 -12px 18px var(--negro-70);
+  }
+
+  .album-button.is-opening .case-tray {
+    transform: translateY(15px) scale(.94);
+  }
+
+  .album-button.is-active .case-lid {
+    transform: rotateY(78deg) translateX(6px);
+    box-shadow: 0 -12px 18px var(--negro-70);
+  }
+
+  .album-button.is-active .case-tray {
+    transform: translateY(15px) scale(.94);
   }
 
   .brand {
@@ -143,12 +204,19 @@
     overflow-wrap: anywhere;
   }
 
-  .case-cover small {
+  .case-lid strong {
+    font-size: clamp(13px, 2vw, 23px);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .case-lid small {
     font-size: 8px;
     letter-spacing: .12em;
   }
 
-  .cover-disc {
+  .lid-disc,
+  .tray-disc {
     width: 48%;
     aspect-ratio: 1;
     border-radius: 50%;
@@ -163,6 +231,38 @@
       var(--marfil)
     );
     box-shadow: 3px 7px 18px var(--negro-70);
+  }
+
+  .lid-disc {
+    background: conic-gradient(
+      var(--marfil),
+      var(--accent),
+      var(--dorado),
+      var(--marfil),
+      var(--burdeos),
+      var(--marfil)
+    );
+    opacity: .7;
+  }
+
+  .tray-disc {
+    width: 72%;
+    background: conic-gradient(
+      var(--marfil),
+      var(--accent),
+      var(--dorado),
+      var(--marfil),
+      var(--burdeos),
+      var(--accent)
+    );
+    box-shadow: 4px 9px 20px var(--negro-90);
+  }
+
+  .tray-label {
+    color: var(--negro);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .14em;
   }
 
   .cover-hole {
@@ -184,6 +284,7 @@
       transparent 75%,
       var(--marfil-10) 100%
     );
+    z-index: 4;
   }
 
   .album-details {
@@ -250,6 +351,71 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    transform-origin: 50% 0;
+  }
+
+  .album-view.is-entering .music-card {
+    opacity: 0;
+    transform: translateY(-155px) scale(.42) rotate(-3deg);
+  }
+
+  .album-view.is-open .music-card {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+    transition: opacity .38s ease, transform .62s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .album-view.is-scroll-ready .music-card:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(-155px) scale(.42) rotate(-3deg);
+  }
+
+  .album-view.is-closing .view-header {
+    opacity: 0;
+    transform: translateY(-18px);
+    transition: opacity .25s ease, transform .35s ease;
+  }
+
+  .album-view.is-closing .music-card {
+    opacity: 0;
+    transform: translateY(-130px) scale(.42) rotate(3deg);
+    transition: opacity .38s ease, transform .5s cubic-bezier(.4, 0, 1, 1);
+  }
+
+  .album-view.is-closing .music-card:nth-child(2) {
+    transition-delay: .06s;
+  }
+
+  .album-view.is-closing .music-card:nth-child(3) {
+    transition-delay: .12s;
+  }
+
+  .album-button.is-closing .case-lid {
+    transform: rotateY(78deg) translateX(6px);
+  }
+
+  .album-button.is-closing .case-tray {
+    transform: translateY(15px) scale(.94);
+  }
+
+  .album-view.is-open .music-card:nth-child(2) {
+    transition-delay: .1s;
+  }
+
+  .album-view.is-open .music-card:nth-child(3) {
+    transition-delay: .2s;
+  }
+
+  .album-view.is-open .music-card:nth-child(4) {
+    transition-delay: .28s;
+  }
+
+  .album-view.is-open .music-card:nth-child(5) {
+    transition-delay: .36s;
+  }
+
+  .album-view.is-open .music-card:nth-child(6) {
+    transition-delay: .44s;
   }
 
   .disc-area {
@@ -420,11 +586,33 @@
       animation: none;
     }
     .jewel-case,
+    .case-lid,
+    .case-tray,
+    .view-header,
+    .music-card,
     .play-button {
       transition: none;
     }
 
-    .album-button:hover .jewel-case {
+    .album-button:hover .jewel-case,
+    .album-button.is-opening .jewel-case,
+    .album-button.is-opening .case-lid,
+    .album-button.is-opening .case-tray {
+      transform: none;
+    }
+
+    .album-view.is-entering .view-header,
+    .album-view.is-entering .music-card {
+      opacity: 1;
+      transform: none;
+    }
+
+    .album-view.is-scroll-ready .music-card:not(.is-visible),
+    .album-view.is-closing .view-header,
+    .album-view.is-closing .music-card,
+    .album-button.is-closing .case-lid,
+    .album-button.is-closing .case-tray {
+      opacity: 1;
       transform: none;
     }
   }

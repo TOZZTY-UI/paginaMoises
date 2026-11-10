@@ -54,19 +54,21 @@ const genres = Object.entries(collection).map(
       >
         <span class="jewel-case">
           <span class="case-spine"></span>
-
-          <span class="case-cover">
-            <span class="brand">SAXEVENTOS</span>
-
-            <span class="cover-disc" aria-hidden="true">
+          <span class="case-tray">
+            <span class="tray-disc" aria-hidden="true">
               <span class="cover-hole"></span>
             </span>
-
-            <strong>{genre.label}</strong>
-            <small>MUSIC COLLECTION</small>
+            <span class="tray-label">SAXEVENTOS / AUDIO</span>
           </span>
 
-          <span class="case-glass"></span>
+          <span class="case-lid">
+            <span class="brand">SAXEVENTOS</span>
+            <strong>{genre.label}</strong>
+            <small>MUSIC COLLECTION</small>
+            <span class="lid-disc" aria-hidden="true"></span>
+          </span>
+
+          <span class="case-glass" aria-hidden="true"></span>
         </span>
 
         <span class="album-details">
@@ -97,13 +99,6 @@ const genres = Object.entries(collection).map(
           <p>{genre.songs.length} canciones disponibles</p>
         </div>
 
-        <button
-          type="button"
-          class="back-button"
-          data-back
-        >
-          ← Volver a los álbumes
-        </button>
       </div>
 
       <div class="disc-grid">

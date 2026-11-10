@@ -5,8 +5,6 @@ export const repertoire = [
 
 
 export const repertoire2 = {
-
-
 Romantico: [
   { artist: "Los Vásquez", link: "https://www.youtube.com/watch?v=rZjKiJb7M_8", album: "Contigo Pop y Cebolla", song: "Miénteme una vez", image: "https://i.scdn.co/image/ab67616d0000b273d41df08074012ca753e18232" },
   { artist: "Lionel Richie", link: "https://www.youtube.com/watch?v=mHONNcZbwDY", album: "Can't Slow Down", song: "Hello", image: "https://i.scdn.co/image/ab67616d0000b2732166b28714239e31b48aeb17" },
