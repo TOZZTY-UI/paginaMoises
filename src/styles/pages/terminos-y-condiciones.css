@@ -1,0 +1,48 @@
+.legal-content {
+    max-width: 820px;
+    color: #fff8e7;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .legal-content h1,
+  .legal-content h2,
+  .legal-content h3 {
+    color: #fff8e7;
+    font-family: Arial, sans-serif;
+  }
+
+  .legal-content h1 {
+    font-size: 26px;
+    margin-bottom: 0.35rem;
+  }
+
+  .legal-content h2 {
+    font-size: 19px;
+    margin: 2.5rem 0 0.75rem;
+  }
+
+  .legal-content a {
+    color: #f1d18a;
+    word-break: break-word;
+  }
+
+  .legal-subtitle {
+    color: #fff8e7;
+    font-size: 14px;
+  }
+
+  .terms-index {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    background: color-mix(in srgb, currentColor 5%, transparent);
+  }
+
+  .terms-index h2 {
+    margin-top: 0;
+  }
+
+  .terms-index ol {
+    margin-bottom: 0;
+  }

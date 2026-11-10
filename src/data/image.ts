@@ -28,7 +28,19 @@ export const images = {
         image('bodas/IMG-20260806-WA0222.jpg', 'bodas'),
         image('bodas/sdasdas.jpeg', 'bodas'),
         image('bodas/sdasdsadas.jpeg', 'bodas'),
-        image('bodas/WhatsApp Image 2026-asdsa.jpeg', 'bodas')
+        image('bodas/WhatsApp Image 2026-asdsa.jpeg', 'bodas'),
+        image('bodas/Saxofón junto a copas y flores-11.png', 'bodas'),
+        image('bodas/Saxofón y copas en luz cálida-9.png', 'bodas'),
+        image('bodas/Saxofón junto a copas y flores-9.png', 'bodas'),
+        image('bodas/Saxofón, copas y flores en la mesa-8.png', 'bodas'),
+        image('bodas/Saxofón, copas y flores-6.png', 'bodas'),
+        image('bodas/Saxofón, flores y copas bajo luces-7.png', 'bodas'),
+        image('bodas/Saxofón, flores y copas-4.png', 'bodas'),
+        image('bodas/Boda elegante con saxofón y luz cálida-5.png', 'bodas'),
+        image('bodas/Elegancia nupcial con flores y saxofón-2.png', 'bodas'),
+        image('bodas/Elegancia nupcial con saxofón-1.png', 'bodas'),
+        image('bodas/Elegancia nupcial entre flores y saxofón-3.png', 'bodas')
+
     ],
     funerario: [
         image('funerario/20260108_132903.jpg.jpeg', 'funerario'),
@@ -47,9 +59,11 @@ export const images = {
     YO: [
         image('YO/IMG-20260926-WA0063.jpg.jpeg', 'yo'),
         image('YO/file_0000000008ac820ea0a0757b58cffc18.png', 'yo'),
-        image('YO/file_000000001a70820ea1065f0bc7e02e3e.png', 'yo')
-    ]
-    , logros: [
+        image('YO/file_000000001a70820ea1065f0bc7e02e3e.png', 'yo'),
+        image('YO/Retrato de músico con saxofón-2.png', 'yo'),
+        image('YO/Selfie profesional junto al elefante Jumbo.png', 'yo')
+    ],
+    logros: [
         image('YO/logros/badge-2014.jpg', 'logros'),
         image('YO/logros/badge-2015.jpg', 'logros'),
         image('YO/logros/badge-2016.jpg', 'logros'),

@@ -1,4 +1,21 @@
 .landing-cta {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: clamp(5rem, 11vw, 10rem) clamp(1.25rem, 5vw, 4rem);
+  display: grid;
+  justify-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.landing-cta h2 {
+  margin: 0;
+  color: var(--negro);
+  font-size: clamp(2.7rem, 6vw, 6rem);
+  letter-spacing: -.07em;
+}
+
+.landing-cta {
     position: relative;
     isolation: isolate;
     background-image: url('https://i.pinimg.com/1200x/9b/49/33/9b4933e14069a24309e832dca6292b97.jpg');

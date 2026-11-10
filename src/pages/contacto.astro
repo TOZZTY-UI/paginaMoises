@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astro";
+import TextLabel from "../components/ui/TextLabel.astro";
 ---
 
 <BaseLayout page="contacto"
@@ -11,15 +12,6 @@ import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astr
             >
                 Estamos listos para escuchar tu próximo proyecto.
             </p>
-            <div class="contact-links">
-                <InteractiveHoverButton href="mailto:hola@moises.cl" text="hola@moises.cl" />
-                <InteractiveHoverButton
-                    href="https://wa.me/56949251898"
-                    text="+56 9 4925 1898"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                />
-            </div>
             <form class="contact-form" id="contact-form">
                 <div class="form-heading">
                     <p class="eyebrow">Escríbenos</p>
@@ -27,44 +19,46 @@ import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astr
                 </div>
 
                 <div class="form-grid">
-                    <label>
-                        Nombre
-                        <input type="text" name="nombre" autocomplete="name" required />
-                    </label>
-                    <label>
-                        Correo electrónico
-                        <input
-                            id="correo"
-                            type="email"
+                    <TextLabel
+                        for="nombre"
+                        label="Tu nombre"
+                        type="text"
+                        name="nombre"
+                        autocomplete="name"
+                        required
+                    />
+                    <div>
+                        <TextLabel
+                            for="correo"
+                            label="Tu correo"
                             name="correo"
                             autocomplete="email"
-                            required
                             aria-describedby="correo-ayuda"
                             title="Usa un correo de Gmail, Outlook, Hotmail, Yahoo, iCloud, ProtonMail u otro proveedor reconocido."
+                            required
                         />
                         <small id="correo-ayuda" class="field-help">
                             Usa un correo de un proveedor reconocido, por ejemplo Gmail u Outlook.
                         </small>
-                    </label>
-                    <label>
-                        Teléfono
-                        <input type="tel" name="telefono" autocomplete="tel" />
-                    </label>
-                    <label>
-                        Tipo de evento
-                        <select name="evento" required>
-                            <option value="" selected disabled>Selecciona una opción</option>
+                    </div>
+                    <TextLabel
+                        for="telefono"
+                        label="Tu número de teléfono"
+                        type="tel"
+                        name="telefono"
+                        autocomplete="tel"
+                    />
+                    <TextLabel for="evento" label="Tipo de evento" as="select" name="evento" required>
+                        <option value="" selected disabled>Selecciona el tipo de evento</option>
                             <option>Celebración privada</option>
                             <option>Boda</option>
                             <option>Evento empresarial</option>
                             <option>Ceremonia o conmemoración</option>
                             <option>Otro</option>
-                        </select>
-                    </label>
-                    <label class="form-full">
-                        Cuéntanos un poco más
-                        <textarea name="mensaje" rows="5" required></textarea>
-                    </label>
+                    </TextLabel>
+                    <div class="form-full">
+                        <TextLabel for="mensaje" label="Describe tu evento" as="textarea" name="mensaje" rows="5" required />
+                    </div>
                 </div>
 
                 <InteractiveHoverButton type="submit" text="Enviar consulta" />
@@ -74,183 +68,8 @@ import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astr
     </main></BaseLayout
 >
 
-<script>
-    const form = document.querySelector<HTMLFormElement>('#contact-form');
-    const emailInput = document.querySelector<HTMLInputElement>('#correo');
-    const allowedEmailDomains = new Set([
-        'gmail.com',
-        'gmail.cl',
-        'outlook.com',
-        'outlook.cl',
-        'hotmail.com',
-        'hotmail.cl',
-        'live.com',
-        'live.cl',
-        'msn.com',
-        'yahoo.com',
-        'yahoo.cl',
-        'icloud.com',
-        'me.com',
-        'proton.me',
-        'protonmail.com',
-        'zoho.com',
-        'gmx.com',
-        'mail.com',
-        'aol.com',
-    ]);
-
-    const validateEmailDomain = () => {
-        if (!emailInput || !emailInput.value) return true;
-
-        const domain = emailInput.value.trim().toLowerCase().split('@').pop() ?? '';
-        const isAllowed = allowedEmailDomains.has(domain);
-
-        emailInput.setCustomValidity(
-            isAllowed
-                ? ''
-                : 'Usa un correo de un proveedor reconocido, como Gmail, Outlook o Hotmail.',
-        );
-
-        return isAllowed;
-    };
-
-    emailInput?.addEventListener('input', validateEmailDomain);
-    emailInput?.addEventListener('blur', validateEmailDomain);
-
-    form?.addEventListener('submit', (event) => {
-        if (!validateEmailDomain() || !form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity();
-            return;
-        }
-
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const message = [
-            'Hola, quiero consultar por un evento.',
-            `Nombre: ${data.get('nombre')}`,
-            `Correo: ${data.get('correo')}`,
-            `Teléfono: ${data.get('telefono') || 'No indicado'}`,
-            `Tipo de evento: ${data.get('evento')}`,
-            `Mensaje: ${data.get('mensaje')}`,
-        ].join('\n');
-
-        window.open(`https://wa.me/56949251898?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    });
-</script>
+<script src="../scripts/pages/contacto.ts"></script>
 
 <style>
-    .contact-form {
-        max-width: 760px;
-        margin-top: 4rem;
-        padding-top: 3rem;
-        border-top: 1px solid var(--color-border);
-    }
-
-    .contact-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-    }
-
-    .contact-links .interactive-hover-button,
-    .contact-form .interactive-hover-button {
-        border-color: var(--marfil);
-        background: var(--marfil);
-        color: var(--burdeos);
-    }
-
-    .contact-links .interactive-hover-button__fill,
-    .contact-form .interactive-hover-button__fill {
-        background: var(--burdeos);
-    }
-
-    .contact-links .interactive-hover-button__hover-label,
-    .contact-form .interactive-hover-button__hover-label {
-        color: var(--marfil);
-    }
-
-    .contact-links .interactive-hover-button:hover,
-    .contact-links .interactive-hover-button:focus-visible,
-    .contact-form .interactive-hover-button:hover,
-    .contact-form .interactive-hover-button:focus-visible {
-        border-color: var(--burdeos);
-        color: var(--marfil);
-    }
-
-    .form-heading h2 {
-        margin: 0.5rem 0 2rem;
-        font-family: var(--font-display);
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        font-weight: 400;
-    }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.25rem;
-    }
-
-    label {
-        display: grid;
-        gap: 0.5rem;
-        color: var(--color-text);
-        font-size: 0.9rem;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        border: 1px solid var(--color-border);
-        border-radius: 0.35rem;
-        padding: 0.85rem 0.9rem;
-        background: var(--color-card);
-        color: var(--color-text);
-        font: inherit;
-    }
-
-    textarea {
-        resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
-    }
-
-    .form-full {
-        grid-column: 1 / -1;
-    }
-
-    .contact-form .interactive-hover-button {
-        margin-top: 1.5rem;
-        cursor: pointer;
-    }
-
-    .form-note {
-        margin-top: 0.9rem;
-        color: var(--color-text-muted);
-        font-size: 0.8rem;
-    }
-
-    .field-help {
-        color: var(--color-text-muted);
-        font-size: 0.75rem;
-        line-height: 1.4;
-    }
-
-    @media (max-width: 640px) {
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .form-full {
-            grid-column: auto;
-        }
-    }
+  @import '../styles/pages/contacto.css';
 </style>

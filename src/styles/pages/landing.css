@@ -42,7 +42,7 @@
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 2.5rem; }
 .landing-button { display: inline-flex; align-items: center; gap: .9rem; min-height: 3.4rem; padding: .8rem 1.35rem; border: 1px solid var(--dorado); background: var(--dorado); color: var(--negro); font-weight: 700; transition: transform .2s ease, background-color .2s ease; }
 .landing-button:hover { transform: translateY(-3px); background: var(--color-primary-hover); }
-.landing-button span, .service-item b { font-size: 1.2rem; font-weight: 400; }
+.landing-button span { font-size: 1.2rem; font-weight: 400; }
 .text-link { padding: .6rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); font-size: .9rem; }
 .text-link span { margin-left: .4rem; color: var(--color-primary); }
 .hero-note { display: flex; gap: .8rem; align-items: baseline; margin-top: clamp(3rem, 8vw, 6rem); color: var(--color-text-muted); font-size: .72rem; }
@@ -58,8 +58,6 @@
 .landing-intro, .landing-services, .landing-quote, .landing-cta { max-width: 1280px; margin-inline: auto; padding: clamp(5rem, 11vw, 10rem) clamp(1.25rem, 5vw, 4rem); }
 .landing-intro { display: grid; grid-template-columns: .8fr 2fr; gap: 2rem; min-height: 100svh; align-content: center; border-top: 1px solid var(--color-border); }
 .landing-intro h2, .section-heading h2, .landing-cta h2 { margin: 0; color: var(--color-text); font-size: clamp(2.7rem, 6vw, 6rem); letter-spacing: -.07em; }
-h2 em { color: var(--color-primary); font-family: var(--font-accent); font-weight: 400; letter-spacing: 0; }
-.intro-text { max-width: 30rem; margin-top: 2rem; color: var(--color-text-muted); font-size: 1.05rem; }
 .landing-services { display: grid; grid-template-columns: .85fr 1.3fr; gap: clamp(3rem, 9vw, 9rem); width: 100%; max-width: none; min-height: 100svh; align-content: center; background: var(--color-surface); }
 .service-list { border-top: 1px solid var(--color-border); }
 .service-item { display: grid; grid-template-columns: 3rem 1fr 2rem; gap: 1rem; align-items: center; padding: 1.6rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); transition: padding .25s ease, color .25s ease; }
@@ -69,6 +67,8 @@ h2 em { color: var(--color-primary); font-family: var(--font-accent); font-weigh
 .service-item strong { font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.75rem); }
 .service-item small { max-width: 27rem; margin-top: .35rem; color: var(--color-text-muted); font-size: .82rem; line-height: 1.45; }
 .service-item b { justify-self: end; }
+h2 em { color: var(--color-primary); font-family: var(--font-accent); font-weight: 400; letter-spacing: 0; }
+.intro-text { max-width: 30rem; margin-top: 2rem; color: var(--color-text-muted); font-size: 1.05rem; }
 .landing-quote { display: grid; place-items: center; text-align: center; }
 .quote-mark { height: 3rem; color: var(--color-primary); font: 5rem/1 Georgia, serif; }
 .landing-quote blockquote { max-width: 850px; margin: 1rem 0; color: var(--color-text); font: clamp(2rem, 4vw, 4.5rem)/1.05 Georgia, serif; letter-spacing: -.06em; }

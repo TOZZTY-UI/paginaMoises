@@ -1,0 +1,104 @@
+.not-found {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 7rem);
+    min-height: 100svh;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(7rem, 12vh, 10rem) clamp(1.25rem, 5vw, 5rem) clamp(3rem, 7vh, 5rem);
+    overflow: hidden;
+  }
+
+  .not-found__content { position: relative; z-index: 1; max-width: 600px; }
+  .not-found__code {
+    margin: 1.5rem 0 0;
+    color: var(--color-primary);
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+  .not-found h1 {
+    max-width: 100%;
+    margin: 0;
+    font-size: clamp(3.2rem, 6vw, 5.8rem);
+    line-height: .91;
+    text-wrap: pretty;
+  }
+  .not-found__message {
+    max-width: 39rem;
+    margin: 2rem 0 0;
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.55;
+  }
+  .not-found__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.25rem; }
+  .not-found__button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem 1.2rem;
+    background: var(--color-primary);
+    color: var(--negro);
+    font-weight: 700;
+    transition: background-color .2s ease, transform .2s ease;
+  }
+  .not-found__button:hover { background: var(--color-primary-hover); transform: translateY(-2px); }
+  .not-found__link { min-height: 44px; display: inline-flex; align-items: center; gap: .45rem; color: var(--marfil); font-weight: 600; }
+  .not-found__link span { color: var(--color-primary); font-size: 1.2em; transition: transform .2s ease; }
+  .not-found__link:hover span { transform: translate(3px, -3px); }
+
+  .not-found__score {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: min(55vw, 500px);
+    color: var(--marfil);
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 22vw, 20rem);
+    font-weight: 700;
+    line-height: .7;
+    letter-spacing: -.18em;
+    user-select: none;
+  }
+  .not-found__score::before,
+  .not-found__score::after {
+    position: absolute;
+    width: 100%;
+    height: 34%;
+    border-top: 2px solid color-mix(in srgb, var(--marfil) 26%, transparent);
+    border-bottom: 2px solid color-mix(in srgb, var(--marfil) 26%, transparent);
+    content: '';
+  }
+  .not-found__score::before { transform: translateY(-28%); }
+  .not-found__score::after { transform: translateY(28%); }
+  .not-found__score-number { position: relative; z-index: 1; }
+  .not-found__score-number--accent { color: var(--burdeos); transform: translateY(-.12em); }
+
+  .not-found__notation { position: absolute; top: 8%; left: 0; width: min(300px, 50vw); height: 120px; opacity: .7; transform: rotate(-8deg); pointer-events: none; }
+  .not-found__note { position: absolute; width: 26px; height: 34px; color: var(--color-primary); line-height: 1; animation: float-note 4s ease-in-out infinite; }
+  .not-found__note--one { top: 4%; left: 28%; }
+  .not-found__note--two { top: 39%; left: 66%; animation-delay: -1.8s; }
+  @keyframes float-note { 0%, 100% { transform: translateY(0) rotate(5deg); } 50% { transform: translateY(-9px) rotate(-5deg); } }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .not-found__content > * { animation: rise-in .65s cubic-bezier(.22, 1, .36, 1) both; }
+    .not-found__content > :nth-child(2) { animation-delay: 80ms; }
+    .not-found__content > :nth-child(3) { animation-delay: 150ms; }
+    .not-found__content > :nth-child(4) { animation-delay: 220ms; }
+    .not-found__score { animation: score-in .8s cubic-bezier(.22, 1, .36, 1) 120ms both; }
+    @keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes score-in { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+  }
+
+  @media (max-width: 760px) {
+    .not-found { grid-template-columns: 1fr; align-content: center; gap: 1rem; padding-top: 6rem; }
+    .not-found__score { position: absolute; right: -2rem; bottom: 2rem; min-height: 220px; opacity: .3; font-size: clamp(9rem, 45vw, 16rem); }
+    .not-found__notation { top: 12%; left: 1.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .not-found__note, .not-found__button, .not-found__link span { animation: none; transition: none; }
+  }

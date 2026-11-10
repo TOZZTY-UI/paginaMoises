@@ -1,14 +1,33 @@
 ---
 import '../../styles/components/ui/TextLabel.css';
 
-const { label, for: htmlFor } = Astro.props;
+const {
+  label,
+  for: htmlFor,
+  as = 'input',
+  type = 'email',
+  required = false,
+  ...inputAttributes
+} = Astro.props;
+
+const fieldAttributes = as === 'select' || inputAttributes.placeholder
+  ? inputAttributes
+  : { placeholder: ' ', ...inputAttributes };
 ---
 
-<div class="email-input-container">
-  <input type="email" id={htmlFor} required />
-  <label for={htmlFor}>{label}</label>
-  <div class="email-input-border">
-    <span class="email-input-border-left"></span>
-    <span class="email-input-border-right"></span>
+<div class="text-label" data-text-label data-field={as}>
+  {as === 'select' ? (
+    <select {...fieldAttributes} id={htmlFor} required={required}>
+      <slot />
+    </select>
+  ) : as === 'textarea' ? (
+    <textarea {...fieldAttributes} id={htmlFor} required={required}><slot /></textarea>
+  ) : (
+    <input {...fieldAttributes} type={type} id={htmlFor} required={required} />
+  )}
+  <label class="text-label__label" for={htmlFor}>{label}</label>
+  <div class="text-label__border" aria-hidden="true">
+    <span class="text-label__border-left"></span>
+    <span class="text-label__border-right"></span>
   </div>
 </div>

@@ -1,0 +1,162 @@
+.about-page {
+        min-height: 100svh;
+        padding: clamp(6rem, 12vh, 10rem) 1.5rem clamp(4rem, 8vh, 7rem);
+    }
+
+    .about-page__inner {
+        display: grid;
+        grid-template-columns: minmax(0, .9fr) minmax(320px, .82fr);
+        align-items: center;
+        gap: clamp(3rem, 9vw, 9rem);
+        width: min(1180px, 100%);
+        margin-inline: auto;
+    }
+
+    .about-page__copy { max-width: 560px; }
+    .about-page h1 {
+        max-width: 9ch;
+        margin: 1.4rem 0 1.75rem;
+        font-size: clamp(3.4rem, 6.8vw, 6.8rem);
+        line-height: .92;
+    }
+    .about-page__lead {
+        max-width: 34rem;
+        color: var(--color-text);
+        font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+        line-height: 1.45;
+    }
+    .about-page__body {
+        max-width: 32rem;
+        margin-top: 1.25rem;
+        color: var(--color-text-muted);
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+    .about-page__link {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        min-height: 44px;
+        margin-top: 2.25rem;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text);
+        font-weight: 700;
+        transition: color .2s ease, border-color .2s ease;
+    }
+    .about-page__link span { color: var(--color-primary); transition: transform .2s ease; }
+    .about-page__link:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .about-page__link:hover span { transform: translate(3px, -3px); }
+
+    .about-page__portrait {
+        position: relative;
+        width: min(100%, 530px);
+        margin: 0 0 0 auto;
+        padding-bottom: 2.5rem;
+    }
+    .about-page__portrait::before {
+        position: absolute;
+        inset: 1.5rem -1.25rem 0 1.25rem;
+        background: var(--color-surface);
+        content: '';
+    }
+    .about-page__portrait :global(img) {
+        position: relative;
+        width: 100%;
+        aspect-ratio: .75;
+        object-fit: cover;
+        filter: saturate(.86) contrast(1.04);
+    }
+    .about-page__portrait figcaption {
+        position: absolute;
+        right: -1rem;
+        bottom: 0;
+        max-width: 12rem;
+        color: var(--color-text);
+        font-family: Georgia, serif;
+        font-size: .95rem;
+        font-style: italic;
+        line-height: 1.35;
+    }
+
+    .about-achievements {
+        width: min(100%, 1040px);
+        margin: clamp(8rem, 16vw, 14rem) auto 0;
+    }
+    .about-achievements__heading { max-width: 34rem; }
+    .about-achievements h2 { margin-top: 1.25rem; font-size: clamp(2.5rem, 5vw, 5rem); line-height: .94; }
+    .about-achievements__list {
+        position: relative;
+        display: grid;
+        gap: 2.5rem;
+        margin: 4rem 0 0;
+        padding: 0;
+        list-style: none;
+    }
+    .about-achievements__list::before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: var(--color-primary);
+        content: '';
+        transform: translateX(-50%);
+    }
+    .about-achievements__item { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 150px; }
+    .about-achievements__marker {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        width: 1.05rem;
+        height: 1.05rem;
+        border: 4px solid var(--negro);
+        border-radius: 50%;
+        background: var(--color-primary);
+        transform: translate(-50%, -50%);
+    }
+    .about-achievements__card {
+        width: min(100%, 390px);
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--color-line) 70%, transparent);
+        background: var(--color-card);
+    }
+    .about-achievements__card :global(img) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+    }
+    .about-achievements__item:not(.about-achievements__item--reverse) .about-achievements__card { grid-column: 1; justify-self: end; margin-right: 3.25rem; }
+    .about-achievements__item--reverse .about-achievements__card { grid-column: 2; justify-self: start; margin-left: 3.25rem; }
+    .about-achievements__label { color: var(--color-primary); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .about-achievements h3 { margin-top: .65rem; font-size: clamp(1.35rem, 2vw, 1.8rem); }
+    .about-achievements__card > p:last-child { margin-top: .7rem; color: var(--color-text-muted); font-size: .92rem; line-height: 1.55; }
+
+    @media (max-width: 760px) {
+        .about-page { padding-inline: 1rem; }
+        .about-page__inner { grid-template-columns: 1fr; gap: 3.5rem; }
+        .about-page h1 { max-width: 10ch; font-size: clamp(3.3rem, 15vw, 5.2rem); }
+        .about-page__portrait { width: calc(100% - 1rem); margin-inline: 0 auto; }
+        .about-page__portrait::before { right: -.75rem; left: .75rem; }
+        .about-page__portrait figcaption { right: -.5rem; }
+        .about-achievements { margin-top: 7rem; }
+        .about-achievements__list { gap: 2rem; margin-top: 3rem; padding-left: 1.25rem; }
+        .about-achievements__list::before { left: .25rem; transform: none; }
+        .about-achievements__item { display: block; min-height: 0; padding-left: 1.25rem; }
+        .about-achievements__marker { top: 1.25rem; left: .25rem; }
+        .about-achievements__item:not(.about-achievements__item--reverse) .about-achievements__card,
+        .about-achievements__item--reverse .about-achievements__card { width: 100%; margin: 0; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .about-page__copy { animation: about-in .7s cubic-bezier(.22, 1, .36, 1) both; }
+        .about-page__portrait { animation: about-in .8s .12s cubic-bezier(.22, 1, .36, 1) both; }
+        @keyframes about-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-page__link, .about-page__link span { transition: none; }
+    }

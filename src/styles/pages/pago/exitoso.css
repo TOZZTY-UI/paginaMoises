@@ -1,0 +1,47 @@
+.payment-status {
+    display: grid;
+    min-height: 70vh;
+    place-items: center;
+    padding: clamp(4rem, 10vw, 8rem) 1.25rem;
+    background: var(--negro);
+    color: var(--marfil);
+  }
+
+  .payment-status__card {
+    width: min(100%, 40rem);
+    max-width: 40rem;
+    padding: clamp(2rem, 6vw, 4rem);
+    border: 1px solid color-mix(in srgb, var(--dorado) 55%, transparent);
+    background: var(--color-card);
+    text-align: center;
+  }
+
+  .payment-status h1 {
+    margin: 1rem 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 400;
+  }
+
+  .payment-status p:not(.eyebrow) {
+    color: var(--gris);
+    line-height: 1.7;
+  }
+
+  .payment-status__actions {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .payment-status__back {
+    color: var(--dorado);
+  }
+
+  .payment-status small {
+    display: block;
+    margin-top: 2rem;
+    color: var(--gris);
+    line-height: 1.5;
+  }

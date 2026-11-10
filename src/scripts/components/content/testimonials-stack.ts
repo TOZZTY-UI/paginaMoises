@@ -63,7 +63,16 @@ import { gsap } from 'gsap';
       document.addEventListener('astro:before-swap', cleanup, { once: true });
     }
 
-    document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
-    document.addEventListener('astro:page-load', () => {
+    const bootTestimonials = () => {
       document.querySelectorAll<HTMLElement>('[data-testimonials]').forEach(initTestimonials);
-    });
+      ScrollTrigger.refresh();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootTestimonials, { once: true });
+    } else {
+      bootTestimonials();
+    }
+
+    window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+    document.addEventListener('astro:page-load', bootTestimonials);

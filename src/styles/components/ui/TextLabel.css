@@ -1,34 +1,130 @@
-.email-input-container {
+.text-label {
   position: relative;
-  display: grid;
-  gap: 0.5rem;
+  display: block;
+  width: 100%;
+  min-width: 0;
 }
 
-.email-input-container input {
+.text-label input,
+.text-label select,
+.text-label textarea {
   width: 100%;
   border: 1px solid var(--color-border);
   border-radius: 0.35rem;
-  padding: 0.85rem 0.9rem;
+  padding: 1.35rem 0.9rem 0.65rem;
   background: var(--color-card);
   color: var(--color-text);
   font: inherit;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
 }
 
-.email-input-container label {
+.text-label__label {
+  position: absolute !important;
+  z-index: 1;
+  inset-block-start: 50% !important;
+  inset-inline-start: 0.9rem !important;
+  inset-block-end: auto !important;
+  inset-inline-end: auto !important;
+  padding-inline: 0;
+  background: transparent;
   color: var(--color-text);
   font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  transform: translateY(-50%) scale(1) !important;
+  transform-origin: left center;
+  display: block;
+  transition: inset-block-start 220ms cubic-bezier(0.2, 0, 0, 1),
+    transform 220ms cubic-bezier(0.2, 0, 0, 1), padding 220ms ease,
+    background-color 220ms ease, color 220ms ease, font-size 220ms ease;
 }
 
-.email-input-container input:focus {
+.text-label input:focus,
+.text-label select:focus,
+.text-label textarea:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
 
-.email-input-border {
-  display: none;
+.text-label input:focus ~ .text-label__label,
+.text-label input:not(:placeholder-shown) ~ .text-label__label,
+.text-label textarea:focus ~ .text-label__label,
+.text-label textarea:not(:placeholder-shown) ~ .text-label__label,
+.text-label select:focus ~ .text-label__label,
+.text-label select:valid ~ .text-label__label,
+.text-label[data-field='select'] > .text-label__label {
+  inset-block-start: -0.45rem !important;
+  padding-inline: 0.25rem;
+  background: var(--color-card);
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  transform: translateY(0) scale(0.78) !important;
 }
 
-.email-input-border-left,
-.email-input-border-right {
-  display: block;
+.text-label:focus-within > .text-label__label {
+  color: var(--color-primary);
+}
+
+.text-label:focus-within > .text-label__label {
+  inset-block-start: -0.45rem !important;
+  transform: translateY(0) scale(0.78) !important;
+  padding-inline: 0.25rem;
+  background: var(--color-card);
+}
+
+.text-label select {
+  appearance: auto;
+  padding-block: 1.35rem 0.65rem;
+}
+
+.text-label textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.text-label__border {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 0.35rem;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.text-label__border-left,
+.text-label__border-right {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 260ms ease;
+}
+
+.text-label__border-left {
+  left: 0;
+}
+
+.text-label__border-right {
+  right: 0;
+}
+
+.text-label:focus-within .text-label__border-left,
+.text-label:focus-within .text-label__border-right {
+  width: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-label input,
+  .text-label select,
+  .text-label textarea,
+  .text-label__label,
+  .text-label__border-left,
+  .text-label__border-right {
+    transition: none;
+  }
 }
