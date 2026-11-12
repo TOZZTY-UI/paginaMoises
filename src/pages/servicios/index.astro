@@ -7,6 +7,7 @@ const planes = servicios.map((servicio) => ({
   slug: servicio.slug,
   name: servicio.title,
   price: servicio.price && servicio.price !== 'Consultar' ? `$ ${servicio.price}` : 'Consultar',
+  originalPrice: servicio.originalPrice ? `$ ${servicio.originalPrice}` : undefined,
   period: servicio.period ?? 'Por proyecto',
   features: servicio.features,
   href: `/servicios/${servicio.slug}`,

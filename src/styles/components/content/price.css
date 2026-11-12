@@ -87,11 +87,37 @@
   }
 
   .price-card__amount {
-    margin-top: 2rem;
+    margin: 0;
     font-family: var(--font-display);
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     letter-spacing: -.06em;
+    line-height: 1;
+  }
+
+  .price-card__original-price {
+    display: block;
+    margin-top: 2rem;
+    color: color-mix(in srgb, currentColor 62%, transparent);
+    font-size: .9rem;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  .price-card__current-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin-top: .35rem;
+  }
+
+  .price-card__discount {
+    padding: .25rem .45rem;
+    background: var(--dorado);
+    color: var(--negro);
+    font-size: .72rem;
+    font-weight: 700;
     line-height: 1;
   }
 

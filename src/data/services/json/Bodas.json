@@ -15,6 +15,7 @@
       "slug": "entrada-salida-novios",
       "name": "Entrada y salida de novios",
         "price": "99.990",
+        "originalPrice": "133.320",
         "description": "Presentación de saxofón en vivo para la ceremonia civil o religiosa. Incluye la entrada del novio, la entrada de la novia, la participación de pajes o la postura de argollas y la salida de ambos novios. Las canciones pueden elegirse del repertorio disponible y no tienen que ser necesariamente las clásicas.",
       "image": "https://i0.wp.com/elconsejodesilvia.com/wp-content/uploads/2017/09/xmariposas-de-arroz-1024x683-pagespeed-ic-fkcbb8j_ey.jpg",
       "highlights": [
@@ -39,6 +40,7 @@
       "slug": "pack-completo-servicios-matrimoniales",
       "name": "Pack Completo Servicios Matrimoniales",
       "price": "310.990",
+      "originalPrice": "414.653",
       "description": "Una experiencia musical completa para acompañar los momentos más importantes de tu matrimonio.",
       "image": "https://bedazzling.es/blog/wp-content/uploads/2022/05/pexels-emma-bauso-2253870-1024x854.jpg",
       "highlights": [
@@ -53,6 +55,7 @@
       "slug": "bodas-cristianas",
       "name": "Bodas cristianas",
       "price": "149.990",
+      "originalPrice": "199.990",
         "description": "Saxofón en vivo para acompañar los momentos de una boda cristiana, respetando el programa de la ceremonia y las preferencias de la pareja.",
       "image": "https://cdn0.bodas.com.mx/article-vendor/6285/3_2/960/jpg/img-4756_5_106285.webp",
       "highlights": [
@@ -75,6 +78,7 @@
       "slug": "bodas-de-oro",
       "name": "Bodas de oro",
       "price": "149.990",
+      "originalPrice": "199.990",
         "description": "Melodías emotivas para celebrar cincuenta años de matrimonio y honrar la historia compartida por la pareja.",
       "image": "https://diarioelnortino.cl/wp-content/uploads/2025/10/Bodas-de-Oro.jpeg",
       "highlights": [
@@ -97,6 +101,7 @@
       "slug": "bodas-de-plata",
       "name": "Bodas de plata",
       "price": "149.990",
+      "originalPrice": "199.990",
         "description": "Música romántica para celebrar veinticinco años de matrimonio y acompañar una jornada llena de recuerdos.",
       "image": "https://zafirobodas.com/wp-content/uploads/2024/09/Sin-titulo-21-scaled.jpg",
       "highlights": [

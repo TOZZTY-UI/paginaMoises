@@ -16,6 +16,7 @@
       "slug": "amenizacion-coctel",
       "name": "Amenización de cóctel",
         "price": "149.990",
+        "originalPrice": "199.990",
         "description": "Una hora de música ambiental en el cóctel con saxofón alto y un repertorio amplio y variado. Se escogen diez canciones más una canción de regalo para crear una atmósfera elegante y cercana durante la recepción de tus invitados.",
       "image": "/images/amenizacion-coctel.webp",
       "highlights": [
@@ -31,6 +32,7 @@
       "slug": "amenizacion-coctel-y-cena",
       "name": "Amenización de cóctel y cena",
       "price": "199.990",
+      "originalPrice": "266.650",
       "description": "Presentación de saxofón en vivo durante el cóctel y la cena. Incluye trece canciones más una canción de regalo, con interacción junto a los invitados y un recorrido por las mesas y el recinto. La presentación se realiza con micrófono inalámbrico para acompañar cada momento de la celebración.",
       "image": "/images/amenizacion-coctel-cena.webp",
       "highlights": [

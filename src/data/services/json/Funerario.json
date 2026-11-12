@@ -57,6 +57,7 @@
       "slug": "maestro-de-ceremonia-despedida-mascotas",
       "name": "Maestro de ceremonia: despedida de mascotas",
       "price": "44.990",
+      "originalPrice": "59.990",
       "description": "Conducción respetuosa y cercana para despedir a una mascota querida.",
       "image": "/assets/images/funerario/IMG-20260716-WA0683.jpg",
       "highlights": [
@@ -72,6 +73,7 @@
       "subtitle": "Una despedida guiada con respeto",
       "description": "Conducción respetuosa de la ceremonia de despedida, coordinada con la familia y adaptada al programa del homenaje.",
       "price": "65.000",
+      "originalPrice": "86.670",
       "image": "/assets/images/funerario/IMG-20260716-WA0683.jpg",
       "highlights": [
         "Conducción de la ceremonia",
@@ -95,6 +97,7 @@
       "subtitle": "Un homenaje a través de la música",
       "description": "Interpretaciones de saxofón en vivo para acompañar los momentos de despedida con melodías acordadas previamente con la familia.",
       "price": "65.000",
+      "originalPrice": "86.670",
       "image": "/assets/images/funerario/IMG-20260716-WA0683.jpg",
       "highlights": [
         "Saxofón profesional en vivo",
@@ -118,6 +121,7 @@
       "subtitle": "Servicio integral de despedida",
       "description": "Servicio integral que combina maestro de ceremonia y musicalización en vivo para coordinar y acompañar todos los momentos de la despedida.",
       "price": "120.000",
+      "originalPrice": "160.000",
       "image": "/assets/images/funerario/20260109_162323.jpg",
       "highlights": [
         "Maestro de ceremonia",

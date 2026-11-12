@@ -21,6 +21,12 @@ export function getStaticPaths() {
 }
 
 const { title, description, service } = Astro.props as Props;
+const getOriginalPrice = (price: number | string | undefined) => {
+  if (price === undefined || price === null) return null;
+  const numericPrice = Number(String(price).replace(/[^\d]/g, ''));
+  if (!Number.isFinite(numericPrice) || numericPrice <= 0) return null;
+  return Math.round((numericPrice / 0.75) / 10) * 10;
+};
 const detail = service.detail ?? {
   intro: service.description,
   objectiveEyebrow: 'Sobre este servicio',
@@ -76,7 +82,15 @@ const detail = service.detail ?? {
 
               <footer class="service-detail__offer-footer">
                 <div>
-                  <strong>{subService.price ? `$ ${subService.price}` : subService.priceLabel ?? 'Consultar'}</strong>
+                  {subService.price && (subService.originalPrice || getOriginalPrice(subService.price)) ? (
+                    <span class="service-detail__offer-original-price">
+                      $ {subService.originalPrice ?? getOriginalPrice(subService.price)?.toLocaleString('es-CL')}
+                    </span>
+                  ) : null}
+                  <div class="service-detail__offer-current-price">
+                    <strong>{subService.price ? `$ ${subService.price}` : subService.priceLabel ?? 'Consultar'}</strong>
+                    {subService.price && (subService.originalPrice || getOriginalPrice(subService.price)) ? <span class="service-detail__offer-discount">-25%</span> : null}
+                  </div>
                   <span>Por evento</span>
                 </div>
                 <a class="service-detail__offer-link" href={`/servicios/${service.slug}/${subService.slug}`}>

@@ -51,6 +51,7 @@ export type ServiceSubService = {
   slug: string;
   name: string;
   price?: number | string;
+  originalPrice?: number | string;
   priceLabel?: string;
   description: string;
   image: string;
@@ -65,6 +66,7 @@ export type Service = {
   title: string;
   description: string;
   price?: number | string;
+  originalPrice?: number | string;
   period?: string;
   features: string[];
   detail?: ServiceDetail;

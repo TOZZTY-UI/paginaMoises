@@ -4,6 +4,7 @@ import InteractiveHoverButton from '../ui/InteractiveHoverButton.astro';
 export type PricePlan = {
   name: string;
   price: string;
+  originalPrice?: string;
   period?: string;
   features: string[];
   href?: string;
@@ -21,6 +22,13 @@ const {
   subtitle = 'Cada celebración merece una propuesta musical a su medida.',
   plans,
 } = Astro.props;
+
+const getOriginalPrice = (price: string, originalPrice?: string) => {
+  if (originalPrice) return originalPrice;
+  const numericPrice = Number(price.replace(/[^\d]/g, ''));
+  if (!Number.isFinite(numericPrice) || numericPrice <= 0) return null;
+  return new Intl.NumberFormat('es-CL').format(Math.round((numericPrice / 0.75) / 10) * 10);
+};
 ---
 
 <section class="price" aria-labelledby="price-title">
@@ -35,7 +43,15 @@ const {
       <article class:list={["price-card", { "price-card--featured": plan.featured }]}>
         {plan.featured && <span class="price-card__badge">Más elegido</span>}
         <h3>{plan.name}</h3>
-        <p class="price-card__amount">{plan.price}</p>
+        {getOriginalPrice(plan.price, plan.originalPrice) ? (
+          <span class="price-card__original-price">
+            $ {getOriginalPrice(plan.price, plan.originalPrice)}
+          </span>
+        ) : null}
+        <div class="price-card__current-price">
+          <p class="price-card__amount">{plan.price}</p>
+          {getOriginalPrice(plan.price, plan.originalPrice) ? <span class="price-card__discount">-25%</span> : null}
+        </div>
         <p class="price-card__period">{plan.period ?? 'por evento'}</p>
 
         <ul class="price-card__features">

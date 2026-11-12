@@ -57,7 +57,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'cliente-7',
-    name: 'Guillermo Diez',
+    name: 'Guillermo Diaz',
     role: 'Anfitrión de celebración',
     rating: 5,
     comment: 'La interpretación musical y la interacción con los invitados hicieron que la celebración fuera muy especial.',

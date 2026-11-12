@@ -200,15 +200,39 @@
   border-top: 1px solid color-mix(in srgb, var(--marfil) 16%, transparent);
 }
 
-.service-detail__offer-footer div {
+.service-detail__offer-footer > div {
   display: grid;
   gap: .2rem;
+}
+
+.service-detail__offer-original-price {
+  color: var(--gris);
+  font-size: .9rem;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.service-detail__offer-current-price {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .65rem;
 }
 
 .service-detail__offer-footer strong {
   color: var(--marfil);
   font-family: var(--font-display);
   font-size: 1.45rem;
+}
+
+.service-detail__offer-footer .service-detail__offer-discount {
+  display: inline-block;
+  padding: .25rem .45rem;
+  background: var(--dorado);
+  color: var(--negro);
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .service-detail__offer-footer span {
