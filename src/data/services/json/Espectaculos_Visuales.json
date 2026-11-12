@@ -54,7 +54,7 @@
       "price": "270.000",
       "originalPrice": "360.000",
       "description": "Una combinación premium de música en directo, luces LED y efectos de chispa fría.",
-      "image": "/icons/logo.webp",
+      "image": "/assets/images/YO/servicios/Saxofón LED + chispa fría.jpeg",
       "highlights": ["Saxofón en vivo", "Saxofón iluminado con LED", "Efecto de chispa fría"],
       "paymentHref": "https://www.flow.cl/btn.php?token=x0c49a994b1b97bf72129ff10da9e425a62fce2c",
       "detail": {

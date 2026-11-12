@@ -4,6 +4,7 @@ import ButtonPay from '../../../components/ux/ButtonPay.astro';
 import { services, type ServiceSubService } from '../../../data/services/ts/services';
 import maestroMascotaImage from '../../../assets/images/funerario/IMG-20260716-WA0683.jpg';
 import packFunerarioImage from '../../../assets/images/funerario/20260109_162323.jpg';
+import saxofonLedChispaFriaImage from '../../../assets/images/YO/servicios/Saxofón LED + chispa fría.jpeg';
 
 type Props = {
   service: (typeof services)[number];
@@ -39,6 +40,7 @@ const paymentHref = subService.paymentHref && subService.paymentHref !== '.'
 const assetImages: Record<string, string> = {
   '/assets/images/funerario/IMG-20260716-WA0683.jpg': maestroMascotaImage.src,
   '/assets/images/funerario/20260109_162323.jpg': packFunerarioImage.src,
+  '/assets/images/YO/servicios/Saxofón LED + chispa fría.jpeg': saxofonLedChispaFriaImage.src,
 };
 const imageUrl = assetImages[subService.image]
   ?? (subService.image.startsWith('/images/') ? '/icons/logo.webp' : subService.image);
