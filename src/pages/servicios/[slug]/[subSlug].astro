@@ -43,7 +43,7 @@ const assetImages: Record<string, string> = {
   '/assets/images/YO/servicios/Saxofón LED + chispa fría.jpeg': saxofonLedChispaFriaImage.src,
 };
 const imageUrl = assetImages[subService.image]
-  ?? (subService.image.startsWith('/images/') ? '/icons/logo.webp' : subService.image);
+  ?? (subService.image.startsWith('/images/') ? '/icons/logo.png' : subService.image);
 ---
 
 <BaseLayout

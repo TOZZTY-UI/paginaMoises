@@ -17,7 +17,7 @@ const {
 const site = Astro.site ?? new URL("https://saxeventos.cl");
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image, site).href;
-const logoUrl = new URL("/icons/logo.webp", site).href;
+const logoUrl = new URL("/icons/logo.png", site).href;
 const robots = noIndex
   ? "noindex, nofollow"
   : "index, follow, max-image-preview:large";

@@ -16,7 +16,7 @@
       "price": "199.990",
       "originalPrice": "266.650",
       "description": "Una experiencia musical en vivo con saxofón iluminado mediante tecnología LED. Ideal para sorprender a tus invitados con una puesta en escena moderna.",
-      "image": "/icons/logo.webp",
+      "image": "/icons/logo.png",
       "highlights": ["Saxofón en vivo", "Iluminación LED en el instrumento", "Repertorio adaptado al evento"],
       "paymentHref": "https://www.flow.cl/btn.php?token=f88ead9ef006f998cf79a4130b780637eff9b345",
       "detail": {
@@ -35,7 +35,7 @@
       "price": "230.000",
       "originalPrice": "306.670",
       "description": "Un show de saxofón acompañado de un impactante efecto visual de chispa fría para momentos especiales.",
-      "image": "/icons/logo.webp",
+      "image": "/icons/logo.png",
       "highlights": ["Saxofón en vivo", "Efecto de chispa fría", "Coordinación técnica previa"],
       "paymentHref": "https://www.flow.cl/btn.php?token=h78a0fcf2c6eb8c16a99850827d5ae5f84cd0e67",
       "detail": {
@@ -73,7 +73,7 @@
       "price": "479.990",
       "originalPrice": "639.990",
       "description": "Espectáculo visual con bailarina Zancolet LED para aportar altura, movimiento y luces a tu celebración.",
-      "image": "/icons/logo.webp",
+      "image": "/icons/logo.png",
       "highlights": ["Bailarina Zancolet LED", "Puesta en escena luminosa", "Coordinación con el evento"],
       "paymentHref": "https://www.flow.cl/btn.php?token=r1732f569b4ee53f992cff2977dc11605ebb785f",
       "detail": {
