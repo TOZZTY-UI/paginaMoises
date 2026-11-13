@@ -12,7 +12,7 @@
         "answer": "SaxEventos realiza presentaciones en todo Chile. Para revisar la disponibilidad y los detalles de traslado de tu fecha, envía la ciudad, comuna y tipo de evento en tu consulta."
       },
       {
-        "question": "¿Con cuánto tiempo debo reservar?",
+        "question": "¿Con cuánta anticipación se debe reservar?",
         "answer": "Lo ideal es consultar con anticipación, especialmente para matrimonios y fechas de alta demanda. Si tu evento es próximo, escríbenos de todos modos: confirmaremos la disponibilidad real de la fecha."
       },
       {
@@ -30,8 +30,16 @@
         "answer": "Sí. Puedes proponer canciones para la ceremonia, el cóctel, la cena o la celebración. El repertorio se coordina previamente para adaptar la selección al estilo y al momento de tu evento."
       },
       {
-        "question": "¿Cuánto dura una presentación?",
+        "question": "¿Cuánto dura cada presentación?",
         "answer": "La duración depende del servicio y de los momentos que quieras acompañar. Algunas experiencias contemplan una hora de saxofón en vivo y otras se organizan para acompañar distintas partes del evento."
+      },
+      {
+        "question": "¿Qué incluye el servicio?",
+        "answer": "Según la alternativa que elijas, incluye saxofón profesional en vivo, repertorio musical personalizado, coordinación de los momentos especiales y una presentación adaptada al ambiente de tu evento. Algunas propuestas también contemplan interacción con los invitados o micrófono inalámbrico."
+      },
+      {
+        "question": "¿Incluye amplificación?",
+        "answer": "Los requerimientos técnicos se coordinan según el formato, el recinto y la cantidad de público. Algunas presentaciones contemplan micrófono inalámbrico, pero el equipamiento específico debe confirmarse al solicitar la cotización."
       },
       {
         "question": "¿Pueden tocar durante la ceremonia, el cóctel y la cena?",
@@ -54,6 +62,18 @@
       {
         "question": "¿Cómo solicito disponibilidad y cotización?",
         "answer": "Escríbenos indicando tu fecha, ciudad, horario aproximado, tipo de evento y servicio de interés. Revisaremos la disponibilidad y te responderemos con una propuesta para coordinar los siguientes pasos."
+      },
+      {
+        "question": "¿Cuánto cuesta aproximadamente?",
+        "answer": "Los servicios publicados parten aproximadamente desde $99.990, y las amenizaciones musicales tienen alternativas desde $149.990. El valor final depende del servicio, duración, ciudad y detalles del evento, por lo que confirmamos la cotización caso a caso."
+      },
+      {
+        "question": "¿Cómo se paga?",
+        "answer": "Puedes pagar mediante el enlace de Flow cuando esté disponible para el servicio. También se aceptan efectivo, cheque o transferencia electrónica en pesos chilenos. Después del pago, envía el comprobante por WhatsApp para revisar y confirmar la reserva."
+      },
+      {
+        "question": "¿Qué ocurre si el evento es fuera de Santiago?",
+        "answer": "También realizamos presentaciones fuera de Santiago. Revisamos caso a caso la disponibilidad, la ciudad o comuna y los detalles de traslado para preparar una cotización correcta."
       },
       {
         "question": "¿Qué información debo enviar para cotizar?",
