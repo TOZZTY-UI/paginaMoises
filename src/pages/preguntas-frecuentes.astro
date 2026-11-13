@@ -1,55 +1,87 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import InteractiveHoverButton from "../components/ui/InteractiveHoverButton.astro";
+import heroImage from "../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e.png";
+import ContactCtaAstroComponent from "../sections/ContactCTA.astro";
+import faqGroups from "../data/faqs.json";
 
-const faqs = [
-    {
-        question: "¿Para qué tipo de eventos puedo contratar SaxEventos?",
-        answer: "Realizamos presentaciones para matrimonios, ceremonias, cócteles, cenas, cumpleaños, eventos corporativos y homenajes funerarios.",
-    },
-    {
-        question: "¿Cuánto dura la presentación?",
-        answer: "La duración depende del servicio elegido. Algunas experiencias incluyen una hora de saxofón en vivo y otras acompañan distintos momentos del evento.",
-    },
-    {
-        question: "¿Puedo elegir las canciones?",
-        answer: "Sí. Coordinamos previamente el repertorio y puedes proponer canciones especiales para la ceremonia, el cumpleaños o la celebración.",
-    },
-    {
-        question: "¿Con cuánto tiempo debo reservar?",
-        answer: "Recomendamos consultar y reservar con anticipación, especialmente para matrimonios y fechas de alta demanda. La reserva depende de la disponibilidad de la fecha.",
-    },
-    {
-        question: "¿El saxofonista puede interactuar con los invitados?",
-        answer: "Sí. En las experiencias de cóctel, cena y cumpleaños la presentación puede ser cercana, dinámica e interactiva, recorriendo distintos espacios del evento.",
-    },
-    {
-        question: "¿Cómo solicito disponibilidad y cotización?",
-        answer: "Escríbenos indicando la fecha, la ciudad, el tipo de evento y el servicio que te interesa. Te responderemos con la disponibilidad y los detalles para reservar.",
-    },
-];
+const faqs = faqGroups.flatMap((group) => group.faqs);
 ---
 
 <BaseLayout page="faq">
-    <main class="section">
+    <section class="faq-page section" aria-labelledby="faq-title">
         <div class="container">
-            <p class="eyebrow">FAQ</p>
-            <h1>Preguntas frecuentes.</h1>
-
-            <div class="faq-list">
-                {faqs.map((faq) => (
-                    <details class="card faq-item">
-                        <summary>{faq.question}</summary>
-                        <div class="faq-answer">
-                            <p class="text-muted">{faq.answer}</p>
-                        </div>
-                    </details>
-                ))}
+            <div class="faq-hero">
+                <div class="faq-hero__copy">
+                    <h1 id="faq-title">Preguntas sobre saxofón en vivo.</h1>
+                    <p class="faq-hero__lead">
+                        Resuelve tus dudas sobre repertorio, duración, disponibilidad y contratación para bodas,
+                        celebraciones y eventos en todo Chile.
+                    </p>
+                    <div class="faq-hero__actions">
+                        <InteractiveHoverButton href="/contacto" text="Consultar disponibilidad" />
+                        <a class="faq-text-link" href="/servicios">Explorar servicios <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+                <aside class="faq-hero__note" aria-label="Resumen del servicio">
+                    <figure class="faq-hero__image">
+                        <img src={heroImage.src} alt="Moisés tocando el saxofón durante una celebración" width={heroImage.width} height={heroImage.height} loading="eager" fetchpriority="high" />
+                    </figure>
+                    <p>La música se coordina contigo para que cada momento tenga su propia atmósfera.</p>
+                    <a href="/repertorio">Conoce el repertorio <span aria-hidden="true">↗</span></a>
+                </aside>
             </div>
+
+            <div class="faq-content">
+                <div class="faq-content__intro">
+                    <h2>Elige con claridad.</h2>
+                </div>
+
+                <div class="faq-groups">
+                    {faqGroups.map((group) => (
+                        <section class="faq-group" aria-labelledby={`faq-group-${group.title}`}>
+                            <div class="faq-group__heading">
+                                <h2 id={`faq-group-${group.title}`}>{group.title}</h2>
+                                <p>{group.description}</p>
+                            </div>
+                            <div class="faq-list">
+                                {group.faqs.map((faq, index) => {
+                                    const answerId = `faq-answer-${faqGroups.indexOf(group)}-${index}`;
+                                    return (
+                                        <details class="card faq-item" open={faq.question.includes("tipo de eventos")}>
+                                            <summary aria-controls={answerId}>{faq.question}</summary>
+                                            <div class="faq-answer" id={answerId}>
+                                                <p>{faq.answer}</p>
+                                            </div>
+                                        </details>
+                                    );
+                                })}
+                            </div>
+                        </section>
+                    ))}
+                </div>
+            </div>
+
+            <section class="faq-process" aria-labelledby="faq-process-title">
+                <div>
+                    <h2 id="faq-process-title">Así reservamos.</h2>
+                </div>
+                <ol class="faq-process__steps">
+                    <li><strong>Cuéntanos tu fecha</strong><span>Comparte ciudad, tipo de evento y horario aproximado.</span></li>
+                    <li><strong>Revisamos la propuesta</strong><span>Confirmamos disponibilidad y la alternativa que mejor encaja.</span></li>
+                    <li><strong>Coordinamos los detalles</strong><span>Definimos repertorio, momentos y el ambiente de tu celebración.</span></li>
+                </ol>
+            </section>
+
+            <ContactCtaAstroComponent />
         </div>
-    </main>
+    </section>
     <script type="application/ld+json" set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
+        '@id': 'https://saxeventos.cl/preguntas-frecuentes/#faq',
+        url: 'https://saxeventos.cl/preguntas-frecuentes/',
+        name: 'Preguntas frecuentes sobre saxofón en vivo | SaxEventos',
         mainEntity: faqs.map((faq) => ({
             '@type': 'Question',
             name: faq.question,

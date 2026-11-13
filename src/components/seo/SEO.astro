@@ -6,10 +6,12 @@ interface Props {
   noIndex?: boolean;
 }
 
+import defaultSocialImage from '../../assets/images/YO/file_000000001a70820ea1065f0bc7e02e3e.png';
+
 const {
   title,
   description,
-  image = "/icons/logo.webp",
+  image = defaultSocialImage.src,
   noIndex = false,
 } = Astro.props;
 const site = Astro.site ?? new URL("https://saxeventos.cl");
@@ -49,6 +51,10 @@ const structuredData = {
       },
       areaServed: { "@type": "Country", name: "Chile" },
       founder: { "@type": "Person", name: "Moisés Larenas" },
+      sameAs: [
+        "https://www.instagram.com/saxoeventos",
+        "https://www.facebook.com/share/152hUi3kWo1/",
+      ],
     },
     {
       "@type": "WebSite",
@@ -69,8 +75,10 @@ const structuredData = {
       url: canonical,
       name: title,
       description,
+      image: imageUrl,
       inLanguage: "es-CL",
       isPartOf: { "@id": `${site.href}#website` },
+      mainEntityOfPage: canonical,
     },
   ],
 };

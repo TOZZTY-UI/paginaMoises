@@ -25,31 +25,21 @@ import TextLabel from "../components/ui/TextLabel.astro";
                         type="text"
                         name="nombre"
                         autocomplete="name"
+                        placeholder="Ej: María González"
                         required
                     />
-                    <div>
-                        <TextLabel
-                            for="correo"
-                            label="Tu correo"
-                            name="correo"
-                            autocomplete="email"
-                            aria-describedby="correo-ayuda"
-                            title="Usa un correo de Gmail, Outlook, Hotmail, Yahoo, iCloud, ProtonMail u otro proveedor reconocido."
-                            required
-                        />
-                        <small id="correo-ayuda" class="field-help">
-                            Usa un correo de un proveedor reconocido, por ejemplo Gmail u Outlook.
-                        </small>
-                    </div>
                     <TextLabel
                         for="telefono"
-                        label="Tu número de teléfono"
+                        label="Tu número de teléfono (Chile)"
                         type="tel"
                         name="telefono"
                         autocomplete="tel"
+                        placeholder="+569 XXXXXXXX"
+                        inputmode="numeric"
+                        maxlength="13"
                     />
                     <TextLabel for="evento" label="Tipo de evento" as="select" name="evento" required>
-                        <option value="" selected disabled>Selecciona el tipo de evento</option>
+                        <option value="" selected disabled hidden></option>
                             <option>Celebración privada</option>
                             <option>Boda</option>
                             <option>Evento empresarial</option>

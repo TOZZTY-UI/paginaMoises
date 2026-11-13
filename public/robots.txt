@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 
-# Permitir rastreo para buscadores tradicionales y asistentes con búsqueda web.
 User-agent: Googlebot
 Allow: /
 

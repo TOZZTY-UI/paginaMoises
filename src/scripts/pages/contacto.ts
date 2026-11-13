@@ -1,63 +1,47 @@
 const form = document.querySelector<HTMLFormElement>('#contact-form');
-    const emailInput = document.querySelector<HTMLInputElement>('#correo');
-    const allowedEmailDomains = new Set([
-        'gmail.com',
-        'gmail.cl',
-        'outlook.com',
-        'outlook.cl',
-        'hotmail.com',
-        'hotmail.cl',
-        'live.com',
-        'live.cl',
-        'msn.com',
-        'yahoo.com',
-        'yahoo.cl',
-        'icloud.com',
-        'me.com',
-        'proton.me',
-        'protonmail.com',
-        'zoho.com',
-        'gmx.com',
-        'mail.com',
-        'aol.com',
-    ]);
+const phoneInput = document.querySelector<HTMLInputElement>('#telefono');
 
-    const validateEmailDomain = () => {
-        if (!emailInput || !emailInput.value) return true;
+const formatChileanPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '');
+    let localNumber = digits;
 
-        const domain = emailInput.value.trim().toLowerCase().split('@').pop() ?? '';
-        const isAllowed = allowedEmailDomains.has(domain);
+    if (digits.startsWith('569')) {
+        localNumber = digits.slice(3);
+    } else if (digits.startsWith('56')) {
+        localNumber = digits.slice(2);
+    }
 
-        emailInput.setCustomValidity(
-            isAllowed
-                ? ''
-                : 'Usa un correo de un proveedor reconocido, como Gmail, Outlook o Hotmail.',
-        );
+    // If the user pastes a complete Chilean mobile number (9 + 8 digits),
+    // remove the mobile prefix 9 because +569 already contains it.
+    if (localNumber.length > 8 && localNumber.startsWith('9')) {
+        localNumber = localNumber.slice(1);
+    }
 
-        return isAllowed;
-    };
+    localNumber = localNumber.slice(0, 8);
+    return localNumber ? `+569${localNumber}` : '';
+};
 
-    emailInput?.addEventListener('input', validateEmailDomain);
-    emailInput?.addEventListener('blur', validateEmailDomain);
+phoneInput?.addEventListener('input', () => {
+    phoneInput.value = formatChileanPhone(phoneInput.value);
+});
 
-    form?.addEventListener('submit', (event) => {
-        if (!validateEmailDomain() || !form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity();
-            return;
-        }
-
+form?.addEventListener('submit', (event) => {
+    if (!form.checkValidity()) {
         event.preventDefault();
+        form.reportValidity();
+        return;
+    }
 
-        const data = new FormData(form);
-        const message = [
-            'Hola, quiero consultar por un evento.',
-            `Tu nombre: ${data.get('nombre')}`,
-            `Tu correo: ${data.get('correo')}`,
-            `Tu número de teléfono: ${data.get('telefono') || 'No indicado'}`,
-            `Tipo de evento: ${data.get('evento')}`,
-            `Describe tu evento: ${data.get('mensaje')}`,
-        ].join('\n');
+    event.preventDefault();
 
-        window.open(`https://wa.me/56949251898?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    });
+    const data = new FormData(form);
+    const message = [
+        'Hola, quiero consultar por un evento.',
+        `Tu nombre: ${data.get('nombre')}`,
+        `Tu número de teléfono: ${data.get('telefono') || 'No indicado'}`,
+        `Tipo de evento: ${data.get('evento')}`,
+        `Describe tu evento: ${data.get('mensaje')}`,
+    ].join('\n');
+
+    window.open(`https://wa.me/56949251898?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+});

@@ -1,52 +1,57 @@
 const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const duration = 360;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const duration = 360;
 
-    faqItems.forEach((item) => {
-        const summary = item.querySelector('summary');
-        const answer = item.querySelector<HTMLElement>('.faq-answer');
+faqItems.forEach((item) => {
+    const summary = item.querySelector('summary');
+    const answer = item.querySelector<HTMLElement>('.faq-answer');
 
-        if (!summary || !answer) return;
+    if (!summary || !answer) return;
 
-        summary.addEventListener('click', (event) => {
-            if (reducedMotion.matches) return;
-            if (item.dataset.animating === 'true') {
-                event.preventDefault();
-                return;
-            }
+    let finishTimer: number | undefined;
 
-            event.preventDefault();
-            item.dataset.animating = 'true';
+    const finish = (open: boolean) => {
+        if (finishTimer) window.clearTimeout(finishTimer);
+        item.open = open;
+        item.classList.remove('is-opening', 'is-closing');
+        answer.style.height = '';
+        item.dataset.animating = 'false';
+    };
 
-            if (item.open) {
-                answer.style.height = `${answer.offsetHeight}px`;
-                item.classList.remove('is-open');
-                item.classList.add('is-closing');
+    const animate = (open: boolean) => {
+        item.dataset.animating = 'true';
+        item.classList.add(open ? 'is-opening' : 'is-closing');
 
-                requestAnimationFrame(() => {
-                    answer.style.height = '0px';
-                });
-
-                window.setTimeout(() => {
-                    item.open = false;
-                    item.classList.remove('is-closing');
-                    answer.style.height = '';
-                    item.dataset.animating = 'false';
-                }, duration);
-                return;
-            }
-
+        if (open) {
             item.open = true;
-            item.classList.add('is-open');
             answer.style.height = '0px';
+        } else {
+            answer.style.height = `${answer.offsetHeight}px`;
+        }
 
-            requestAnimationFrame(() => {
-                answer.style.height = `${answer.scrollHeight}px`;
-            });
+        // Force the browser to register the starting height before animating.
+        void answer.offsetHeight;
 
-            window.setTimeout(() => {
-                answer.style.height = 'auto';
-                item.dataset.animating = 'false';
-            }, duration);
+        requestAnimationFrame(() => {
+            answer.style.height = open ? `${answer.scrollHeight}px` : '0px';
         });
+
+        answer.addEventListener('transitionend', (event) => {
+            if (event.propertyName !== 'height') return;
+            finish(open);
+        }, { once: true });
+
+        // Safety net for browsers that do not emit transitionend reliably.
+        finishTimer = window.setTimeout(() => finish(open), duration + 80);
+    };
+
+    summary.addEventListener('click', (event) => {
+        // The native details behavior remains the fallback when motion is reduced.
+        if (reducedMotion.matches) return;
+
+        event.preventDefault();
+        if (item.dataset.animating === 'true') return;
+
+        animate(!item.open);
     });
+});

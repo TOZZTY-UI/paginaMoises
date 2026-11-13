@@ -49,13 +49,23 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
 }
 
+.text-label input::placeholder {
+  color: transparent;
+  opacity: 0;
+  transition: color 220ms ease, opacity 220ms ease;
+}
+
+.text-label input:focus::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
 .text-label input:focus ~ .text-label__label,
 .text-label input:not(:placeholder-shown) ~ .text-label__label,
 .text-label textarea:focus ~ .text-label__label,
 .text-label textarea:not(:placeholder-shown) ~ .text-label__label,
 .text-label select:focus ~ .text-label__label,
-.text-label select:valid ~ .text-label__label,
-.text-label[data-field='select'] > .text-label__label {
+.text-label select:valid ~ .text-label__label {
   inset-block-start: -0.45rem !important;
   padding-inline: 0.25rem;
   background: var(--color-card);
@@ -122,6 +132,7 @@
   .text-label input,
   .text-label select,
   .text-label textarea,
+  .text-label input::placeholder,
   .text-label__label,
   .text-label__border-left,
   .text-label__border-right {

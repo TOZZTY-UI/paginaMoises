@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Antes de reservar",
+    "description": "Lo esencial para saber si SaxEventos es la experiencia adecuada para tu fecha.",
+    "faqs": [
+      {
+        "question": "¿Para qué tipo de eventos puedo contratar SaxEventos?",
+        "answer": "Puedes contratar saxofón en vivo para matrimonios, bodas, ceremonias, cócteles, cenas, cumpleaños, eventos empresariales, hoteles, celebraciones privadas y homenajes funerarios."
+      },
+      {
+        "question": "¿En qué lugares realizan presentaciones?",
+        "answer": "SaxEventos realiza presentaciones en todo Chile. Para revisar la disponibilidad y los detalles de traslado de tu fecha, envía la ciudad, comuna y tipo de evento en tu consulta."
+      },
+      {
+        "question": "¿Con cuánto tiempo debo reservar?",
+        "answer": "Lo ideal es consultar con anticipación, especialmente para matrimonios y fechas de alta demanda. Si tu evento es próximo, escríbenos de todos modos: confirmaremos la disponibilidad real de la fecha."
+      },
+      {
+        "question": "¿Cómo sé si mi fecha está disponible?",
+        "answer": "La disponibilidad se confirma de forma personalizada. Indica la fecha, ciudad, horario aproximado y tipo de evento en el formulario de contacto para recibir una respuesta sobre tu caso."
+      }
+    ]
+  },
+  {
+    "title": "La experiencia musical",
+    "description": "El repertorio y la forma de tocar se adaptan al momento que quieres crear.",
+    "faqs": [
+      {
+        "question": "¿Puedo elegir las canciones?",
+        "answer": "Sí. Puedes proponer canciones para la ceremonia, el cóctel, la cena o la celebración. El repertorio se coordina previamente para adaptar la selección al estilo y al momento de tu evento."
+      },
+      {
+        "question": "¿Cuánto dura una presentación?",
+        "answer": "La duración depende del servicio y de los momentos que quieras acompañar. Algunas experiencias contemplan una hora de saxofón en vivo y otras se organizan para acompañar distintas partes del evento."
+      },
+      {
+        "question": "¿Pueden tocar durante la ceremonia, el cóctel y la cena?",
+        "answer": "Sí. La música puede acompañar uno o varios momentos del evento, desde la ceremonia y la entrada de los novios hasta el cóctel, la cena o una celebración privada. Lo coordinamos según tu programa."
+      },
+      {
+        "question": "¿El saxofonista puede interactuar con los invitados?",
+        "answer": "Sí. En cócteles, cenas y cumpleaños la presentación puede ser cercana, dinámica e interactiva, recorriendo distintos espacios del evento sin perder el ambiente que quieres construir."
+      },
+      {
+        "question": "¿Ofrecen saxofón LED y efectos visuales?",
+        "answer": "Sí. SaxEventos cuenta con propuestas de espectáculos visuales, como saxofón LED y chispa fría, disponibles según el tipo de evento y la alternativa que elijas."
+      }
+    ]
+  },
+  {
+    "title": "Cotización y coordinación",
+    "description": "Así avanzamos desde tu primera idea hasta los detalles de la presentación.",
+    "faqs": [
+      {
+        "question": "¿Cómo solicito disponibilidad y cotización?",
+        "answer": "Escríbenos indicando tu fecha, ciudad, horario aproximado, tipo de evento y servicio de interés. Revisaremos la disponibilidad y te responderemos con una propuesta para coordinar los siguientes pasos."
+      },
+      {
+        "question": "¿Qué información debo enviar para cotizar?",
+        "answer": "Para orientarte mejor necesitamos la fecha, ciudad o comuna, tipo de evento, horario aproximado y el momento que quieres musicalizar. También puedes contarnos si ya tienes canciones o una idea de ambiente."
+      },
+      {
+        "question": "¿Puedo revisar las alternativas de servicio antes de consultar?",
+        "answer": "Sí. Puedes explorar las categorías de servicios para bodas, celebraciones privadas, cumpleaños, empresas y otras ocasiones. Si no sabes cuál elegir, cuéntanos tu idea y te orientaremos."
+      }
+    ]
+  }
+]
